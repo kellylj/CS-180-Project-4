@@ -14,7 +14,7 @@ public class LearningManagementSystem {
 	private UserFileManager userFileManager;
 	private QuizFileManager quizFileManager;
 	private UserManager userManager;
-	private QuizManager fileManager;
+	private QuizManager quizManager;
 	
 	/**
 	 * Main method. Initializes the LMS instance
@@ -31,7 +31,6 @@ public class LearningManagementSystem {
 	 * Instantiates each manager and passes them
 	 * an instance of LMS to be able to access 
 	 * all other managers.
-	 * 
 	 */
 	public LearningManagementSystem() {
 		uiManager = new UIManager(this);
@@ -44,7 +43,6 @@ public class LearningManagementSystem {
 	/**
 	 * Initializes each manager before the user can
 	 * interact with the program.
-	 * 
 	 */
 	public void init() {
 		uiManager.init();
@@ -56,9 +54,8 @@ public class LearningManagementSystem {
 	
 	/**
 	 * Runs the program. UIManager will
-	 * suspend execution here until the program
+	 * run the UI loop here until the UI
 	 * exits.
-	 * 
 	 */
 	public void run() {
 		uiManager.run();
@@ -67,7 +64,6 @@ public class LearningManagementSystem {
 	/**
 	 * Notifies all the managers that
 	 * the program is exiting.
-	 * 
 	 */
 	public void exit() {
 		uiManager.exit();
