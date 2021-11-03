@@ -1,39 +1,83 @@
-
+/**
+ * 
+ * Main class that ties all the systems together.
+ * Initializes each manager and provides access to them.
+ * When the UI has exited, it safely exits all managers
+ *   to clean up any loose ends.
+ * 
+ * @author Isaac Fleetwood
+ * @version 1.0.0
+ */
 public class LearningManagementSystem {
 
 	private UIManager uiManager;
 	private UserFileManager userFileManager;
 	private QuizFileManager quizFileManager;
 	private UserManager userManager;
-	private FileManager fileManager;
+	private QuizManager fileManager;
 	
+	/**
+	 * Main method. Initializes the LMS instance
+	 * and runs the program.
+	 */
 	public static void main(String[] args) {
 		LearningManagementSystem lms = new LearningManagementSystem();
 		lms.init();
-		lms.start();
+		lms.run();
+		lms.exit();
 	}
 	
+	/**
+	 * Instantiates each manager and passes them
+	 * an instance of LMS to be able to access 
+	 * all other managers.
+	 * 
+	 */
 	public LearningManagementSystem() {
 		uiManager = new UIManager(this);
 		userFileManager = new UserFileManager(this);
 		quizFileManager = new QuizFileManager(this);
 		userManager = new UserManager(this);
-		fileManager = new FileManager(this);
+		quizManager = new QuizManager(this);
 	}
 
+	/**
+	 * Initializes each manager before the user can
+	 * interact with the program.
+	 * 
+	 */
 	public void init() {
 		uiManager.init();
 		userFileManager.init();
 		quizFileManager.init();
 		userManager.init();
-		fileManager.init();
+		quizManager.init();
 	}
 	
-	public void start() {
-		uiManager.start();
+	/**
+	 * Runs the program. UIManager will
+	 * suspend execution here until the program
+	 * exits.
+	 * 
+	 */
+	public void run() {
+		uiManager.run();
 	}
 	
-	public UIManager getUiManager() {
+	/**
+	 * Notifies all the managers that
+	 * the program is exiting.
+	 * 
+	 */
+	public void exit() {
+		uiManager.exit();
+		userFileManager.exit();
+		quizFileManager.exit();
+		userManager.exit();
+		quizManager.exit();
+	}
+	
+	public UIManager getUIManager() {
 		return uiManager;
 	}
 
@@ -49,10 +93,8 @@ public class LearningManagementSystem {
 		return userManager;
 	}
 
-	public FileManager getFileManager() {
-		return fileManager;
+	public QuizManager getQuizManager() {
+		return quizManager;
 	}
-	
-	
-	
+		
 }
