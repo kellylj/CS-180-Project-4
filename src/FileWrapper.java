@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class FileWrapper {
 
-    public ArrayList<String> readFile(String path) {
+    public static ArrayList<String> readFile(String path) {
         ArrayList<String> contents = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
@@ -21,7 +21,7 @@ public class FileWrapper {
         return contents;
     }
 
-    public boolean writeFile(String path, ArrayList<String> contents) {
+    public static boolean writeFile(String path, ArrayList<String> contents) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
             for (String line : contents) {
                 bw.write(line);
@@ -38,12 +38,12 @@ public class FileWrapper {
         return true;
     }
 
-    public boolean canReadFile(String path) {
+    public static boolean canReadFile(String path) {
         File file = new File(path);
         return file.exists() && file.canRead();
     }
 
-    public boolean canWriteFile(String path) {
+    public static boolean canWriteFile(String path) {
         File file = new File(path);
         return file.exists() && file.canWrite();
     }
