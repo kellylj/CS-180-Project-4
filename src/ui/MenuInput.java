@@ -1,0 +1,41 @@
+package ui;
+
+import java.util.Scanner;
+
+/**
+ * Datastructure used by {@link InputMenu} to store information about the input the menu should ask for.
+ * <p>
+ * Contains a question and the key for where to store the resulting data in the HashMap in InputMenu ({@link InputMenu#values}).
+ * 
+ * @author Isaac Fleetwood
+ * @see InputMenu
+ */
+public class MenuInput {
+	String question;
+	String resultKey;
+
+	public MenuInput(String question, String resultKey) {
+		this.question = question;
+		this.resultKey = resultKey;
+	}
+
+	public String getQuestion() {
+		return this.question;
+	}
+
+	public String getResultKey() {
+		return this.resultKey;
+	}
+	
+	public String getInput(Scanner scanner) {
+		String input;
+		while(true) {
+			input = scanner.nextLine();
+			if(input != null && input.length() > 0)
+				break;
+			System.out.println("Please try again and enter a valid input.");
+		}
+		return input;
+	}
+	
+}

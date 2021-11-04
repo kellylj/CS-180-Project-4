@@ -1,15 +1,17 @@
+package main;
 /**
  * 
  * Main class that ties all the systems together.
+ * <p>
  * Initializes each manager and provides access to them.
- * When the UI has exited, it safely exits all managers
- *   to clean up any loose ends.
+ * <p>
+ * When the program has finished, it safely exits all managers
+ * to clean up any loose ends.
  * 
  * @author Isaac Fleetwood
- * @version 1.0.0
  */
 public class LearningManagementSystem {
-
+	
 	private UIManager uiManager;
 	private UserFileManager userFileManager;
 	private QuizFileManager quizFileManager;
@@ -32,7 +34,7 @@ public class LearningManagementSystem {
 	 * an instance of LMS to be able to access 
 	 * all other managers.
 	 */
-	public LearningManagementSystem() {
+	private LearningManagementSystem() {
 		uiManager = new UIManager(this);
 		userFileManager = new UserFileManager(this);
 		quizFileManager = new QuizFileManager(this);
@@ -44,7 +46,7 @@ public class LearningManagementSystem {
 	 * Initializes each manager before the user can
 	 * interact with the program.
 	 */
-	public void init() {
+	private void init() {
 		uiManager.init();
 		userFileManager.init();
 		quizFileManager.init();
@@ -57,7 +59,7 @@ public class LearningManagementSystem {
 	 * run the UI loop here until the UI
 	 * exits.
 	 */
-	public void run() {
+	private void run() {
 		uiManager.run();
 	}
 	
@@ -65,7 +67,7 @@ public class LearningManagementSystem {
 	 * Notifies all the managers that
 	 * the program is exiting.
 	 */
-	public void exit() {
+	private void exit() {
 		uiManager.exit();
 		userFileManager.exit();
 		quizFileManager.exit();
@@ -92,5 +94,5 @@ public class LearningManagementSystem {
 	public QuizManager getQuizManager() {
 		return quizManager;
 	}
-		
+	
 }
