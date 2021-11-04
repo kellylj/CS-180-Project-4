@@ -1,8 +1,8 @@
 package ui;
 
 /**
- * Used to check if a condition is true or not. 
- * Usually is implemented by an anonymous function.
+ * Lambda used to check if a condition is true or not.
+ * Returns a boolean based on whether the condition is true or not.
  * 
  * @author Isaac Fleetwood
  * 

@@ -40,6 +40,8 @@ public abstract class Menu {
 	 * Runs {@link #runMenu()} until {@link #menuState} is set to {@link MenuState.CLOSE}
 	 * <p>
 	 * If you want to open the {@link Menu}, this is the method to run.
+	 * 
+	 * @see Menu#runMenu()
 	 */
 	public void open() {
 		this.start();
@@ -50,7 +52,7 @@ public abstract class Menu {
 	}
 
 	/**
-	 * Should print information to the user and prompt for user input.
+	 * Print information to the user and prompts for user input.
 	 * <p>
 	 * Is implemented by all subclasses.
 	 */

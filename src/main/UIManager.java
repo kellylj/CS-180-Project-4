@@ -14,6 +14,19 @@ import ui.OptionMenu;
 import ui.OptionMenuYesNo;
 import utils.ANSICodes;
 
+/**
+ * The manager for the UI of the application.
+ * <p>
+ * Is instantiated inside of {@link LearningManagementSystem} 
+ * and should not be instantiated anywhere else.
+ * <p>
+ * Initializes all the {@link Menu}s that are used in the UI,
+ * and opens the Start Menu ({@link #MENU_START}) whenever {@link #run()} is called.
+ * 
+ * @author Isaac Fleetwood
+ * @see LearningManagementSystem
+ * @see Manager
+ */
 public class UIManager implements Manager {
 
 	private LearningManagementSystem lms;
@@ -33,6 +46,14 @@ public class UIManager implements Manager {
 	private Menu MENU_QUIZ_LIST_MODIFY; // Quiz List for Modify Quiz
 	private Menu MENU_ADD_QUIZ;
 	
+	/**
+	 * Constructor for the UIManager.
+	 * <p>
+	 * All initialization is done in {@link #init()}, so the
+	 * constructor solely sets the {@link #lms} field.
+	 * 
+	 * @param lms The LearningManagementSystem instance used for accessing the rest of the managers.
+	 */
 	public UIManager(LearningManagementSystem lms) {
 		this.lms = lms;
 	}
@@ -430,6 +451,11 @@ public class UIManager implements Manager {
 		return questionsMenus.poll();
 	}
 
+	/**
+	 * Ran whenever the UI has exited.
+	 * <p>
+	 * Closes the {@link UIManager#scanner} scanner.
+	 */
 	@Override
 	public void exit() {
 		this.scanner.close();
@@ -442,6 +468,7 @@ public class UIManager implements Manager {
 	 * Most (if not all) of the menus that are branched from here are initialized in {@link #init()}
 	 * 
 	 * @see LearningManagementSystem#run()
+	 * @see Menu#open()
 	 */
 	public void run() {
 		System.out.print(ANSICodes.CLEAR_SCREEN);
@@ -450,14 +477,34 @@ public class UIManager implements Manager {
 		MENU_START.open();
 	}
 	
+	/**
+	 * Accesses the scanner used for user input.
+	 * 
+	 * @return Scanner The Scanner used for user input.
+	 */
 	public Scanner getScanner() {
 		return this.scanner;
 	}
 	
+	/**
+	 * Accesses the current {@link User} that is logged in.
+	 * 
+	 * TODO Determine if we want to move this to a {@link SessionManager} class.
+	 * 
+	 * @return User The current User logged in. Can be null if no user is logged in.
+	 */
 	public User getCurrentUser() {
 		return this.currentUser;
 	}
 	
+	/**
+	 * Sets the current {@link User}
+	 * <p>
+	 * Is used inside {@link #MENU_LOGIN} to set the logged-in user, 
+	 * and is set to null inside {@link #MENU_MAIN} to logout the user.
+	 * 
+	 * @param currentUser The current user. Can be null.
+	 */
 	public void setCurrentUser(User currentUser) {
 		this.currentUser = currentUser;
 	}

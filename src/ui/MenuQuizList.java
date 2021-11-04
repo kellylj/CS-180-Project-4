@@ -4,8 +4,22 @@ import java.util.ArrayList;
 
 import main.LearningManagementSystem;
 import main.Quiz;
-import main.UIManager;
 
+/**
+ * {@link OptionMenu} for selecting a {@link Quiz} object.
+ * <p>
+ * Uses pages to show only a certain number of quizzes at a time,
+ * and allows the user to change the page to show different quizzes.
+ * <p>
+ * See {@link MenuQuizList#MenuQuizList(LearningManagementSystem, RunnableSelectQuiz)} for creating the menu.
+ * <p>
+ * Runs {@link RunnableSelectQuiz#selectQuiz(Quiz)} whenever the quiz is selected.
+ * <p>
+ * Note: It is possible a {@link Quiz} isn't selected if a user chooses "Exit"
+ * 
+ * @author Isaac Fleetwood
+ *
+ */
 public class MenuQuizList extends OptionMenuWithResult<Quiz> {
 
 	private static final int AMT_QUIZ_PER_PAGE = 5;
@@ -13,7 +27,15 @@ public class MenuQuizList extends OptionMenuWithResult<Quiz> {
 	LearningManagementSystem lms;
 	RunnableSelectQuiz runnableSelectQuiz;
 	int page = 0;
-
+	
+	/**
+	 * Used to create the quiz list menu.
+	 * 
+	 * @param lms Used for accessing {@link QuizManager} to get the list of quizzes.
+	 * @param runnableSelectQuiz Used as a callback function for whenever a quiz is selected. 
+	 * 	{@link RunnableSelectQuiz#selectQuiz(Quiz)} is ran whenever a quiz is selected.
+	 * @see RunnableSelectQuiz
+	 */
 	public MenuQuizList(LearningManagementSystem lms, RunnableSelectQuiz runnableSelectQuiz) {
 		super(lms.getUIManager());
 		this.page = 0;

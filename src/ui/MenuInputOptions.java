@@ -11,8 +11,8 @@ import main.UIManager;
  * <p>
  * Once the user chooses a valid option, the resulting chosen string is returned.
  * 
- * @author linux
- *
+ * @author Isaac Fleetwood
+ * @see InputMenu
  */
 public class MenuInputOptions extends MenuInput {
 

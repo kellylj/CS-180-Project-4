@@ -6,6 +6,34 @@ import main.UIManager;
 import utils.ANSICodes;
 import utils.NumberUtils;
 
+/**
+ * {@link Menu} in which options are given that the user can choose from.
+ * <p>
+ * Works in the form of printing the headings, and then giving the options 
+ * in the form of a numbered list, where the user can select the option by 
+ * inputting the number.
+ * <p>
+ * Use {@link #addHeading(String)} and {@link #addSubheading(String)} to 
+ * add a string to be printed before the options are presented.
+ * <p>
+ * And use {@link #addOption(MenuOption)} to add an option to the menu.
+ * If you want an option to be visible only at certain times, use 
+ * {@link MenuOption#addVisibilityCondition(RunnableCheckCondition)}
+ * <p>
+ * When an option is selected {@link MenuOption#onSelect()} is ran.
+ * Use {@link MenuOption#onSelect(RunnableSelectEvent)} to set the callback function
+ * for when that specific option is selected.
+ * <p>
+ * See {@link OptionMenuWithResult} and {@link OptionMenuYesNo} for classes
+ * similar to this one.
+ * <p>
+ * See {@link MenuQuizList} for an extension that specifically list quizzes
+ * as options to select from, using a pagination format.
+ * 
+ * @author Isaac Fleetwood
+ * @see Menu
+ * @see MenuOption
+ */
 public class OptionMenu extends Menu {
 
 	UIManager uiManager;
