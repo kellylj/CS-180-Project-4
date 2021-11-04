@@ -1,11 +1,13 @@
+import java.util.ArrayList;
 
 public class QuizManager implements Manager {
 
 	LearningManagementSystem lms;
-	
+	ArrayList<Quiz> quizList = new ArrayList<>();
 	public QuizManager(LearningManagementSystem lms) {
 		this.lms = lms;
 	}
+
 
 	@Override
 	public void init() {
