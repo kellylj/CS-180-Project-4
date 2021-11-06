@@ -14,5 +14,20 @@ public class Quiz {
 		// TODO Auto-generated method stub
 		return new ArrayList<Question>();
 	}
+
+	public int getID() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public String getAuthor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
