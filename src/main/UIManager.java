@@ -244,7 +244,7 @@ public class UIManager implements Manager {
 	}
 
 	private OptionMenu getMenuAddQuiz(String name) {
-		Quiz quiz = new Quiz(/* TODO name */);
+		Quiz quiz = new Quiz(name, "Turkstra", 0, 0, "Multiple Choice"/* TODO name */);
 		OptionMenu menu = (new OptionMenu(this))
 				.onHeadingPrint(() -> {
 					// TODO quiz.getName();
@@ -411,7 +411,7 @@ public class UIManager implements Manager {
 	private OptionMenu getMenuTakeQuiz(Quiz quiz) {
 		// Queue is used to go from first to last question in order.
 		Queue<OptionMenu> questionsMenus = new LinkedList<OptionMenu>();
-		ArrayList<Question> questions = quiz.getQuestions(); // TODO Quiz - quiz.getQuestions();
+		ArrayList<Question> questions = new ArrayList<Question>(); // TODO Quiz - quiz.getQuestions();
 		// TODO GradedQuiz create new graded quiz object.
 		for(Question question: questions) {
 			OptionMenu menu = (new OptionMenu(this));

@@ -58,7 +58,7 @@ public class MenuQuizList extends OptionMenuWithResult<Quiz> {
 		// TODO QuizManager get quizzes from QuizManager here
 		// lms.getQuizManager().getQuizzes();
 		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
-		for(int i = 0; i < 100; i++) quizzes.add(new Quiz());
+		for(int i = 0; i < 100; i++) quizzes.add(new Quiz("Test", "Turkstra", 0, i, "Multiple Choice"));
 		
 		for (int i = 0; i < AMT_QUIZ_PER_PAGE; i++) {
 			int j = page * AMT_QUIZ_PER_PAGE + i;
