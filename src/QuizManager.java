@@ -1,5 +1,11 @@
 import java.util.ArrayList;
-
+/**
+ *
+ * Class that handles management of all quizzes
+ *
+ * @author Liam Kelly
+ * @version 11/4/21
+ */
 public class QuizManager implements Manager {
 
 	LearningManagementSystem lms;
@@ -18,8 +24,17 @@ public class QuizManager implements Manager {
 		quizList.add(quiz);
 	}
 
-	public void removeQuiz() {
-
+	public void removeQuiz(int ID) {
+		int startingListLength = quizList.size();
+		for (int i = 0; i < quizList.size(); i++) {
+			if (quizList.get(i).getID() == ID) {
+				quizList.remove(i);
+				i--;
+			}
+		}
+		if (startingListLength == quizList.size()) {
+			System.out.println("No quizzes were found with that ID. Please try again");
+		}
 	}
 
 	public String listQuizzes() {
@@ -33,43 +48,43 @@ public class QuizManager implements Manager {
 		return s;
 	}
 
-	public String searchQuizByName(String name) {
-		String s = "";
+	public ArrayList<Quiz> searchQuizByName(String name) {
+		ArrayList<Quiz> matchingQuizzes = new ArrayList<>();
 		for (Quiz q : quizList) {
 			if (q.getName().toLowerCase().contains(name.toLowerCase())) {
-				s += q.toString() + "\n";
+				matchingQuizzes.add(q);
 			}
 		}
-		if (s.equals("")) {
-			s+= "No quizzes found with that name";
+		if (matchingQuizzes.size() == 0) {
+			return null;
 		}
-		return s;
+		return matchingQuizzes;
 	}
 
-	public String searchQuizByAuthor(String author) {
-		String s = "";
+	public ArrayList<Quiz> searchQuizByAuthor(String author) {
+		ArrayList<Quiz> matchingQuizzes = new ArrayList<>();
 		for (Quiz q : quizList) {
 			if (q.getAuthor().toLowerCase().contains(author.toLowerCase())) {
-				s += q.toString() + "\n";
+				matchingQuizzes.add(q);
 			}
 		}
-		if (s.equals("")) {
-			s+= "No quizzes found with that author";
+		if (matchingQuizzes.size() == 0) {
+			return null;
 		}
-		return s;
+		return matchingQuizzes;
 	}
 
-	public String searchQuizByID(int ID) {
-		String s = "";
+	public ArrayList<Quiz> searchQuizByID(int ID) {
+		ArrayList<Quiz> matchingQuizzes = new ArrayList<>();
 		for (Quiz q : quizList) {
 			if (q.getID() == ID) {
-				s += q.toString() + "\n";
+				matchingQuizzes.add(q);
 			}
 		}
-		if (s.equals("")) {
-			s+= "No quizzes found with that ID";
+		if (matchingQuizzes.size() == 0) {
+			return null;
 		}
-		return s;
+		return matchingQuizzes;
 	}
 
 	@Override
