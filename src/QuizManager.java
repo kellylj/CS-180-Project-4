@@ -16,7 +16,6 @@ public class QuizManager implements Manager {
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -87,9 +86,16 @@ public class QuizManager implements Manager {
 		return matchingQuizzes;
 	}
 
+	public void setQuizList(ArrayList<Quiz> quizList) {
+		this.quizList = quizList;
+	}
+
+	public ArrayList<Quiz> getQuizList() {
+		return quizList;
+	}
+
 	@Override
 	public void exit() {
-		// TODO Auto-generated method stub
 
 	}
 

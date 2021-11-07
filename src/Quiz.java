@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 /**
  *
  * Class that contains the details of a particular quiz
@@ -10,20 +11,20 @@ public class Quiz {
     private String author;
     private int numQuestions;
     private String quizType;
-    //private Question[] questions;
-    //private Answer[] answers;
+    ArrayList<Question> questions;
     private int ID;
     private boolean scrambled;
 
     //Quiz constructor.
     //TODO: Once question/answer classes are made, add lists of each to constructor
-    public Quiz(String name, String author, int numQuestions, int ID, String quizType, boolean scrambled) {
+    public Quiz(String name, String author, int numQuestions, int ID, ArrayList<Question> questions, String quizType, boolean scrambled) {
         this.name = name;
         this.author = author;
         this.numQuestions = numQuestions;
         this.quizType = quizType;
         this.ID = ID;
         this.scrambled = scrambled;
+        this.questions = questions;
     }
 
     public int getID() {
@@ -46,6 +47,30 @@ public class Quiz {
         return quizType;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public void setQuizType(String quizType) {
+        this.quizType = quizType;
+    }
+
+    public void setNumQuestions(int numQuestions) {
+        this.numQuestions = numQuestions;
+    }
+
+    public void setScrambled(boolean answer) {
+        this.scrambled = scrambled;
+    }
+
     public boolean isScrambled() { return scrambled; }
 
     public void scrambleQuestions() {
@@ -53,7 +78,7 @@ public class Quiz {
     }
 
     public String toString() {
-        String s = "Quiz name: " + name + ", author: " + author;
+        String s = "Quiz name: " + name + ", Author: " + author;
         s+= ", ID: " + ID + ", Number of Questions: " + numQuestions + ".";
         return s;
     }
