@@ -4,8 +4,8 @@
  * The methods of this interface will help users initialize anything
  * before user does anything
  *
- * @author jain455
- * @version 11/7/2021
+ * @author Aryan Jain
+ * @version 1.0.0
  */
 public interface Manager {
 	//Useful for if you need to initialize anything before user does anything.
