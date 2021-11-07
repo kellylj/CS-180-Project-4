@@ -20,6 +20,8 @@ public class UserManager implements Manager {
 		users.add(user);
 	}
 
+	public void removeUser(User user) { users.remove(user); }
+
 	public boolean authenticator(String username, String password) {
 		for (User user : users) {
 			if ((user.getUsername().equals(username)) && (user.getPassword().equals(password))) {
