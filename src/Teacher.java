@@ -1,3 +1,10 @@
+/**
+ *
+ * Class that contains the detail of a teacher
+ *
+ * @author Sean Lee
+ * @version 11/7/21
+ */
 public class Teacher extends User {
     // make new class permission level?
     private final UserPermission userPermission;

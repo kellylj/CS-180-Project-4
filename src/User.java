@@ -1,3 +1,11 @@
+/**
+ *
+ * Super class that contains the details of a particular user
+ *
+ * @author Sean Lee
+ * @version 11/7/21
+ */
+
 public class User {
     private int ID;
     private String username;
