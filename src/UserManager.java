@@ -1,5 +1,11 @@
 import java.util.ArrayList;
 
+/**
+ *
+ * @author Aryan Jain
+ * @version 1.0.0
+ *
+ */
 public class UserManager implements Manager {
 
 	private ArrayList<User> users;
