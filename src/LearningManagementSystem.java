@@ -33,11 +33,11 @@ public class LearningManagementSystem {
 	 * all other managers.
 	 */
 	public LearningManagementSystem() {
-		uiManager = new UIManager(this);
-		userFileManager = new UserFileManager(this);
-		quizFileManager = new QuizFileManager(this);
 		userManager = new UserManager(this);
 		quizManager = new QuizManager(this);
+		userFileManager = new UserFileManager(this);
+		quizFileManager = new QuizFileManager(this);
+		uiManager = new UIManager(this);
 	}
 
 	/**
@@ -45,11 +45,11 @@ public class LearningManagementSystem {
 	 * interact with the program.
 	 */
 	public void init() {
-		uiManager.init();
-		userFileManager.init();
-		quizFileManager.init();
 		userManager.init();
 		quizManager.init();
+		userFileManager.init();
+		quizFileManager.init();
+		uiManager.init();
 	}
 	
 	/**
