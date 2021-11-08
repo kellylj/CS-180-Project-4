@@ -2,12 +2,13 @@ package ui;
 
 import java.util.ArrayList;
 
-import utils.Listable;
-
 /**
+ * Lambda for requesting the items in a list.
+ * <p>
+ * Runs whenever the menu opens, so that the most recent,
+ * up-to-date list can be used.
  * 
- * @author linux
- *
+ * @author Isaac Fleetwood
  * @param <T>
  * TODO T extends Listable
  */
