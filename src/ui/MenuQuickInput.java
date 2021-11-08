@@ -2,6 +2,8 @@ package ui;
 
 import java.util.Scanner;
 
+import utils.ANSICodes;
+
 public class MenuQuickInput extends Menu {
 	
 	Scanner scanner;
@@ -15,7 +17,7 @@ public class MenuQuickInput extends Menu {
 
 	@Override
 	public void runMenu() {
-		System.out.println(this.question);
+		System.out.println(ANSICodes.CYAN + ANSICodes.BOLD + question);
 		this.result = scanner.nextLine();
 		this.menuState = MenuState.CLOSE;
 	}
