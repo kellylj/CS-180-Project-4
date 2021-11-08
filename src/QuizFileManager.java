@@ -25,7 +25,8 @@ public class QuizFileManager implements Manager {
 	}
 
 	public ArrayList<Quiz> readQuizzes() {
-		//TODO: does it need to return? or does it need a class variable? (quizzes), change filepath, determine final separating characters
+		//TODO: change filepath, determine final separating characters
+		ArrayList<Quiz> tempQuizzes = new ArrayList<>();
 		String path = ""; // Change path to the path of the file that stores the quizzes
 		ArrayList<String> contents = fw.readFile(path);
 
@@ -38,10 +39,9 @@ public class QuizFileManager implements Manager {
 			ArrayList<Question> questions = this.formatQuestions(components[4], numQuestions); //format the list of questions
 			int id = Integer.parseInt(components[5]);
 			boolean scrambled = Boolean.parseBoolean(components[6]);
-			quizzes.add(new Quiz(name, author, numQuestions, id, questions, quizType, scrambled));
+			tempQuizzes.add(new Quiz(name, author, numQuestions, id, questions, quizType, scrambled));
 		}
-
-		return quizzes;
+		return tempQuizzes;
 	}
 
 	public ArrayList<Question> formatQuestions(String questionList, int numQuestions) {
