@@ -76,7 +76,6 @@ public class UIManager implements Manager {
 		this.scanner = new Scanner(System.in);
 		
 		MENU_START = (new OptionMenu(this))
-			.setRequiresLogin(false)
 			.addHeading("Welcome to the Learning Management System!")
 			.addSubheading("Please select one of the following options:")
 			.addOption((new MenuOption("Login")).onSelect(() -> {
@@ -167,6 +166,7 @@ public class UIManager implements Manager {
 			});
 		
 		MENU_MAIN = (new OptionMenu(this))
+			.setCheckLogin(true)
 			.addHeading("Main Menu")
 			.addSubheading("Please select one of the following options:")
 			.addOption((new MenuOption("Teacher Menu"))
@@ -199,6 +199,7 @@ public class UIManager implements Manager {
 				}));
 		
 		MENU_USER_SETTINGS = (new OptionMenu(this))
+			.setCheckLogin(true)
 			.addHeading("User Settings Menu")
 			.addSubheading("Select one of the following options:")
 			.addOption((new MenuOption("Edit User"))

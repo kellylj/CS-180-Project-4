@@ -98,6 +98,8 @@ public class InputMenu extends Menu {
 		}
 		verifyMenu.addHeading("Are you satisfied with these values?");
 		verifyMenu.open();
+		// TODO BUG - "Please use a valid integer?????????"
+		
 		boolean isYes = verifyMenu.getResult();
 		if (isYes)
 			return ValidationState.CONTINUE;

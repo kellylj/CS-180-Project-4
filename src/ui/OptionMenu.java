@@ -41,17 +41,17 @@ public class OptionMenu extends Menu {
 	ArrayList<String> headings;
 	ArrayList<MenuOption> options;
 	Runnable callbackOnHeadingPrint;
-	boolean requiresLogin;
+	boolean checkLogin;
 
 	public OptionMenu(UIManager uiManager) {
 		this.uiManager = uiManager;
 		options = new ArrayList<MenuOption>();
 		headings = new ArrayList<String>();
-		this.requiresLogin = true;
+		this.checkLogin = false;
 	}
 
-	public OptionMenu setRequiresLogin(boolean requiresLogin) {
-		this.requiresLogin = requiresLogin;
+	public OptionMenu setCheckLogin(boolean checkLogin) {
+		this.checkLogin = checkLogin;
 		return this;
 	}
 	
@@ -82,7 +82,7 @@ public class OptionMenu extends Menu {
 
 	@Override
 	public void runMenu() {
-		if(uiManager.getCurrentUser() == null && this.requiresLogin) {
+		if(this.checkLogin && uiManager.getCurrentUser() == null) {
 			this.menuState = MenuState.CLOSE;
 			return;
 		}
