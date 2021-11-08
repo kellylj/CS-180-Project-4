@@ -8,7 +8,7 @@ package ui;
  * <p>
  * The callback function will determine if the menu will close or stay open and restart via its result of {@link MenuState}
  * <p>
- * The callback can be added via a similar builder-like pattern to the one in {@link OptionMenu}
+ * The callback can be added via method chaining, like seen in {@link OptionMenu}
  * 
  * @author Isaac Fleetwood
  * 
@@ -44,7 +44,7 @@ public class MenuOption {
 	 * Sets the callback for whenever the option is selected.
 	 * 
 	 * @param onSelectRunnable - Callback function to be ran when the option is selected.
-	 * @return itself - Used for builder-like pattern.
+	 * @return itself - Used for method chaining
 	 */
 	public MenuOption onSelect(RunnableSelectOption onSelectRunnable) {
 		this.onSelectRunnable = onSelectRunnable;

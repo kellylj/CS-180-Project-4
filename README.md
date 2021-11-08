@@ -59,7 +59,7 @@ A menu that prompts the user to enter input. Once all required input is received
 ### OptionMenu
 A menu that prompts the user to select an option. When an option is selected, it will run the callback function `onSelect(()->{})` for that respective option. (See MenuOption)
 
-# MenuQuickInput
+### MenuQuickInput
 A smaller input menu that only allows for one input question. The user input from that one question is then stored in a field and is accessible to any method with an instance of this menu.
 
 ### OptionMenuWithResult<T>

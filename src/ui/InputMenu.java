@@ -13,7 +13,7 @@ import utils.ANSICodes;
  * Class extending {@link Menu} that adds the option of prompting the 
  * user for input for object creation.
  * <p>
- * The menu can be created through the use of a builder-like pattern. 
+ * The menu can be created through the use of method chaining.
  * <p>
  * Inputs and any callbacks are passed to the menu before the UI runs the menu. 
  * Each relevant input will be stored in a HashMap, which will then get passed 

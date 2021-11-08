@@ -45,7 +45,7 @@ public class OptionListMenu<T> extends OptionMenuWithResult<T> {
 		this.page = 0;
 		this.items = new ArrayList<T>();
 	}
-
+	
 	public OptionListMenu<T> setItems(ArrayList<T> items) {
 		this.items = items;
 		return this;
