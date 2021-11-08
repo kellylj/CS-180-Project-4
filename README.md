@@ -7,11 +7,13 @@ Todo: Add our classes to here and explain what they do.
 ### LearningManagementSystem
 (Abbreviated LMS for short) 
 This is the main class that ties all of the managers together. It contains the `main()` method. Upon running, it instantiates all of the following managers:
+
 - UserManager
 - UserFileManager
 - QuizManager
 - QuizFileManager
 - UIManager
+
 Then, after instantiating them, it runs the `init()` method on all of them to notify them that the program is initializing. Once all the managers have initialized, the UIManager is ran, which opens the UI and prompts the user for input. Once the UI has exited, LMS then runs the `exit()` method on all of the managers to notify them that the program is exiting.
 The LMS class is the glue that ties all of the parts of the program together. It holds all of the managers, lets them communicate with each other, and notifies them about the state of the overall program.
 
