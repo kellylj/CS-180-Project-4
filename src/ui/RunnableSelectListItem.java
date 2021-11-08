@@ -1,14 +1,16 @@
 package ui;
 
 import main.Quiz;
+import utils.Listable;
 
 /**
  * Lambda used for when a user has selected
- * a {@link Quiz} in {@link MenuQuizList}.
+ * an item in {@link OptionListMenu}.
  * 
  * @author Isaac Fleetwood
- * @see MenuQuizList
+ * @param T the type of the selected item
+ * @see OptionListMenu
  */
-public interface RunnableSelectQuiz {
-	public MenuState selectQuiz(Quiz quiz);
+public interface RunnableSelectListItem<T extends Listable> {
+	public MenuState selectItem(T listItem);
 }

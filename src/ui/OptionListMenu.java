@@ -4,44 +4,73 @@ import java.util.ArrayList;
 
 import main.LearningManagementSystem;
 import main.Quiz;
+import main.UIManager;
+import utils.Listable;
 
 /**
- * {@link OptionMenu} for selecting a {@link Quiz} object.
+ * {@link OptionMenu} for selecting an item from a arraylist.
  * <p>
- * Uses pages to show only a certain number of quizzes at a time,
- * and allows the user to change the page to show different quizzes.
+ * Uses pages to show only a certain number of items at a time,
+ * and allows the user to change the page to show different items.
  * <p>
- * See {@link MenuQuizList#MenuQuizList(LearningManagementSystem, RunnableSelectQuiz)} for creating the menu.
+ * Item type must implement {@link Listable} in order to be used.
  * <p>
- * Runs {@link RunnableSelectQuiz#selectQuiz(Quiz)} whenever the quiz is selected.
+ * See {@link OptionListMenu#OptionListMemu(LearningManagementSystem, RunnableSelectListItem)} for creating the menu.
  * <p>
- * Note: It is possible a {@link Quiz} isn't selected if a user chooses "Exit"
+ * Runs {@link RunnableSelectListItem#selectItem(T)} whenever the item is selected.
+ * <p>
+ * Note: It is possible an item isn't selected if a user chooses "Exit"
  * 
  * @author Isaac Fleetwood
- *
+ * @param T the type of the item in the list.
  */
-public class MenuQuizList extends OptionMenuWithResult<Quiz> {
+public class OptionListMenu<T extends Listable> extends OptionMenuWithResult<T> {
 
-	private static final int AMT_QUIZ_PER_PAGE = 5;
+	private static final int AMT_ITEMS_PER_PAGE = 5;
 
-	LearningManagementSystem lms;
-	RunnableSelectQuiz runnableSelectQuiz;
+	ArrayList<T> items;
+	RunnableGetListItems<T> runnableGetListItems;
+	RunnableSelectListItem<T> runnableSelectListItem;
 	int page = 0;
 	
 	/**
 	 * Used to create the quiz list menu.
 	 * 
 	 * @param lms Used for accessing {@link QuizManager} to get the list of quizzes.
-	 * @param runnableSelectQuiz Used as a callback function for whenever a quiz is selected. 
-	 * 	{@link RunnableSelectQuiz#selectQuiz(Quiz)} is ran whenever a quiz is selected.
-	 * @see RunnableSelectQuiz
+	 * @param runnableSelectListItem Used as a callback function for whenever a quiz is selected. 
+	 * 	{@link RunnableSelectListItem#selectQuiz(Quiz)} is ran whenever a quiz is selected.
+	 * @see RunnableSelectListItem
 	 */
-	public MenuQuizList(LearningManagementSystem lms, RunnableSelectQuiz runnableSelectQuiz) {
-		super(lms.getUIManager());
+	public OptionListMenu(UIManager uiManager) {
+		super(uiManager);
 		this.page = 0;
-		this.runnableSelectQuiz = runnableSelectQuiz;
+		this.items = new ArrayList<T>();
 	}
 
+	public OptionListMenu<T> setItems(ArrayList<T> items) {
+		this.items = items;
+		return this;
+	}
+	
+	public OptionListMenu<T> onRequestListItems(RunnableGetListItems<T> runnable) {
+		this.runnableGetListItems = runnable;
+		return this;
+	}
+
+
+	public OptionListMenu<T> onSelectListItem(RunnableSelectListItem<T> runnable) {
+		this.runnableSelectListItem = runnable;
+		return this;
+	}
+
+	@Override
+	public void start() {
+		super.start();
+		if(runnableGetListItems == null)
+			return;
+		this.items = runnableGetListItems.getListItems();
+	}
+	
 	@Override
 	public void runMenu() {
 		// Clear options so that all options are new.
@@ -55,26 +84,21 @@ public class MenuQuizList extends OptionMenuWithResult<Quiz> {
 			return MenuState.RESTART;
 		}));
 		
-		// TODO QuizManager get quizzes from QuizManager here
-		// lms.getQuizManager().getQuizzes();
-		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
-		for(int i = 0; i < 100; i++) quizzes.add(new Quiz("Test", "Turkstra", 0, i, "Multiple Choice"));
-		
-		for (int i = 0; i < AMT_QUIZ_PER_PAGE; i++) {
-			int j = page * AMT_QUIZ_PER_PAGE + i;
-			if (j < 0 || j >= quizzes.size())
+		for (int i = 0; i < AMT_ITEMS_PER_PAGE; i++) {
+			int j = page * AMT_ITEMS_PER_PAGE + i;
+			if (j < 0 || j >= items.size())
 				continue;
-			// TODO Use Quiz Name here.
-			final Quiz q = quizzes.get(j);
-			this.addOption((new MenuOption("Quiz " + (j+1))).onSelect(() -> {
-				this.setResult(q);
+			
+			final T item = items.get(j);
+			this.addOption((new MenuOption(item.getListName())).onSelect(() -> {
+				this.setResult(item);
 				return MenuState.CLOSE;
 			}));
 		}
 		
 		// Add Next Page option, which increases the page, but only if there's more quizzes to see.
 		this.addOption((new MenuOption("Next Page")).addVisibilityCondition(() -> {
-			return quizzes.size() > (page+1) * AMT_QUIZ_PER_PAGE;
+			return items.size() > (page+1) * AMT_ITEMS_PER_PAGE;
 		}).onSelect(() -> {
 			this.page += 1;
 			return MenuState.RESTART;
@@ -97,7 +121,7 @@ public class MenuQuizList extends OptionMenuWithResult<Quiz> {
 			return;
 		
 		// Otherwise, a quiz was selected, so run the callback with that quiz.
-		menuState = this.runnableSelectQuiz.selectQuiz(this.getResult());
+		menuState = this.runnableSelectListItem.selectItem(this.getResult());
 	}
 
 }

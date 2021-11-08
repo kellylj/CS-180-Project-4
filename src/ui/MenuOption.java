@@ -3,7 +3,7 @@ package ui;
 /**
  * 
  * Datastructure used by {@link OptionMenu} representing an option that can be chosen in a menu.
- * Contains a {@link String} for the name of the option, and a {@link RunnableSelectEvent} for a callback function 
+ * Contains a {@link String} for the name of the option, and a {@link RunnableSelectOption} for a callback function 
  * that runs whenever the option is selected.
  * <p>
  * The callback function will determine if the menu will close or stay open and restart via its result of {@link MenuState}
@@ -17,7 +17,7 @@ package ui;
  */
 public class MenuOption {
 
-	private RunnableSelectEvent onSelectRunnable;
+	private RunnableSelectOption onSelectRunnable;
 	private RunnableCheckCondition visibilityCondition;
 
 	private String option;
@@ -46,7 +46,7 @@ public class MenuOption {
 	 * @param onSelectRunnable - Callback function to be ran when the option is selected.
 	 * @return itself - Used for builder-like pattern.
 	 */
-	public MenuOption onSelect(RunnableSelectEvent onSelectRunnable) {
+	public MenuOption onSelect(RunnableSelectOption onSelectRunnable) {
 		this.onSelectRunnable = onSelectRunnable;
 		return this;
 	}

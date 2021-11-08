@@ -31,7 +31,7 @@ public abstract class Menu {
 	/**
 	 * Ran whenever the menu is opened.
 	 */
-	private void start() {
+	public void start() {
 		// TODO: Figure out what needs to go here, if anything.
 	}
 
@@ -61,7 +61,7 @@ public abstract class Menu {
 	/**
 	 * Ran whenever the menu is finally closed.
 	 */
-	private void end() {
+	public void end() {
 		// TODO: Figure out what needs to go here, if anything.
 	}
 	

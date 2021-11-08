@@ -80,4 +80,14 @@ public class QuizManager implements Manager {
 
 	}
 
+	public ArrayList<Quiz> getQuizzes() {
+		// TODO Use actual quiz array.
+		Quiz quiz = new Quiz("Quiz Name", "Teacher", 0, 0, "TEST");
+		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+		for(int i = 0; i < 13; i++) {
+			quizzes.add(quiz);
+		}
+		return quizzes;
+	}
+
 }

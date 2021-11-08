@@ -27,7 +27,7 @@ import utils.NumberUtils;
  * See {@link OptionMenuWithResult} and {@link OptionMenuYesNo} for classes
  * similar to this one.
  * <p>
- * See {@link MenuQuizList} for an extension that specifically list quizzes
+ * See {@link OptionListMenu} for an extension that specifically list quizzes
  * as options to select from, using a pagination format.
  * 
  * @author Isaac Fleetwood
@@ -41,13 +41,20 @@ public class OptionMenu extends Menu {
 	ArrayList<String> headings;
 	ArrayList<MenuOption> options;
 	Runnable callbackOnHeadingPrint;
+	boolean requiresLogin;
 
 	public OptionMenu(UIManager uiManager) {
 		this.uiManager = uiManager;
 		options = new ArrayList<MenuOption>();
 		headings = new ArrayList<String>();
+		this.requiresLogin = true;
 	}
 
+	public OptionMenu setRequiresLogin(boolean requiresLogin) {
+		this.requiresLogin = requiresLogin;
+		return this;
+	}
+	
 	public OptionMenu addHeading(String heading) {
 		headings.add("\n" + ANSICodes.BOLD + heading + ANSICodes.RESET);
 		return this;
@@ -75,7 +82,10 @@ public class OptionMenu extends Menu {
 
 	@Override
 	public void runMenu() {
-
+		if(uiManager.getCurrentUser() == null && this.requiresLogin) {
+			this.menuState = MenuState.CLOSE;
+			return;
+		}
 		for (String heading : headings) {
 			System.out.println(heading);
 		}

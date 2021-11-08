@@ -9,6 +9,6 @@ package ui;
  * @see MenuOption
  * @see OptionMenu
  */
-public interface RunnableSelectEvent {
+public interface RunnableSelectOption {
 	public MenuState onSelect();
 }

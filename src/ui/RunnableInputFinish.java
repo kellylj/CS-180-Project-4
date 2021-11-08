@@ -9,6 +9,6 @@ import java.util.Map;
  * @author Isaac Fleetwood
  * @see InputMenu
  */
-public interface RunnableInputFinishEvent {
+public interface RunnableInputFinish {
 	public MenuState onInputFinish(Map<String, String> results);
 }

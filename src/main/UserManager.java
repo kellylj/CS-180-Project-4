@@ -20,4 +20,9 @@ public class UserManager implements Manager {
 		
 	}
 
+	public void removeUser(User currentUser) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

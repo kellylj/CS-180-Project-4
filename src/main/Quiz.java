@@ -1,5 +1,8 @@
 package main;
-public class Quiz {
+
+import utils.Listable;
+
+public class Quiz implements Listable {
     private String name;
     private String author;
     private int numQuestions;
@@ -45,6 +48,11 @@ public class Quiz {
         s+= ", ID: " + ID + ", Number of Questions: " + numQuestions + ".";
         return s;
     }
+
+	@Override
+	public String getListName() {
+		return this.author + " - " + this.name;
+	}
 
 
 }

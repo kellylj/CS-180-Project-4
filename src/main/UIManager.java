@@ -8,7 +8,8 @@ import java.util.Queue;
 import ui.InputMenu;
 import ui.Menu;
 import ui.MenuOption;
-import ui.MenuQuizList;
+import ui.MenuQuickInput;
+import ui.OptionListMenu;
 import ui.MenuState;
 import ui.OptionMenu;
 import ui.OptionMenuYesNo;
@@ -23,7 +24,8 @@ import utils.ANSICodes;
  * Initializes all the {@link Menu}s that are used in the UI,
  * and opens the Start Menu ({@link #MENU_START}) whenever {@link #run()} is called.
  * 
- * @author Isaac Fleetwood
+ * @authors Isaac Fleetwood
+ * @authors Aryan Jain
  * @see LearningManagementSystem
  * @see Manager
  */
@@ -33,7 +35,7 @@ public class UIManager implements Manager {
 	
 	private Scanner scanner;
 	private User currentUser;
-
+	
 	private Menu MENU_START;
 	private Menu MENU_LOGIN;
 	private Menu MENU_CREATE_USER;
@@ -41,6 +43,7 @@ public class UIManager implements Manager {
 	private Menu MENU_MAIN;
 	private Menu MENU_QUIZ_LIST_INFO; // Quiz List for Show Quiz Info
 	private Menu MENU_QUIZ_LIST_TAKE; // Quiz List for Take Quiz
+	private Menu MENU_USER_SETTINGS;
 	
 	private Menu MENU_TEACHER;
 	private Menu MENU_QUIZ_LIST_MODIFY; // Quiz List for Modify Quiz
@@ -73,6 +76,7 @@ public class UIManager implements Manager {
 		this.scanner = new Scanner(System.in);
 		
 		MENU_START = (new OptionMenu(this))
+			.setRequiresLogin(false)
 			.addHeading("Welcome to the Learning Management System!")
 			.addSubheading("Please select one of the following options:")
 			.addOption((new MenuOption("Login")).onSelect(() -> {
@@ -106,8 +110,20 @@ public class UIManager implements Manager {
 				String password = values.get("Password");
 				String userType = values.get("User Type");
 				User user;
+				/*
+				switch(userType) {
+				case "Teacher":
+					user = new Teacher(name, username, password);
+					break;
+				case "Student":
+					user = new Student(name, username, password);
+					break;
+				}
+				lms.getUserManager().addUser(user);
+				*/
 				// TODO User - for creating a user
 				// TODO UserManager - for adding the user
+				
 				// User user = ?;
 				// lms.getUserManager().addUser(user);
 				System.out.println("Succesfully created the user.");
@@ -122,9 +138,10 @@ public class UIManager implements Manager {
 			.onInputFinish((Map<String, String> values) -> {
 				String username = values.get("Username");
 				String password = values.get("Password");
+				
 				// TODO UserManager - Authenticate username password and determine if valid
 				// lms.getUserManager().authenticateUser(username, password):
-				boolean correctUsernamePassword = true;
+				boolean correctUsernamePassword = true;//lms.getUserManager().authenticator(username, password);
 				if(correctUsernamePassword) {
 					// TODO UserManager get User from Username and Password
 					// lms.getUserManager().getUser(username, password);
@@ -170,11 +187,79 @@ public class UIManager implements Manager {
 					MENU_QUIZ_LIST_TAKE.open();
 					return MenuState.RESTART;
 				}))
+			.addOption((new MenuOption("User Settings"))
+				.onSelect(() -> {
+					MENU_USER_SETTINGS.open();
+					return MenuState.RESTART;
+				}))
 			.addOption((new MenuOption("Logout"))
 				.onSelect(() -> {
 					this.setCurrentUser(null);
 					return MenuState.CLOSE;
 				}));
+		
+		MENU_USER_SETTINGS = (new OptionMenu(this))
+			.addHeading("User Settings Menu")
+			.addSubheading("Select one of the following options:")
+			.addOption((new MenuOption("Edit User"))
+				.onSelect(() -> {
+					OptionMenu editUserMenu = (new OptionMenu(this))
+						.addHeading("Edit User Menu")
+						.addOption ((new MenuOption("Username"))
+								.onSelect (() -> {
+									MenuQuickInput menuUsername = (new MenuQuickInput(this, "Type in your new username"));
+									menuUsername.open();
+									this.currentUser.setUsername(menuUsername.getResult());
+									System.out.println("Successfully changed your username");
+									return MenuState.RESTART;
+								}))
+						.addOption ((new MenuOption("Password"))
+								.onSelect (() -> {
+									MenuQuickInput menuPassword = (new MenuQuickInput(this, "Type in your new password"));
+									menuPassword.open();
+									this.currentUser.setPassword(menuPassword.getResult());
+									System.out.println("Successfully changed your password");
+
+									return MenuState.RESTART;
+								}))
+						.addOption ((new MenuOption("Name"))
+								.onSelect (() -> {
+									MenuQuickInput menuName = (new MenuQuickInput(this, "Type in your new name"));
+									menuName.open();
+									this.currentUser.setName(menuName.getResult());
+									System.out.println("Successfully changed your name");
+									return MenuState.RESTART;
+								}))
+						.addOption ((new MenuOption("Save Changes"))
+								.onSelect (() -> {
+									System.out.println("All changes were successfully saved");
+									return MenuState.CLOSE;
+								}));
+					editUserMenu.open();
+					
+					return MenuState.RESTART;
+				}))
+			.addOption((new MenuOption("Delete User"))
+				.onSelect(() -> {
+					OptionMenuYesNo verifyMenu = new OptionMenuYesNo(this);
+					verifyMenu.addHeading("Are you sure you want to delete your account?");
+					verifyMenu.open();
+					if(verifyMenu.resultWasYes()) {
+						System.out.println("Your account has been successfully deleted.");
+						User userToBeDeleted = this.currentUser;
+						this.setCurrentUser(null);
+						lms.getUserManager().removeUser(userToBeDeleted);
+						return MenuState.CLOSE;
+					} else {
+						System.out.println("Okay. Your account has not been deleted.");
+					}
+					return MenuState.RESTART;
+				}))
+			.addOption((new MenuOption("Exit"))
+				.onSelect(() -> {
+					return MenuState.CLOSE;
+				}));
+					
 		
 		MENU_TEACHER = (new OptionMenu(this))
 			.addHeading("Teacher Menu")
@@ -198,39 +283,54 @@ public class UIManager implements Manager {
 					return MenuState.CLOSE;
 				}));
 		
-		MENU_QUIZ_LIST_INFO = (new MenuQuizList(lms,
-			(Quiz q) -> {
-				System.out.println(ANSICodes.BOLD + "\nQuiz Info" + ANSICodes.RESET);
-				// TODO Quiz - get quiz info... maybe a toString method?
-				System.out.println(q.toString());
-				System.out.println("Press Enter to go back.");
-				this.getScanner().nextLine();
-				return MenuState.RESTART;
-			}
-		)).addHeading("List of All Quizzes");
+		MENU_QUIZ_LIST_INFO = (new OptionListMenu<Quiz>(this))
+			.onRequestListItems(() -> {
+				return lms.getQuizManager().getQuizzes();
+			})
+			.onSelectListItem(
+				(Quiz q) -> {
+					System.out.println(ANSICodes.BOLD + "\nQuiz Info" + ANSICodes.RESET);
+					// TODO Quiz - get quiz info... maybe a toString method?
+					System.out.println(q.toString());
+					System.out.println("Press Enter to go back.");
+					this.getScanner().nextLine();
+					return MenuState.RESTART;
+				}
+			)
+			.addHeading("List of All Quizzes");
 		
-		MENU_QUIZ_LIST_TAKE = (new MenuQuizList(lms,
-			(Quiz q) -> {
-				System.out.println(ANSICodes.BOLD + "\nQuiz Info" + ANSICodes.RESET);
-				// TODO Quiz - get quiz info... maybe a toString method?
-				System.out.println(q.toString());
-				OptionMenuYesNo menuTakeQuizQuestion = new OptionMenuYesNo(this);
-				menuTakeQuizQuestion.addHeading("Would you like to take this quiz");
-				menuTakeQuizQuestion.open();
-				if(menuTakeQuizQuestion.resultWasYes()) {
-					getMenuTakeQuiz(q).open();
+		MENU_QUIZ_LIST_TAKE = (new OptionListMenu<Quiz>(this))
+			.onRequestListItems(() -> {
+				return lms.getQuizManager().getQuizzes();
+			})
+			.onSelectListItem(
+				(Quiz q) -> {
+					System.out.println(ANSICodes.BOLD + "\nQuiz Info" + ANSICodes.RESET);
+					// TODO Quiz - get quiz info... maybe a toString method?
+					System.out.println(q.toString());
+					OptionMenuYesNo menuTakeQuizQuestion = new OptionMenuYesNo(this);
+					menuTakeQuizQuestion.addHeading("Would you like to take this quiz");
+					menuTakeQuizQuestion.open();
+					if(menuTakeQuizQuestion.resultWasYes()) {
+						getMenuTakeQuiz(q).open();
+						return MenuState.CLOSE;
+					}
+					System.out.println("Okay. Going back");
+					return MenuState.RESTART;
+				}
+			)
+			.addHeading("List of Quizzes to Take");
+		
+		MENU_QUIZ_LIST_MODIFY = (new OptionListMenu<Quiz>(this))
+			.onRequestListItems(() -> {
+				return lms.getQuizManager().getQuizzes();
+			})
+			.onSelectListItem(
+				(Quiz q) -> {
 					return MenuState.CLOSE;
 				}
-				System.out.println("Okay. Going back");
-				return MenuState.RESTART;
-			}
-		)).addHeading("List of Quizzes to Take");
-		
-		MENU_QUIZ_LIST_MODIFY = (new MenuQuizList(lms,
-			(Quiz q) -> {
-				return MenuState.CLOSE;
-			}
-		)).addHeading("List of Quizzes to Change");
+			)
+			.addHeading("List of Quizzes to Change");
 		
 		MENU_ADD_QUIZ = (new InputMenu(this))
 			.addInput("What would you like the name of this quiz to be?", "Name")
@@ -242,7 +342,7 @@ public class UIManager implements Manager {
 			});
 		
 	}
-
+	
 	private OptionMenu getMenuAddQuiz(String name) {
 		Quiz quiz = new Quiz(name, "Turkstra", 0, 0, "Multiple Choice"/* TODO name */);
 		OptionMenu menu = (new OptionMenu(this))
@@ -356,16 +456,16 @@ public class UIManager implements Manager {
 				// TODO Question -> question.setQuestionString(questionString);
 				OptionMenu menu = (new OptionMenu(this))
 					.addHeading("Adding a new question to the quiz") // TODO Quiz -> "to quiz: " + quiz.getName()
-					.addSubheading("Current point value: 0") // TODO Question -> "value: " + question.getValue()
+					//.addSubheading("Current point value: 0") // TODO Question -> "value: " + question.getValue()
 					.addOption((new MenuOption("Add Answer"))
 						.onSelect(() -> {
 							InputMenu inpMenu = (new InputMenu(this))
 								.addInput("What is the answer?", "Answer")
-								.addInputWithOptions("Is it correct?",
-									new String[] {"Yes", "No"}, "Correct")
+								.addIntInput("How much is this answer worth?", "PointValue")
 								.onInputFinish((Map<String, String> answerInfo) -> {
 									String answer = answerInfo.get("Answer");
-									boolean correct = answerInfo.get("Correct").equals("Yes");
+									// TODO Float not int
+									int pointvalue = Integer.parseInt(answerInfo.get("PointValue"));
 									// TODO Question - question.addAnswer(answer, correct);
 									return MenuState.CLOSE;
 								});
@@ -401,6 +501,10 @@ public class UIManager implements Manager {
 									return MenuState.CLOSE;
 								});
 							return MenuState.RESTART;
+						}))
+					.addOption((new MenuOption("Finish Adding Question"))
+						.onSelect(() -> {
+							return MenuState.CLOSE;
 						}));
 				menu.open();
 				return MenuState.CLOSE;

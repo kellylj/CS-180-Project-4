@@ -32,7 +32,7 @@ public class InputMenu extends Menu {
 	ArrayList<String> headings;
 	ArrayList<MenuInput> inputs;
 	Map<String, String> values;
-	RunnableInputFinishEvent inputFinishEventRunnable;
+	RunnableInputFinish inputFinishEventRunnable;
 	boolean validationRequest;
 
 	public InputMenu(UIManager uiManager) {
@@ -67,7 +67,7 @@ public class InputMenu extends Menu {
 		return this;
 	}
 
-	public InputMenu onInputFinish(RunnableInputFinishEvent inputFinishEventRunnable) {
+	public InputMenu onInputFinish(RunnableInputFinish inputFinishEventRunnable) {
 		this.inputFinishEventRunnable = inputFinishEventRunnable;
 		return this;
 	}
