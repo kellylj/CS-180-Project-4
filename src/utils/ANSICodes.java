@@ -59,7 +59,7 @@ public class ANSICodes {
 	public static String stripCodes(String s) {
 		return s
 			.replaceAll("\u001B\\[\\d+[a-zA-Z]", "")
-			.replaceAll("\u001B\\[\\d+;\\\\d+[a-zA-Z]", "");
+			.replaceAll("\u001B\\[\\d+;\\d+[a-zA-Z]", "");
 	}
 	
 }
