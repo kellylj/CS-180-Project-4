@@ -11,13 +11,11 @@ public class FileWrapper {
                 contents.add(line);
             }
         } catch (FileNotFoundException | NullPointerException e) {
-            System.out.println("Invalid File Provided");
             return null;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-
         return contents;
     }
 
@@ -28,13 +26,11 @@ public class FileWrapper {
                 bw.newLine();
             }
         } catch (FileNotFoundException | NullPointerException e) {
-            System.out.println("Invalid File Provided");
             return false;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-
         return true;
     }
 

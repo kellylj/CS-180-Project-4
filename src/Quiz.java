@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.*;
+
 /**
  *
  * Class that contains the details of a particular quiz
@@ -16,7 +18,6 @@ public class Quiz {
     private boolean scrambled;
 
     //Quiz constructor.
-    //TODO: Once question/answer classes are made, add lists of each to constructor
     public Quiz(String name, String author, int numQuestions, int ID, ArrayList<Question> questions, String quizType, boolean scrambled) {
         this.name = name;
         this.author = author;
@@ -67,14 +68,14 @@ public class Quiz {
         this.numQuestions = numQuestions;
     }
 
-    public void setScrambled(boolean answer) {
+    public void setScrambled(boolean scrambled) {
         this.scrambled = scrambled;
     }
 
     public boolean isScrambled() { return scrambled; }
 
     public void scrambleQuestions() {
-
+        Collections.shuffle(questions);
     }
 
     public String toString() {
