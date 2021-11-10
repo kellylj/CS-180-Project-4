@@ -112,17 +112,16 @@ public class UIManager implements Manager {
 				User user = lms.getUserManager().getUser(username);
 				
 				if(user != null) {
-					System.out.println("A user with those details already exists.");
 					OptionMenuYesNo retryMenu = new OptionMenuYesNo(scanner);
 					retryMenu.addHeading("A user with those details already exists.");
-					retryMenu.addSubheading("A user with those details already exists.");
+					retryMenu.addSubheading("Would you like to try creating a new user again?");
 					retryMenu.open();
-					if(retryMenu.resultWasYes()) {
+					if(retryMenu.resultWasNo()) {
 						System.out.println("Cancelling creation of a new user.");
-						return MenuState.RESTART;
+						return MenuState.CLOSE;
 					} else {
 						System.out.println("Restarting...");
-						return MenuState.CLOSE;
+						return MenuState.RESTART;
 					}
 				}
 				
