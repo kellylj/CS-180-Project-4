@@ -82,10 +82,10 @@ public class OptionMenu extends Menu {
 
 	@Override
 	public void runMenu() {
-		if(this.checkLogin) {// && uiManager.getCurrentUser() == null) {
+		/*if(this.checkLogin) {// && uiManager.getCurrentUser() == null) {
 			this.menuState = MenuState.CLOSE;
 			return;
-		}
+		}*/
 		for (String heading : headings) {
 			System.out.println(heading);
 		}
