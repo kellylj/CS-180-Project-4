@@ -126,6 +126,7 @@ public class QuizFileManager implements Manager {
 
 	public void importQuiz(String path) {
 		//TODO: import quiz, return success boolean;
+		//use lms.getQuizManager().addQuiz(quiz);
 	}
 
 	public void setQuizzes(ArrayList<Quiz> quizzes) {
