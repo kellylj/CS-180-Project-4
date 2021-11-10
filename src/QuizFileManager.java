@@ -14,13 +14,11 @@ public class QuizFileManager implements Manager {
 
 	@Override
 	public void init() {
-		// TODO Auto-generated method stub
 		lms.getQuizManager().setQuizList(quizzes);
 	}
 
 	@Override
 	public void exit() {
-		// TODO Auto-generated method stub
 		quizzes = lms.getQuizManager().getQuizList();
 		this.writeQuizzes();
 	}
@@ -77,7 +75,7 @@ public class QuizFileManager implements Manager {
 	}
 
 	public boolean writeQuizzes() {
-		//TODO: maybe make return a boolean
+		//TODO: Determine final filepath and separator characters
 		ArrayList<String> writableQuizzes = new ArrayList<>();
 		String path = "";
 
