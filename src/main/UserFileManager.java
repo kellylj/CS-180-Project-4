@@ -35,7 +35,7 @@ public class UserFileManager implements Manager {
             return tempUsers;
         }
 
-        //TODO: add name
+        //TODO: review written and read components
 
         for (int i = 0; i < contents.size(); i++) {
             String[] list = contents.get(i).split(":", 2);
@@ -56,7 +56,7 @@ public class UserFileManager implements Manager {
     public boolean writeUsers() {
         ArrayList<String> writableUsers = new ArrayList<>();
         String path = "";
-        //TODO: add name
+        //TODO: review written and read component
         for (int i = 0; i < users.size(); i++) {
             String write = "";
             if (users.get(i) instanceof Teacher) {

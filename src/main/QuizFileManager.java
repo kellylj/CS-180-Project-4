@@ -25,7 +25,7 @@ public class QuizFileManager implements Manager {
 	}
 
 	public ArrayList<Quiz> readQuizzes() {
-		//TODO: change filepath, determine final separating characters
+		//TODO: change filepath, determine final separating characters, review written and read components
 		ArrayList<Quiz> tempQuizzes = new ArrayList<>();
 		String path = ""; // Change path to the path of the file that stores the quizzes
 		ArrayList<String> contents = fw.readFile(path);
@@ -35,7 +35,7 @@ public class QuizFileManager implements Manager {
 		}
 
 		for (int i = 0; i < contents.size(); i++) {
-			String[] components = contents.get(i).split(";", 7); //A ";" (semicolon) is used to separate the parts of a quiz
+			String[] components = contents.get(i).split(";", 8); //A ";" (semicolon) is used to separate the parts of a quiz
 			String name = components[0];
 			String author = components[1];
 			int numQuestions = Integer.parseInt(components[2]);
@@ -43,7 +43,8 @@ public class QuizFileManager implements Manager {
 			ArrayList<Question> questions = this.readQuestions(components[4], numQuestions); //format the list of questions
 			int id = Integer.parseInt(components[5]);
 			boolean scrambled = Boolean.parseBoolean(components[6]);
-			tempQuizzes.add(new Quiz(name, author, numQuestions, id, questions, quizType, scrambled));
+			String course = components[7];
+			tempQuizzes.add(new Quiz(name, author, numQuestions, id, questions, quizType, scrambled, course));
 		}
 		return tempQuizzes;
 	}
@@ -81,7 +82,7 @@ public class QuizFileManager implements Manager {
 	}
 
 	public boolean writeQuizzes() {
-		//TODO: Determine final filepath and separator characters, add ID
+		//TODO: Determine final filepath and separator characters, add ID to answer and question
 		ArrayList<String> writableQuizzes = new ArrayList<>();
 		String path = "";
 
@@ -91,7 +92,7 @@ public class QuizFileManager implements Manager {
 			int numQuestions = quizzes.get(i).getNumQuestions();
 			String quizType = quizzes.get(i).getQuizType();
 			String questions = formatQuestions(quizzes.get(i).getQuestions());
-			int id = quizzes.get(i).getID();
+			int id = quizzes.get(i).getId();
 			boolean scrambled = quizzes.get(i).isScrambled();
 			String addon = String.format("%s;%s;%s;%s;%s;%s;%s", name, author, numQuestions, quizType, questions, id, scrambled);
 			writableQuizzes.add(addon);
