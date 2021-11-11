@@ -70,7 +70,6 @@ public class QuizFileManager implements Manager {
 			int points = Integer.parseInt(answerParts[2]);
 			answers.add(new Answer(answer, correct, points));
 		}
-
 		return answers;
 	}
 
@@ -84,11 +83,11 @@ public class QuizFileManager implements Manager {
 			String author = quizzes.get(i).getAuthor();
 			int numQuestions = quizzes.get(i).getNumQuestions();
 			String quizType = quizzes.get(i).getQuizType();
-			//String questions = formatQuestions(quizzes.get(i).getQuestions());
+			String questions = formatQuestions(quizzes.get(i).getQuestions());
 			int id = quizzes.get(i).getID();
 			boolean scrambled = quizzes.get(i).isScrambled();
-			//String addon = String.format("%s;%s;%s;%s;%s;%s;%s", name, author, numQuestions, quizType, questions, id, scrambled);
-			//writableQuizzes.add(addon);
+			String addon = String.format("%s;%s;%s;%s;%s;%s;%s", name, author, numQuestions, quizType, questions, id, scrambled);
+			writableQuizzes.add(addon);
 		}
 
 		boolean success = fw.writeFile(path, writableQuizzes);
@@ -99,11 +98,11 @@ public class QuizFileManager implements Manager {
 		String retVal = "";
 		for (int i = 0; i < questions.size(); i++) {
 			String answers = formatAnswers(questions.get(i).getAnswers());
-			//String question = questions.get(i).getQuestion();
+			String question = questions.get(i).getQuestion();
 			if (i == questions.size() - 1) {
-				//retVal += String.format("%s/%s", answers, question);
+				retVal += String.format("%s/%s", answers, question);
 			} else {
-				//retVal += String.format("%s/%s,", answers, question);
+				retVal += String.format("%s/%s,", answers, question);
 			}
 		}
 		return retVal;
@@ -112,13 +111,13 @@ public class QuizFileManager implements Manager {
 	public String formatAnswers(ArrayList<Answer> answers) {
 		String retVal = "";
 		for (int i = 0; i < answers.size(); i++) {
-			//String answer = answers.get(i).getAnswer();
+			String answer = answers.get(i).getAnswer();
 			boolean correct = answers.get(i).isCorrect();
-			//int points = answers.get(i).getPoints();
+			int points = answers.get(i).getPoints();
 			if (i == answers.size() - 1) {
-				//retVal += String.format("%s_%s_%s", answer, correct, points);
+				retVal += String.format("%s_%s_%s", answer, correct, points);
 			} else {
-				//retVal += String.format("%s_%s_%s-", answer, correct, points);
+				retVal += String.format("%s_%s_%s-", answer, correct, points);
 			}
 		}
 		return retVal;
