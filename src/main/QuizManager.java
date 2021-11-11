@@ -1,3 +1,4 @@
+package main;
 import java.util.ArrayList;
 /**
  * Stores a list of every created quiz, which is instantiated every time the program is run

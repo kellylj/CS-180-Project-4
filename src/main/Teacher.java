@@ -1,15 +1,16 @@
+package main;
 /**
  *
- * Class that contains the detail of a student
+ * Class that contains the detail of a teacher
  *
  * @author Sean Lee
  * @version 11/7/21
  */
-public class Student extends User{
-    UserPermission userPermission;
-    public Student(int ID, String name, String username, String password) {
+public class Teacher extends User {
+    private final UserPermission userPermission;
+    public Teacher(int ID, String name, String username, String password) {
         super(ID, name, username, password);
-        this.userPermission = UserPermission.USER;
+        userPermission = UserPermission.ADMIN;
     }
 
     public Enum<UserPermission> getUserPermission() {

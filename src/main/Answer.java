@@ -1,3 +1,4 @@
+package main;
 /**
  * Stores one answer to a question
  * <p>

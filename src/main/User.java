@@ -1,3 +1,4 @@
+package main;
 /**
  *
  * Super class that contains the details of a particular user
