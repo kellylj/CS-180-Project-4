@@ -11,7 +11,7 @@ import java.util.Random;
  * @see Manager
  */
 public class QuizManager implements Manager {
-
+	Random rand = new Random();
 	LearningManagementSystem lms;
 	ArrayList<Quiz> quizList = new ArrayList<>();
 	public QuizManager(LearningManagementSystem lms) {
@@ -146,7 +146,6 @@ public class QuizManager implements Manager {
 	}
 
 	public int getUniqueID() {
-		Random rand = new Random();
 		int id = 0;
 		boolean exists = true;
 		while (exists) {
