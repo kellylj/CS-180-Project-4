@@ -54,10 +54,11 @@ public class QuizFileManager implements Manager {
 		String[] list = questionList.split(",", numQuestions); //A "," (comma) is used to separate the different questions in a quiz
 
 		for (int i = 0; i < numQuestions; i++) {
-			String[] questionParts = list[i].split("/", 2); //A "/" (forward slash) is used to separate the answers from the question asked
+			String[] questionParts = list[i].split("/", 3); //A "/" (forward slash) is used to separate the answers from the question asked
 			ArrayList<Answer> answers = this.readAnswers(questionParts[0]);
 			String question = questionParts[1];
-			questions.add(new Question(answers, question));
+			String id = questionParts[2];
+			questions.add(new Question(answers, question, id));
 		}
 
 		return questions;
@@ -69,17 +70,18 @@ public class QuizFileManager implements Manager {
 		String[] list = answerList.split("-"); //A "-" (dash) is used to separate the answers from each other
 
 		for (int i = 0; i < list.length; i++) {
-			String[] answerParts = list[i].split("_", 3); //An "_" (underscore) is used to separate the parts of an answer
+			String[] answerParts = list[i].split("_", 4); //An "_" (underscore) is used to separate the parts of an answer
 			String answer = answerParts[0];
 			boolean correct = Boolean.parseBoolean(answerParts[1]);
 			int points = Integer.parseInt(answerParts[2]);
-			answers.add(new Answer(answer, correct, points));
+			String id = answerParts[3];
+			answers.add(new Answer(answer, correct, points, id));
 		}
 		return answers;
 	}
 
 	public boolean writeQuizzes() {
-		//TODO: Determine final filepath and separator characters
+		//TODO: Determine final filepath and separator characters, add ID
 		ArrayList<String> writableQuizzes = new ArrayList<>();
 		String path = "";
 

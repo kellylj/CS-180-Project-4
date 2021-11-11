@@ -18,25 +18,27 @@ public class Quiz {
     private int numQuestions;
     private String quizType;
     ArrayList<Question> questions;
-    private int ID;
+    private int id;
     private boolean scrambled;
+    private String course;
 
-    public Quiz(String name, String author, int numQuestions, int ID, ArrayList<Question> questions, String quizType, boolean scrambled) {
+    public Quiz(String name, String author, int numQuestions, int id, ArrayList<Question> questions, String quizType, boolean scrambled, String course) {
         this.name = name;
         this.author = author;
         this.numQuestions = numQuestions;
         this.quizType = quizType;
-        this.ID = ID;
+        this.id = id;
         this.scrambled = scrambled;
         this.questions = questions;
+        this.course = course;
     }
     /**
-     * Returns ID of the quiz
+     * Returns id of the quiz
      *
-     * @return ID - quiz-specific identifier
+     * @return id - quiz-specific identifier
      */
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
     /**
      * Returns name of the quiz
@@ -89,10 +91,10 @@ public class Quiz {
     /**
      * Sets quiz ID
      *
-     * @param ID - the new ID of the quiz
+     * @param id - the new ID of the quiz
      */
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setID(int id) {
+        this.id = id;
     }
     /**
      * Sets quiz type
@@ -134,6 +136,12 @@ public class Quiz {
     public void scrambleQuestions() {
         Collections.shuffle(questions);
     }
+    public String getCourse() {
+        return course;
+    }
+    public void setCourse(String course) {
+        this.course = course;
+    }
     /**
      * Returns a synopsis of the attributes of a quiz
      *
@@ -146,7 +154,7 @@ public class Quiz {
     }
     public String toString() {
         String quizDescription = "Quiz name: " + name + ", Author: " + author;
-        quizDescription+= ", ID: " + ID + ", Number of Questions: " + numQuestions + ".";
+        quizDescription+= ", ID: " + id + ", Number of Questions: " + numQuestions + ".";
         return quizDescription;
     }
 

@@ -13,10 +13,12 @@ import java.util.ArrayList;
 public class Question {
     ArrayList<Answer> answers;
     String question;
+    String id;
 
-    public Question(ArrayList<Answer> answers, String question) {
+    public Question(ArrayList<Answer> answers, String question, String id) {
         this.answers = answers;
         this.question = question;
+        this.id = id;
     }
     /**
      * Returns the list of possible answers
@@ -28,6 +30,14 @@ public class Question {
     }
     public String getQuestion() {
         return question;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
     /**
      * Returns the question as it will be displayed to the user

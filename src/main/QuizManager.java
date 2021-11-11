@@ -1,4 +1,5 @@
 package main;
+import java.io.StringBufferInputStream;
 import java.util.ArrayList;
 import java.util.Random;
 /**
@@ -11,7 +12,7 @@ import java.util.Random;
  * @see Manager
  */
 public class QuizManager implements Manager {
-
+	Random rand = new Random();
 	LearningManagementSystem lms;
 	ArrayList<Quiz> quizList = new ArrayList<>();
 	public QuizManager(LearningManagementSystem lms) {
@@ -134,6 +135,18 @@ public class QuizManager implements Manager {
 		}
 		return matchingQuizzes;
 	}
+	public ArrayList<String> getListOfCourses() {
+		ArrayList<String> courses = new ArrayList<>();
+		for (int i = 0; i < quizList.size(); i++) {
+			String course = quizList.get(i).getCourse();
+			for (int j = 0; j < courses.size(); j++) {
+				if (!(courses.get(j).equals(course))) {
+					courses.add(course);
+				}
+			}
+		}
+		return courses;
+	}
 	/**
 	 * Sets the quizList to a different quizList
 	 *<p>
@@ -146,7 +159,6 @@ public class QuizManager implements Manager {
 	}
 
 	public int getUniqueID() {
-		Random rand = new Random();
 		int id = 0;
 		boolean exists = true;
 		while (exists) {
