@@ -140,6 +140,9 @@ public class Quiz {
      *
      * @return quizDescription - a synopsis of this individual quiz
      */
+    public ArrayList<Question> getQuestions() {
+        return questions;
+    }
     public String toString() {
         String quizDescription = "Quiz name: " + name + ", Author: " + author;
         quizDescription+= ", ID: " + ID + ", Number of Questions: " + numQuestions + ".";
