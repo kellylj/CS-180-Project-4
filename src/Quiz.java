@@ -138,12 +138,12 @@ public class Quiz {
      *
      * Used to display the list of all quizzes
      *
-     * @return s - a synopsis of this individual quiz
+     * @return quizDescription - a synopsis of this individual quiz
      */
     public String toString() {
-        String s = "Quiz name: " + name + ", Author: " + author;
-        s+= ", ID: " + ID + ", Number of Questions: " + numQuestions + ".";
-        return s;
+        String quizDescription = "Quiz name: " + name + ", Author: " + author;
+        quizDescription+= ", ID: " + ID + ", Number of Questions: " + numQuestions + ".";
+        return quizDescription;
     }
 
 

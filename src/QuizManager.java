@@ -3,7 +3,6 @@ import java.util.ArrayList;
  * Stores a list of every created quiz, which is instantiated every time the program is run
  * <p>
  * Quiz Manager manages the list of quizzes, and provides methods for searching through them
- * <p>
  *
  *
  * @author Liam Kelly
@@ -16,16 +15,30 @@ public class QuizManager implements Manager {
 	public QuizManager(LearningManagementSystem lms) {
 		this.lms = lms;
 	}
-
+	/**
+	 * Run whenever the program is initialized
+	 */
 	@Override
 	public void init() {
 
 	}
-
+	/**
+	 * Adds a quiz to the quizList
+	 *
+	 * @param quiz - A new quiz to be added to the list
+	 */
 	public void addQuiz(Quiz quiz) {
 		quizList.add(quiz);
 	}
 
+	/**
+	 * Removes a quiz from the list
+	 *<p>
+	 * Removes a quiz matching a specific ID from the list of all quizzes.
+	 * If none are removed, displays a message
+	 *
+	 * @param ID - ID of the quiz that needs to be removed
+	 */
 	public void removeQuiz(int ID) {
 		int startingListLength = quizList.size();
 		for (int i = 0; i < quizList.size(); i++) {
@@ -39,17 +52,33 @@ public class QuizManager implements Manager {
 		}
 	}
 
+	/**
+	 * Returns a list with descriptions of every created quiz
+	 *<p>
+	 * Lists all quizzes' toStrings.  Return a message if no quizzes have been created.
+	 *
+	 * @return quizDescriptions - A String of all created quizzes
+	 */
 	public String listQuizzes() {
-		String s = "";
+		String quizDescriptions = "";
 		for (Quiz q : quizList) {
-			s+= q.toString() + "\n";
+			quizDescriptions+= q.toString() + "\n";
 		}
 		if (quizList.size() == 0) {
-			s += "No quizzes have been created";
+			quizDescriptions += "No quizzes have been created";
 		}
-		return s;
+		return quizDescriptions;
 	}
 
+	/**
+	 * Searches for quizzes matching a specified name
+	 *<p>
+	 * Returns the list of quizzes if any are found that match.  If none match, returns null.
+	 * Not case-sensitive.
+	 *
+	 * @return matchingQuizzes - a list of quizzes that match the specified name
+	 * @param name - the quiz name to search for
+	 */
 	public ArrayList<Quiz> searchQuizByName(String name) {
 		ArrayList<Quiz> matchingQuizzes = new ArrayList<>();
 		for (Quiz q : quizList) {
@@ -62,7 +91,15 @@ public class QuizManager implements Manager {
 		}
 		return matchingQuizzes;
 	}
-
+	/**
+	 * Searches for quizzes matching a specified author
+	 *<p>
+	 * Returns the list of quizzes if any are found that match.  If none match, returns null.
+	 * Not case-sensitive.
+	 *
+	 * @return matchingQuizzes - a list of quizzes that match the specified name
+	 * @param author - the author name to search for
+	 */
 	public ArrayList<Quiz> searchQuizByAuthor(String author) {
 		ArrayList<Quiz> matchingQuizzes = new ArrayList<>();
 		for (Quiz q : quizList) {
@@ -75,7 +112,14 @@ public class QuizManager implements Manager {
 		}
 		return matchingQuizzes;
 	}
-
+	/**
+	 * Searches for quizzes matching a specified ID
+	 *<p>
+	 * Returns the list of quizzes if any are found that match.  If none match, returns null
+	 *
+	 * @return matchingQuizzes - a list of quizzes that match the specified ID
+	 * @param ID - the ID to search for
+	 */
 	public ArrayList<Quiz> searchQuizByID(int ID) {
 		ArrayList<Quiz> matchingQuizzes = new ArrayList<>();
 		for (Quiz q : quizList) {
@@ -88,7 +132,13 @@ public class QuizManager implements Manager {
 		}
 		return matchingQuizzes;
 	}
-
+	/**
+	 * Sets the quizList to a different quizList
+	 *<p>
+	 * Used in initialization of the program to copy quiz list from files
+	 *
+	 * @param quizList - the new list of quizzes
+	 */
 	public void setQuizList(ArrayList<Quiz> quizList) {
 		this.quizList = quizList;
 	}
@@ -96,7 +146,9 @@ public class QuizManager implements Manager {
 	public ArrayList<Quiz> getQuizList() {
 		return quizList;
 	}
-
+	/**
+	 * Run whenever the program is terminated
+	 */
 	@Override
 	public void exit() {
 
