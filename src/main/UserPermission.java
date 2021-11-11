@@ -1,3 +1,4 @@
+package main;
 /**
  *
  * Enum that holds the two possible values of a user's permission:

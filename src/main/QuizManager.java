@@ -1,4 +1,6 @@
+package main;
 import java.util.ArrayList;
+import java.util.Random;
 /**
  * Stores a list of every created quiz, which is instantiated every time the program is run
  * <p>
@@ -141,6 +143,22 @@ public class QuizManager implements Manager {
 	 */
 	public void setQuizList(ArrayList<Quiz> quizList) {
 		this.quizList = quizList;
+	}
+
+	public int getUniqueID() {
+		Random rand = new Random();
+		int id = 0;
+		boolean exists = true;
+		while (exists) {
+			exists = false;
+			id = rand.nextInt(999999);
+			for (int i = 0; i < quizList.size(); i++) {
+				if(quizList.get(i).getID() == i) {
+					exists = true;
+				}
+			}
+		}
+		return id;
 	}
 
 	public ArrayList<Quiz> getQuizList() {
