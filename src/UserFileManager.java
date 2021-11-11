@@ -37,15 +37,16 @@ public class UserFileManager implements Manager {
         //TODO: add name
 
         for (int i = 0; i < contents.size(); i++) {
-            String[] list = contents.get(i).split(":", 2); //can combine this line and the first of each if-statement if teacher and student have the same amount of class variables
-            String[] info = list[1].split(";", 3);
+            String[] list = contents.get(i).split(":", 2);
+            String[] info = list[1].split(";", 4);
             int id = Integer.parseInt(info[0]);
             String username = info[1];
             String password = info[2];
-            if (list[0].equals("teacher")) { //only necessary for constructors if the amount of class variables are the same
-                tempUsers.add(new Teacher(id, username, password));
+            String name = info[3];
+            if (list[0].equals("teacher")) {
+                tempUsers.add(new Teacher(id, username, password, name));
             } else {
-                tempUsers.add(new Student(id, username, password));
+                tempUsers.add(new Student(id, username, password, name));
             }
         }
         return tempUsers;
@@ -57,12 +58,12 @@ public class UserFileManager implements Manager {
         //TODO: add name
         for (int i = 0; i < users.size(); i++) {
             String write = "";
-            if (users.get(i) instanceof Teacher) { //class variables can be written only once outside of the if-statement if teacher and student have the same class variables
+            if (users.get(i) instanceof Teacher) {
                 write += "teacher:";
             } else {
                 write += "student:";
             }
-            write += String.format("%d;%s;%s", users.get(i).getID(), users.get(i).getUsername(), users.get(i).getPassword());
+            write += String.format("%d;%s;%s;%s", users.get(i).getID(), users.get(i).getUsername(), users.get(i).getPassword(), users.get(i).getName());
             writableUsers.add(write);
         }
         boolean success = fw.writeFile(path, writableUsers);
