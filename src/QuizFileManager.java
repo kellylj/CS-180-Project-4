@@ -29,6 +29,10 @@ public class QuizFileManager implements Manager {
 		String path = ""; // Change path to the path of the file that stores the quizzes
 		ArrayList<String> contents = fw.readFile(path);
 
+		if (contents == null) {
+			return tempQuizzes;
+		}
+
 		for (int i = 0; i < contents.size(); i++) {
 			String[] components = contents.get(i).split(";", 7); //A ";" (semicolon) is used to separate the parts of a quiz
 			String name = components[0];

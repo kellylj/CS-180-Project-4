@@ -30,6 +30,10 @@ public class UserFileManager implements Manager {
         String path = "";
         ArrayList<String> contents = fw.readFile(path);
 
+        if (contents == null) {
+            return tempUsers;
+        }
+
         //TODO: add name
 
         for (int i = 0; i < contents.size(); i++) {
