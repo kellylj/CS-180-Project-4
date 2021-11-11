@@ -1,5 +1,6 @@
 package main;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -47,6 +48,22 @@ public class UserManager implements Manager {
 			}
 		}
 		return null;
+	}
+
+	public int getUniqueID() {
+		Random rand = new Random();
+		int id = 0;
+		boolean exists = true;
+		while (exists) {
+			exists = false;
+			id = rand.nextInt(999999);
+			for (int i = 0; i < users.size(); i++) {
+				if(users.get(i).getID() == i) {
+					exists = true;
+				}
+			}
+		}
+		return id;
 	}
 
 	@Override
