@@ -1,4 +1,5 @@
 package main;
+import java.io.StringBufferInputStream;
 import java.util.ArrayList;
 import java.util.Random;
 /**
@@ -133,6 +134,18 @@ public class QuizManager implements Manager {
 			return null;
 		}
 		return matchingQuizzes;
+	}
+	public ArrayList<String> getListOfCourses() {
+		ArrayList<String> courses = new ArrayList<>();
+		for (int i = 0; i < quizList.size(); i++) {
+			String course = quizList.get(i).getCourse();
+			for (int j = 0; j < courses.size(); j++) {
+				if (!(courses.get(j).equals(course))) {
+					courses.add(course);
+				}
+			}
+		}
+		return courses;
 	}
 	/**
 	 * Sets the quizList to a different quizList

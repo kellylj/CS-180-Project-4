@@ -14,12 +14,12 @@ public class Answer {
     String answer;
     boolean isCorrect;
     int points;
-    String ID;
-    public Answer(String answer, boolean correct, int points, String ID) {
+    String id;
+    public Answer(String answer, boolean correct, int points, String id) {
         this.answer = answer;
         this.isCorrect = correct;
         this.points = points;
-        this.ID = ID;
+        this.id = id;
     }
 
     /**
@@ -41,11 +41,11 @@ public class Answer {
     }
 
     public void setID(String ID) {
-        this.ID = ID;
+        this.id = ID;
     }
 
-    public String getID() {
-        return ID;
+    public String getId() {
+        return id;
     }
     /**
      * Returns answer string
