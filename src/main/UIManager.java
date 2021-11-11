@@ -76,7 +76,6 @@ public class UIManager implements Manager {
 	@Override
 	public void init() {
 		this.scanner = new Scanner(System.in);
-
 		MENU_START = (new OptionMenu(scanner))
 			.addHeading("Welcome to the Learning Management System!")
 			.addSubheading("Please select one of the following options:")
@@ -174,7 +173,9 @@ public class UIManager implements Manager {
 				System.out.println("Okay. Going back to the main menu.");
 				return MenuState.CLOSE;
 			});
-		
+
+		//Aryan will document this block of code
+
 		MENU_MAIN = (new OptionMenu(scanner))
 			.setCheckLogin(true)
 			.addHeading("Main Menu")
@@ -207,7 +208,12 @@ public class UIManager implements Manager {
 					this.setCurrentUser(null);
 					return MenuState.CLOSE;
 				}));
-		
+
+		//Aryan will document this block of code
+		// here
+		/*
+
+		 */
 		MENU_USER_SETTINGS = (new OptionMenu(scanner))
 			.setCheckLogin(true)
 			.addHeading("User Settings Menu")
@@ -218,6 +224,7 @@ public class UIManager implements Manager {
 						.addHeading("Edit User Menu")
 						.addOption ((new MenuOption("Username"))
 								.onSelect (() -> {
+									// here
 									MenuQuickInput menuUsername = (new MenuQuickInput(scanner, "Type in your new username"));
 									menuUsername.open();
 									this.currentUser.setUsername(menuUsername.getResult());
@@ -226,6 +233,7 @@ public class UIManager implements Manager {
 								}))
 						.addOption ((new MenuOption("Password"))
 								.onSelect (() -> {
+									// here
 									MenuQuickInput menuPassword = (new MenuQuickInput(scanner, "Type in your new password"));
 									menuPassword.open();
 									this.currentUser.setPassword(menuPassword.getResult());
@@ -235,6 +243,7 @@ public class UIManager implements Manager {
 								}))
 						.addOption ((new MenuOption("Name"))
 								.onSelect (() -> {
+									// here
 									MenuQuickInput menuName = (new MenuQuickInput(scanner, "Type in your new name"));
 									menuName.open();
 									
@@ -245,6 +254,7 @@ public class UIManager implements Manager {
 								}))
 						.addOption ((new MenuOption("Save Changes"))
 								.onSelect (() -> {
+									// here
 									System.out.println("All changes were successfully saved");
 									return MenuState.CLOSE;
 								}));
