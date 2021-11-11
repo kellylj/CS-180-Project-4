@@ -10,9 +10,11 @@ public class User {
     private int ID;
     private String username;
     private String password;
+    private String name;
 
-    public User(int ID, String username, String password) {
+    public User(int ID, String name, String username, String password) {
         this.ID = ID;
+        this.name = name;
         this.username = username;
         this.password = password;
     }
