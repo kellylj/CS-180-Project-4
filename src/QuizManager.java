@@ -1,10 +1,13 @@
 import java.util.ArrayList;
 /**
+ * Stores a list of every created quiz, which is instantiated every time the program is run
+ * <p>
+ * Quiz Manager manages the list of quizzes, and provides methods for searching through them
+ * <p>
  *
- * Class that handles management of all quizzes
  *
  * @author Liam Kelly
- * @version 11/4/21
+ * @see Manager
  */
 public class QuizManager implements Manager {
 
