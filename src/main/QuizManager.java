@@ -45,7 +45,7 @@ public class QuizManager implements Manager {
 	public void removeQuiz(int ID) {
 		int startingListLength = quizList.size();
 		for (int i = 0; i < quizList.size(); i++) {
-			if (quizList.get(i).getID() == ID) {
+			if (quizList.get(i).getId() == ID) {
 				quizList.remove(i);
 				i--;
 			}
@@ -126,7 +126,7 @@ public class QuizManager implements Manager {
 	public ArrayList<Quiz> searchQuizByID(int ID) {
 		ArrayList<Quiz> matchingQuizzes = new ArrayList<>();
 		for (Quiz q : quizList) {
-			if (q.getID() == ID) {
+			if (q.getId() == ID) {
 				matchingQuizzes.add(q);
 			}
 		}
@@ -165,7 +165,7 @@ public class QuizManager implements Manager {
 			exists = false;
 			id = rand.nextInt(999999);
 			for (int i = 0; i < quizList.size(); i++) {
-				if(quizList.get(i).getID() == i) {
+				if(quizList.get(i).getId() == i) {
 					exists = true;
 				}
 			}
