@@ -75,7 +75,7 @@ public class UIManager implements Manager {
 	@Override
 	public void init() {
 		this.scanner = new Scanner(System.in);
-		
+
 		MENU_START = (new OptionMenu(scanner))
 			.addHeading("Welcome to the Learning Management System!")
 			.addSubheading("Please select one of the following options:")
@@ -127,10 +127,10 @@ public class UIManager implements Manager {
 				
 				switch(userType) {
 					case "Teacher":
-						user = new Teacher(0, username, password);
+						user = new Teacher(0, name, username, password);
 						break;
 					case "Student":
-						user = new Student(0, username, password);
+						user = new Student(0, name, username, password);
 						break;
 				}
 				lms.getUserManager().addUser(user);
