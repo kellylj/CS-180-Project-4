@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 public class UserManager implements Manager {
 
-	private ArrayList<User> users;
+	private ArrayList<User> users = new ArrayList<>();
 	LearningManagementSystem lms;
 	
 	public UserManager(LearningManagementSystem lms) {

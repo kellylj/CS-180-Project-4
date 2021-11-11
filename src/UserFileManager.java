@@ -9,7 +9,7 @@ public class UserFileManager implements Manager {
 	
 	public UserFileManager(LearningManagementSystem lms) {
 		this.lms = lms;
-		this.users = this.readUsers();
+		//this.users = this.readUsers();
 	}
 
 	@Override

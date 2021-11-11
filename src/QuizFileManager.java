@@ -9,7 +9,7 @@ public class QuizFileManager implements Manager {
 	
 	public QuizFileManager(LearningManagementSystem lms) {
 		this.lms = lms;
-		this.quizzes = this.readQuizzes();
+		//this.quizzes = this.readQuizzes();
 	}
 
 	@Override
