@@ -25,6 +25,9 @@ public class Question {
     public ArrayList<Answer> getAnswers() {
         return answers;
     }
+    public String getQuestion() {
+        return question;
+    }
     /**
      * Returns the question as it will be displayed to the user
      *

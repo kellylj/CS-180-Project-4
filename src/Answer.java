@@ -42,6 +42,9 @@ public class Answer {
      *
      * @return {@link #answer}
      */
+    public String getAnswer() {
+        return answer;
+    }
     public String toString() {
         String s = answer;
         return s;
