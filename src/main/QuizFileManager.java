@@ -1,5 +1,6 @@
 package main;
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class QuizFileManager implements Manager {
@@ -25,7 +26,7 @@ public class QuizFileManager implements Manager {
 	}
 
 	public ArrayList<Quiz> readQuizzes() {
-		//TODO: change filepath, determine final separating characters, review written and read components
+		//TODO: change filepath, determine final separating characters
 		ArrayList<Quiz> tempQuizzes = new ArrayList<>();
 		String path = ""; // Change path to the path of the file that stores the quizzes
 		ArrayList<String> contents = fw.readFile(path);
@@ -82,7 +83,7 @@ public class QuizFileManager implements Manager {
 	}
 
 	public boolean writeQuizzes() {
-		//TODO: Determine final filepath and separator characters, add ID to answer and question
+		//TODO: Determine final filepath and separator characters
 		ArrayList<String> writableQuizzes = new ArrayList<>();
 		String path = "";
 
@@ -94,7 +95,8 @@ public class QuizFileManager implements Manager {
 			String questions = formatQuestions(quizzes.get(i).getQuestions());
 			int id = quizzes.get(i).getId();
 			boolean scrambled = quizzes.get(i).isScrambled();
-			String addon = String.format("%s;%s;%s;%s;%s;%s;%s", name, author, numQuestions, quizType, questions, id, scrambled);
+			String course = quizzes.get(i).getCourse();
+			String addon = String.format("%s;%s;%s;%s;%s;%s;%s;%s", name, author, numQuestions, quizType, questions, id, scrambled, course);
 			writableQuizzes.add(addon);
 		}
 
@@ -107,10 +109,11 @@ public class QuizFileManager implements Manager {
 		for (int i = 0; i < questions.size(); i++) {
 			String answers = formatAnswers(questions.get(i).getAnswers());
 			String question = questions.get(i).getQuestion();
+			String id = questions.get(i).getId();
 			if (i == questions.size() - 1) {
-				retVal += String.format("%s/%s", answers, question);
+				retVal += String.format("%s/%s/%s", answers, question, id);
 			} else {
-				retVal += String.format("%s/%s,", answers, question);
+				retVal += String.format("%s/%s/%s,", answers, question, id);
 			}
 		}
 		return retVal;
@@ -122,10 +125,11 @@ public class QuizFileManager implements Manager {
 			String answer = answers.get(i).getAnswer();
 			boolean correct = answers.get(i).isCorrect();
 			int points = answers.get(i).getPoints();
+			String id = answers.get(i).getId();
 			if (i == answers.size() - 1) {
-				retVal += String.format("%s_%s_%s", answer, correct, points);
+				retVal += String.format("%s_%s_%s_%s", answer, correct, points, id);
 			} else {
-				retVal += String.format("%s_%s_%s-", answer, correct, points);
+				retVal += String.format("%s_%s_%s_%s-", answer, correct, points, id);
 			}
 		}
 		return retVal;
@@ -133,7 +137,8 @@ public class QuizFileManager implements Manager {
 
 	public void importQuiz(String path) {
 		//TODO: import quiz, return success boolean;
-		//use lms.getQuizManager().addQuiz(quiz);
+		String user = lms.getUIManager().getCurrentUser().getName(); //use for author name
+		//use lms.getQuizManager().addQuiz(new Quiz(stuff));
 	}
 
 	public void setQuizzes(ArrayList<Quiz> quizzes) {
