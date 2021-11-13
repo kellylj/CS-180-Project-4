@@ -21,7 +21,7 @@ public class GradedQuiz { // should students be able to take quiz multiple times
         this.studentID = studentID;
     }
 
-    public GradedQuiz(int quizID, int studentID, HashMap<Integer, Integer> map, int totalScore) {
+    public GradedQuiz(int quizID, int studentID, HashMap<Integer, Integer> map) {
         this.quizID = quizID;
         this.studentID = studentID;
         this.map = map;
