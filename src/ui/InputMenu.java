@@ -3,10 +3,8 @@ package ui;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
 
-import javax.swing.UIManager;
-
+import main.UIManager;
 import utils.ANSICodes;
 
 /**
@@ -29,7 +27,7 @@ import utils.ANSICodes;
  */
 public class InputMenu extends Menu {
 
-	Scanner scanner;
+	UIManager uiManager;
 	
 	ArrayList<String> headings;
 	ArrayList<MenuInput> inputs;
@@ -37,8 +35,8 @@ public class InputMenu extends Menu {
 	RunnableInputFinish inputFinishEventRunnable;
 	boolean validationRequest;
 
-	public InputMenu(Scanner scanner) {
-		this.scanner = scanner;
+	public InputMenu(UIManager uiManager) {
+		this.uiManager = uiManager;
 		this.inputs = new ArrayList<MenuInput>();
 		this.headings = new ArrayList<String>();
 		this.values = new HashMap<String, String>();
@@ -65,7 +63,7 @@ public class InputMenu extends Menu {
 	}
 
 	public InputMenu addInputWithOptions(String question, String[] options, String keyResult) {
-		this.inputs.add(new MenuInputOptions(question, options, keyResult, scanner));
+		this.inputs.add(new MenuInputOptions(question, options, keyResult, uiManager));
 		return this;
 	}
 
@@ -93,7 +91,7 @@ public class InputMenu extends Menu {
 	}
 	
 	private ValidationState requestValidation() {
-		OptionMenuYesNo verifyMenu = new OptionMenuYesNo(scanner);
+		OptionMenuYesNo verifyMenu = new OptionMenuYesNo(uiManager);
 		verifyMenu.addHeading("The following are the values you gave:");
 		for (String key : values.keySet()) {
 			verifyMenu.addSubheading(key + " - " + values.get(key));
@@ -106,7 +104,7 @@ public class InputMenu extends Menu {
 		if (isYes)
 			return ValidationState.CONTINUE;
 
-		OptionMenuYesNo tryAgainMenu = new OptionMenuYesNo(scanner);
+		OptionMenuYesNo tryAgainMenu = new OptionMenuYesNo(uiManager);
 		tryAgainMenu.addHeading("Do you want to try again?");
 		tryAgainMenu.open();
 		boolean boolTryAgain = tryAgainMenu.getResult();
@@ -143,7 +141,7 @@ public class InputMenu extends Menu {
 
 			System.out.println(ANSICodes.BOLD + ANSICodes.CYAN + input.getQuestion() + ANSICodes.RESET);
 
-			String result = input.getInput(scanner);
+			String result = input.getInput(uiManager);
 
 			values.put(input.getResultKey(), result);
 		}

@@ -2,6 +2,8 @@ package ui;
 
 import java.util.Scanner;
 
+import main.UIManager;
+
 /**
  * Datastructure used by {@link InputMenu} to store information about the input the menu should ask for.
  * <p>
@@ -27,10 +29,10 @@ public class MenuInput {
 		return this.resultKey;
 	}
 	
-	public String getInput(Scanner scanner) {
+	public String getInput(UIManager uiManager) {
 		String input;
 		while(true) {
-			input = scanner.nextLine();
+			input = uiManager.getScanner().nextLine();
 			if(input != null && input.length() > 0)
 				break;
 			System.out.println("Please try again and enter a valid input.");

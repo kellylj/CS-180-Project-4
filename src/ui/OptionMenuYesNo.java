@@ -1,6 +1,6 @@
 package ui;
 
-import java.util.Scanner;
+import main.UIManager;
 
 /**
  * Option menu for simple yes/no choices.
@@ -12,8 +12,8 @@ import java.util.Scanner;
  */
 public class OptionMenuYesNo extends OptionMenuWithResult<Boolean> {
 	
-	public OptionMenuYesNo(Scanner scanner) {
-		super(scanner);
+	public OptionMenuYesNo(UIManager uiManager) {
+		super(uiManager);
 		
 		this.options.clear();
 		

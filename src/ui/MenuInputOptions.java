@@ -1,6 +1,6 @@
 package ui;
 
-import java.util.Scanner;
+import main.UIManager;
 
 /**
  * Datastructure used by {@link InputMenu} for menu inputs where an option is desired.
@@ -16,9 +16,9 @@ public class MenuInputOptions extends MenuInput {
 
 	OptionMenuWithResult<String> optionMenu;
 	
-	public MenuInputOptions(String question, String[] options, String resultKey, Scanner scanner) {
+	public MenuInputOptions(String question, String[] options, String resultKey, UIManager uiManager) {
 		super(question, resultKey);
-		this.optionMenu = new OptionMenuWithResult<String>(scanner);
+		this.optionMenu = new OptionMenuWithResult<String>(uiManager);
 		for(String option: options) {
 			optionMenu.addOption(((new MenuOption(option))
 				.onSelect(() -> {
@@ -38,7 +38,7 @@ public class MenuInputOptions extends MenuInput {
 	 * @return The chosen option in the form of a {@link String}
 	 */
 	@Override
-	public String getInput(Scanner scanner) {
+	public String getInput(UIManager uiManager) {
 		this.optionMenu.open();
 		return this.optionMenu.getResult();
 	}

@@ -1,6 +1,6 @@
 package ui;
 
-import java.util.Scanner;
+import main.UIManager;
 
 /**
  * 
@@ -17,8 +17,8 @@ import java.util.Scanner;
  */
 public class OptionMenuWithResult<T> extends OptionMenu {
 
-	public OptionMenuWithResult(Scanner scanner) {
-		super(scanner);
+	public OptionMenuWithResult(UIManager uiManager) {
+		super(uiManager);
 	}
 
 	T result;

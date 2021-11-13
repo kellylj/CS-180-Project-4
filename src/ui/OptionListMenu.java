@@ -1,8 +1,11 @@
 package ui;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
+import main.LearningManagementSystem;
+import main.Quiz;
+import main.QuizManager;
+import main.UIManager;
 import utils.Listable;
 
 /**
@@ -40,8 +43,8 @@ public class OptionListMenu<T> extends OptionMenuWithResult<T> {
 	 * 	{@link RunnableSelectListItem#selectQuiz(Quiz)} is ran whenever a quiz is selected.
 	 * @see RunnableSelectListItem
 	 */
-	public OptionListMenu(Scanner scanner) {
-		super(scanner);
+	public OptionListMenu(UIManager uiManager) {
+		super(uiManager);
 		this.page = 0;
 		this.items = new ArrayList<T>();
 	}
