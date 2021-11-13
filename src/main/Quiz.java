@@ -36,7 +36,13 @@ public class Quiz {
         this.questions = new ArrayList<>();
         this.course = course;
     }
-
+    /**
+     * Creates a unique ID for a new question
+     * <p>
+     * Gets the largest id from the list and adds 1 to ensure the id is unique
+     *
+     * @return max - a unique id for a new question object
+     */
     public int generateUniqueQuestionId() {
         int max = 0;
         for (Question q: questions) {

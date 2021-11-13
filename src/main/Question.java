@@ -35,6 +35,11 @@ public class Question {
         }
         return max + 1;
     }
+    /**
+     * Returns the list of answers
+     *
+     * @return answers - the list of answers to this question
+     */
     public ArrayList<Answer> getAnswers() {
         return answers;
     }
