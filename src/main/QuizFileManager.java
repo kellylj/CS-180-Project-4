@@ -133,10 +133,11 @@ public class QuizFileManager implements Manager {
 		return retVal;
 	}
 
-	public void importQuiz(String path) {
+	public boolean importQuiz(String path) {
 		//TODO: import quiz, return success boolean;
 		String user = lms.getUIManager().getCurrentUser().getName(); //use for author name
 		//use lms.getQuizManager().addQuiz(new Quiz(stuff));
+		return false;
 	}
 
 	public void setQuizzes(ArrayList<Quiz> quizzes) {
