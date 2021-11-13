@@ -38,16 +38,19 @@ public class GradedQuizFileManager implements Manager {
             String submissionTime = list[0];
             int quizID = Integer.parseInt(list[1]);
             int studentID = Integer.parseInt(list[2]);
-            HashMap<Question, Answer> map = createHashmap(list[3]);
+            HashMap<String, String> map = createHashmap(list[3]);
             //tempGradQuiz.add(new GradedQuiz());
         } //need a second constructor for GradedQuiz so that I can fill in all the values, go over HashMap values
         return tempGradQuiz;
     }
 
-    public HashMap<Question, Answer> createHashmap(String contents) {
-        HashMap<Question, Answer> map = new HashMap<>();
+    public HashMap<String, String> createHashmap(String contents) {
+        HashMap<String, String> map = new HashMap<>();
+        String[] list = contents.split("/", -1);
 
-        //method to create hashmap when contents have been decided
+        for (int i = 0; i < list.length; i++) {
+            String[] parts = list[i].split(",", 2);
+        }
 
         return map;
     }

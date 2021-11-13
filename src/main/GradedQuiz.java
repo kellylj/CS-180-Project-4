@@ -9,7 +9,7 @@ public class GradedQuiz { // should students be able to take quiz multiple times
     private String submissionTime;
     private int quizID;
     private int studentID;
-    private HashMap<Question,Answer> map = new HashMap<Question,Answer>();
+    private HashMap<Integer, Integer> map = new HashMap<>();
 
 //    public GradedQuiz(Quiz quiz, Student student) {
 //        this.quiz = quiz;
@@ -19,6 +19,12 @@ public class GradedQuiz { // should students be able to take quiz multiple times
     public GradedQuiz(int quizID, int studentID) {
         this.quizID = quizID;
         this.studentID = studentID;
+    }
+
+    public GradedQuiz(int quizID, int studentID, HashMap<Integer, Integer> map) {
+        this.quizID = quizID;
+        this.studentID = studentID;
+        this.map = map;
     }
 
 //    public Quiz getQuiz() {
@@ -42,8 +48,8 @@ public class GradedQuiz { // should students be able to take quiz multiple times
         return String.format("G%d", quizID);
     }
 
-    public void addQuestion(Question question, Answer answer) {
-        map.put(question, answer);
+    public void addQuestion(int questionID, int answerID) {
+        map.put(questionID, answerID);
     }
 
     public String getSubmissionTime() {
@@ -52,13 +58,5 @@ public class GradedQuiz { // should students be able to take quiz multiple times
 
     public void setSubmissionTime(String submissionTime) {
         this.submissionTime = submissionTime;
-    }
-
-    public int getTotalScore() {
-        int total = 0;
-        for (Map.Entry<Question, Answer> m: map.entrySet()) {
-            total += m.getValue().getPoints();
-        }
-        return total;
     }
 }
