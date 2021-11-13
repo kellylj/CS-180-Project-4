@@ -22,12 +22,18 @@ public class Question {
         this.questionType = questionType;
     }
     /**
-     * Returns the list of possible answers
+     * Returns a unique id for an answer
      *
-     * @return answers - a list of all answers to the question
+     * @return max - a new unique id
      */
-    public ArrayList<Answer> getAnswers() {
-        return answers;
+    public int generateUniqueAnswerId() {
+        int max = 0;
+        for (Answer a: answers) {
+            if (a.getId() > max) {
+                max = a.getId();
+            }
+        }
+        return max + 1;
     }
     /**
      * Returns the String representation of the question
