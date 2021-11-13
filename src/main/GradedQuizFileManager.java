@@ -2,6 +2,9 @@ package main;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
+import java.util.StringJoiner;
+
 
 public class GradedQuizFileManager implements Manager {
 
@@ -57,8 +60,30 @@ public class GradedQuizFileManager implements Manager {
         return map;
     }
 
+    public boolean writeGradedQuizzes() {
+        ArrayList<String> writableGradedQuizzes = new ArrayList<>();
+        String path = "";
 
+        for (int i = 0; i < gradedQuizzes.size(); i++) {
+            //int quizId = gradedQuizzes.get(i).getQuizId();
+            //int studentId = gradedQuizzes.get(i).getStudentId();
+            //String mapList = method for hashmap
+            String submissionTime = gradedQuizzes.get(i).getSubmissionTime();
+            //writableGradedQuizzes.add(String.format("%d;%d;%s;%s", quizId, studentId, mapList, submissionTime));
+        }
 
+        return fw.writeFile(path, writableGradedQuizzes);
+    }
 
+    public String formatHashmap(HashMap<Integer, Integer> map) {
+        StringJoiner joiner = new StringJoiner("/");
+
+        for (Integer key : map.keySet()) {
+            String question = Integer.toString(key);
+            String answer = Integer.toString(map.get(key));
+            joiner.add(String.format("%s,%s", question, answer));
+        }
+        return joiner.toString();
+    }
 
 }
