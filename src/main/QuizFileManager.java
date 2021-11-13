@@ -39,27 +39,27 @@ public class QuizFileManager implements Manager {
 			String[] components = contents.get(i).split(";", 8); //A ";" (semicolon) is used to separate the parts of a quiz
 			String name = components[0];
 			String author = components[1];
-			int numQuestions = Integer.parseInt(components[2]);
-			ArrayList<Question> questions = this.readQuestions(components[3], numQuestions); //format the list of questions
-			int id = Integer.parseInt(components[4]);
-			boolean scrambled = Boolean.parseBoolean(components[5]);
-			String course = components[6];
-			tempQuizzes.add(new Quiz(name, author, numQuestions, id, questions, scrambled, course));
+			ArrayList<Question> questions = this.readQuestions(components[2]); //format the list of questions
+			int id = Integer.parseInt(components[3]);
+			boolean scrambled = Boolean.parseBoolean(components[4]);
+			String course = components[5];
+			tempQuizzes.add(new Quiz(name, author, id, questions, scrambled, course));
 		}
 		return tempQuizzes;
 	}
 
-	public ArrayList<Question> readQuestions(String questionList, int numQuestions) {
+	public ArrayList<Question> readQuestions(String questionList) {
 		ArrayList<Question> questions = new ArrayList<>();
 
-		String[] list = questionList.split(",", numQuestions); //A "," (comma) is used to separate the different questions in a quiz
+		String[] list = questionList.split(",", -1); //A "," (comma) is used to separate the different questions in a quiz
 
-		for (int i = 0; i < numQuestions; i++) {
-			String[] questionParts = list[i].split("/", 3); //A "/" (forward slash) is used to separate the answers from the question asked
+		for (int i = 0; i < list.length; i++) {
+			String[] questionParts = list[i].split("/", 4); //A "/" (forward slash) is used to separate the answers from the question asked
 			ArrayList<Answer> answers = this.readAnswers(questionParts[0]);
 			String question = questionParts[1];
 			int id = Integer.parseInt(questionParts[2]);
-			questions.add(new Question(answers, question, id));
+			String questionType = questionParts[3];
+			questions.add(new Question(answers, question, id, questionType));
 		}
 
 		return questions;
@@ -89,12 +89,11 @@ public class QuizFileManager implements Manager {
 		for (int i = 0; i < quizzes.size(); i++) {
 			String name = quizzes.get(i).getName();
 			String author = quizzes.get(i).getAuthor();
-			int numQuestions = quizzes.get(i).getNumQuestions();
 			String questions = formatQuestions(quizzes.get(i).getQuestions());
 			int id = quizzes.get(i).getId();
 			boolean scrambled = quizzes.get(i).isScrambled();
 			String course = quizzes.get(i).getCourse();
-			String addon = String.format("%s;%s;%s;%s;%s;%s;%s", name, author, numQuestions, questions, id, scrambled, course);
+			String addon = String.format("%s;%s;%s;%s;%s;%s", name, author, questions, id, scrambled, course);
 			writableQuizzes.add(addon);
 		}
 
@@ -108,10 +107,11 @@ public class QuizFileManager implements Manager {
 			String answers = formatAnswers(questions.get(i).getAnswers());
 			String question = questions.get(i).getQuestion();
 			String id = Integer.toString(questions.get(i).getId());
+			String questionType = questions.get(i).getQuestionType();
 			if (i == questions.size() - 1) {
-				retVal += String.format("%s/%s/%s", answers, question, id);
+				retVal += String.format("%s/%s/%s/%s", answers, question, id, questionType);
 			} else {
-				retVal += String.format("%s/%s/%s,", answers, question, id);
+				retVal += String.format("%s/%s/%s/%s,", answers, question, id, questionType);
 			}
 		}
 		return retVal;
