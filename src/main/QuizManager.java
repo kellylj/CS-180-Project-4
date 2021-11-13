@@ -72,7 +72,27 @@ public class QuizManager implements Manager {
 		}
 		return quizDescriptions;
 	}
-
+	/**
+	 * Searches for quizzes matching a specified course
+	 *<p>
+	 * Returns the list of quizzes if any are found that match.  If none match, returns null.
+	 * Not case-sensitive.
+	 *
+	 * @return matchingQuizzes - a list of quizzes that match the specified course
+	 * @param course - the quiz course to search for
+	 */
+	public ArrayList<Quiz> searchQuizByCourse(String course) {
+		ArrayList<Quiz> matchingQuizzes = new ArrayList<>();
+		for (Quiz q : quizList) {
+			if (q.getCourse().toLowerCase().contains(course.toLowerCase())) {
+				matchingQuizzes.add(q);
+			}
+		}
+		if (matchingQuizzes.size() == 0) {
+			return null;
+		}
+		return matchingQuizzes;
+	}
 	/**
 	 * Searches for quizzes matching a specified name
 	 *<p>
