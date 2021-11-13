@@ -14,11 +14,12 @@ public class Question {
     ArrayList<Answer> answers;
     String question;
     int id;
-
-    public Question(ArrayList<Answer> answers, String question, int id) {
+    String questionType;
+    public Question(ArrayList<Answer> answers, String question, int id, String questionType) {
         this.answers = answers;
         this.question = question;
         this.id = id;
+        this.questionType = questionType;
     }
     /**
      * Returns the list of possible answers
@@ -51,6 +52,22 @@ public class Question {
      */
     public int getId() {
         return id;
+    }
+    /**
+     * Returns the question type
+     *
+     * @return questionType - the type of question
+     */
+    public String getQuestionType() {
+        return questionType;
+    }
+    /**
+     * Returns the question type
+     *
+     * @param questionType - the type of question
+     */
+    public void setQuestionType(String questionType) {
+        this.questionType = questionType;
     }
     /**
      * Returns the question as it will be displayed to the user
