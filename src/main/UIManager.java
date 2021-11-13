@@ -15,6 +15,7 @@ import ui.OptionListMenu;
 import ui.MenuState;
 import ui.OptionMenu;
 import ui.OptionMenuYesNo;
+import ui.RunnableSelectListItem;
 import utils.ANSICodes;
 
 /**
@@ -210,7 +211,7 @@ public class UIManager implements Manager {
 				.onSelect(() -> {
 					/*
 					When the logout option is selected, the GUI
-					goes back to the show the initialize screen
+					goes back to show the initialize screen
 					*/
 					this.setCurrentUser(null);
 					return MenuState.CLOSE;
@@ -325,54 +326,41 @@ public class UIManager implements Manager {
 					return MenuState.CLOSE;
 				}));
 		
-		MENU_QUIZ_LIST_INFO = (new OptionListMenu<Quiz>(this))
-			.onRequestListItems(() -> {
-				return lms.getQuizManager().getQuizList();
-			})
-			.onSelectListItem(
-				(Quiz q) -> {
-					System.out.println(ANSICodes.BOLD + "\nQuiz Info" + ANSICodes.RESET);
-					// TODO Quiz - get quiz info... maybe a toString method?
-					System.out.println(q.toString());
-					System.out.println("Press Enter to go back.");
-					this.getScanner().nextLine();
-					return MenuState.RESTART;
-				}
-			)
-			.addHeading("List of All Quizzes");
+		MENU_QUIZ_LIST_INFO = getCourseQuizSelectionMenu("Please select a quiz to look at.",
+			(Quiz q) -> {
+				System.out.println(ANSICodes.BOLD + "\nQuiz Info" + ANSICodes.RESET);
+				System.out.println(q.toString());
+				System.out.println("Press Enter to go back.");
+				this.getScanner().nextLine();
+				return MenuState.RESTART;
+			}
+		);
 		
-		MENU_QUIZ_LIST_TAKE = (new OptionListMenu<Quiz>(this))
-			.onRequestListItems(() -> {
-				return lms.getQuizManager().getQuizList();
-			})
-			.onSelectListItem(
-				(Quiz q) -> {
-					System.out.println(ANSICodes.BOLD + "\nQuiz Info" + ANSICodes.RESET);
-					// TODO Quiz - get quiz info... maybe a toString method?
-					System.out.println(q.toString());
-					OptionMenuYesNo menuTakeQuizQuestion = new OptionMenuYesNo(this);
-					menuTakeQuizQuestion.addHeading("Would you like to take this quiz");
-					menuTakeQuizQuestion.open();
-					if(menuTakeQuizQuestion.resultWasYes()) {
-						getMenuTakeQuiz(q).open();
-						return MenuState.CLOSE;
-					}
-					System.out.println("Okay. Going back");
-					return MenuState.RESTART;
-				}
-			)
-			.addHeading("List of Quizzes to Take");
-		
-		MENU_QUIZ_LIST_MODIFY = (new OptionListMenu<Quiz>(this))
-			.onRequestListItems(() -> {
-				return lms.getQuizManager().getQuizList();
-			})
-			.onSelectListItem(
-				(Quiz q) -> {
+		MENU_QUIZ_LIST_TAKE = getCourseQuizSelectionMenu("Please select a quiz to take.",
+			(Quiz q) -> {
+				System.out.println(ANSICodes.BOLD + "\nQuiz Info" + ANSICodes.RESET);
+				// TODO Quiz - get quiz info... maybe a toString method?
+				System.out.println(q.toString());
+				OptionMenuYesNo menuTakeQuizQuestion = new OptionMenuYesNo(this);
+				menuTakeQuizQuestion.addHeading("Would you like to take this quiz");
+				menuTakeQuizQuestion.open();
+				if(menuTakeQuizQuestion.resultWasYes()) {
+					getMenuTakeQuiz(q).open();
 					return MenuState.CLOSE;
 				}
-			)
-			.addHeading("List of Quizzes to Change");
+				System.out.println("Okay. Going back");
+				return MenuState.RESTART;
+			}
+		);
+		
+			//.addHeading("List of Quizzes to Take");
+		
+		MENU_QUIZ_LIST_MODIFY = getCourseQuizSelectionMenu("Please select a quiz to modify.",
+			(Quiz q) -> {
+				
+				return MenuState.CLOSE;
+			}
+		);
 		
 		MENU_ADD_QUIZ = (new InputMenu(this))
 			.addInput("What would you like the name of this quiz to be?", "Name")
@@ -390,7 +378,28 @@ public class UIManager implements Manager {
 			});
 		
 	}
-	
+
+	private Menu getCourseQuizSelectionMenu(String heading, RunnableSelectListItem<Quiz> callback) {
+		return (new OptionListMenu<String>(this))
+			.onRequestListItems(() -> {
+				return lms.getQuizManager().getListOfCourses();
+			})
+			.onSelectListItem(
+				(String course) -> {
+					Menu modifyQuizMenu = (new OptionListMenu<Quiz>(this))
+						// TODO
+						/*.onRequestListItems(() -> {
+							return lms.getQuizManager().getQuizList(course);
+						})*/
+						.onSelectListItem(callback)
+						.addHeading(heading);
+					modifyQuizMenu.open();
+					return MenuState.CLOSE;
+				}
+			)
+			.addHeading("Please select a course.");
+	}
+
 	private OptionMenu getMenuAddQuiz(String name, String quizType, String course) {
 		// TODO Will we be doing the question bank?
 		// TODO Add simple constructor
@@ -467,7 +476,16 @@ public class UIManager implements Manager {
 					quickInput.open();
 					String newName = quickInput.getResult();
 					quiz.setName(newName);
-					System.out.println("Changed the quiz name to " + name);
+					System.out.println("Changed the quiz name to: " + quiz.getName());
+					return MenuState.RESTART;
+				}))
+			.addOption((new MenuOption("Change Course"))
+				.onSelect(() -> {
+					MenuQuickInput quickInput = new MenuQuickInput(this, "What course would you like this quiz to be in?");
+					quickInput.open();
+					String newCourse = quickInput.getResult();
+					quiz.setCourse(newCourse);
+					System.out.println("Changed the quiz course to: " + quiz.getCourse());
 					return MenuState.RESTART;
 				}))
 			.addOption((new MenuOption("Add Question"))
@@ -497,11 +515,12 @@ public class UIManager implements Manager {
 	}
 
 	private InputMenu getAddQuestionMenu(Quiz quiz) {
+		
 		InputMenu questionMenu = (new InputMenu(this))
 			.addInputWithOptions("What type of question do you want to add?",
 				new String[] {"Multiple Choice", "True or False", "Dropdown"},
 				"Type"
-			)
+			);/*
 			.addInput("What is the question?", "Question")
 			.onInputFinish((Map<String, String> questionInfo) -> {
 				String type = questionInfo.get("Type");
@@ -585,7 +604,7 @@ public class UIManager implements Manager {
 						}));
 				menu.open();
 				return MenuState.CLOSE;
-			});
+			});*/
 		return questionMenu;
 	}
 	
