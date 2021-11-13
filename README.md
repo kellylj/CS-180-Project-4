@@ -28,7 +28,7 @@ This interface is what blueprints all of other managers used in this application
 The manager that is responsible for the User Interface (UI). It uses the User Interface Menu System to create menus that the user then interacts with. In “init()” it creates all of the menus, which sets up the structure of the UI, and then in `run()` it runs the start menu, which is used as the entry point to the rest of the UI.
 
 ### QuizManager
-
+The manager that holds the list of every created quiz.  It also provides methods for searching through the quizzes with various filters, such as name, author, etc.  It also is responsible for generating unique ids for new quizzes.
 ### UserManager
 The manager that is responsible for keeping track of users and providing functionalities such as `addUser()` or `authenticator()`. This manager performs actions that mainly require iterating through all the Users. For example, searching a user by his username or generating a unique id for each user is done through this class.
 
@@ -36,6 +36,13 @@ The manager that is responsible for keeping track of users and providing functio
 Classes used for storing data that don't inherently do anything by themselves.
 
 ### Quiz
+Class used for storing data about each quiz, including a toString which displays relevant information about the quiz.  It also is able to generate unique IDs for each question which haven't been used before.
+
+### Question
+Class used for storing data about each question.  It also has a toString which is used for displaying the question to the user.  Each question has a type, which can be multiple choice, true/false, or dropdown.  Each question also includes an array of answers.
+
+### Answer
+Class used for storing data about each answer.  Each answer is assigned a point value by the teacher, and is either correct or incorerct.
 
 ### User
 
