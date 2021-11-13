@@ -14,8 +14,8 @@ public class Answer {
     String answer;
     boolean isCorrect;
     int points;
-    String id;
-    public Answer(String answer, boolean correct, int points, String id) {
+    int id;
+    public Answer(String answer, boolean correct, int points, int id) {
         this.answer = answer;
         this.isCorrect = correct;
         this.points = points;
@@ -44,7 +44,7 @@ public class Answer {
      *
      * @param id - the new unique id for the answer
      */
-    public void setID(String id) {
+    public void setID(int id) {
         this.id = id;
     }
     /**
@@ -52,7 +52,7 @@ public class Answer {
      *
      * @return id - the unique id for the question
      */
-    public String getId() {
+    public int getId() {
         return id;
     }
     /**

@@ -13,9 +13,9 @@ import java.util.ArrayList;
 public class Question {
     ArrayList<Answer> answers;
     String question;
-    String id;
+    int id;
 
-    public Question(ArrayList<Answer> answers, String question, String id) {
+    public Question(ArrayList<Answer> answers, String question, int id) {
         this.answers = answers;
         this.question = question;
         this.id = id;
@@ -41,7 +41,7 @@ public class Question {
      *
      * @param id - the new unique id for the quiz
      */
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
     /**
@@ -49,7 +49,7 @@ public class Question {
      *
      * @return id - the unique id for the quiz
      */
-    public String getId() {
+    public int getId() {
         return id;
     }
     /**
