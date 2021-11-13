@@ -21,14 +21,16 @@ The LMS class is the glue that ties all of the parts of the program together. It
 Classes that each handle a vital function of the program.
 
 ### Manager
-Todo Explain Manager interface
+This interface is what blueprints all of other managers used in this application such as UIManager, QuizManager, and UserManager. There are 2 methods in this interface: `init()` and `exit()`. These methods help initialize and save data. 
+
 
 ### UIManager
 The manager that is responsible for the User Interface (UI). It uses the User Interface Menu System to create menus that the user then interacts with. In “init()” it creates all of the menus, which sets up the structure of the UI, and then in `run()` it runs the start menu, which is used as the entry point to the rest of the UI.
 
 ### QuizManager
 
-### other managers
+### UserManager
+The manager that is responsible for keeping track of users and providing functionalities such as `addUser()` or `authenticator()`. This manager performs actions that mainly require iterating through all the Users. For example, searching a user by his username or generating a unique id for each user is done through this class.
 
 ## Datastructure Classes
 Classes used for storing data that don't inherently do anything by themselves.
