@@ -35,6 +35,9 @@ public class Question {
         }
         return max + 1;
     }
+    public ArrayList<Answer> getAnswers() {
+        return answers;
+    }
     /**
      * Returns the String representation of the question
      *

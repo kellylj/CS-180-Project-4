@@ -97,8 +97,7 @@ public class QuizFileManager implements Manager {
 			writableQuizzes.add(addon);
 		}
 
-		boolean success = fw.writeFile(path, writableQuizzes);
-		return success;
+		return fw.writeFile(path, writableQuizzes);
 	}
 
 	public String formatQuestions(ArrayList<Question> questions) {
