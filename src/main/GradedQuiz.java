@@ -35,6 +35,10 @@ public class GradedQuiz { // should students be able to take quiz multiple times
         this.submissionTime = submissionTime;
     }
 
+    public HashMap<Integer, Integer> getGradedQuizMap() {
+        return this.map;
+    }
+
     /**
      * Returns the ID of the quiz that got graded
      * @return Quiz ID

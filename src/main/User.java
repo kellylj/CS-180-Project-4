@@ -20,6 +20,10 @@ public class User {
         this.password = password;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     /**
      * Returns name of User
      * @return name of User
