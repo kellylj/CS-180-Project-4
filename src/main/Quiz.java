@@ -136,9 +136,19 @@ public class Quiz {
     public void scrambleQuestions() {
         Collections.shuffle(questions);
     }
+    /**
+     * Returns the name of the course the quiz is a part of
+     *
+     * @return course - A string containing the course name
+     */
     public String getCourse() {
         return course;
     }
+    /**
+     * Sets the course name for the quiz
+     *
+     * @param course - String containing the name of the course the quiz is a part of
+     */
     public void setCourse(String course) {
         this.course = course;
     }

@@ -135,6 +135,13 @@ public class QuizManager implements Manager {
 		}
 		return matchingQuizzes;
 	}
+	/**
+	 * Returns the list of all courses created
+	 * <p>
+	 * If no courses have been created, it will return an empty ArrayList
+	 *
+	 * @return courses - an ArrayList of all created courses
+	 */
 	public ArrayList<String> getListOfCourses() {
 		ArrayList<String> courses = new ArrayList<>();
 		for (int i = 0; i < quizList.size(); i++) {
@@ -157,7 +164,13 @@ public class QuizManager implements Manager {
 	public void setQuizList(ArrayList<Quiz> quizList) {
 		this.quizList = quizList;
 	}
-
+	/**
+	 * Creates a unique ID for instantiation of a new quiz
+	 * <p>
+	 * Checks to make sure the generated id hasn't been used before to prevent duplicate ids
+	 *
+	 * @return id - a unique id for a new quiz object
+	 */
 	public int getUniqueID() {
 		int id = 0;
 		boolean exists = true;
@@ -172,7 +185,11 @@ public class QuizManager implements Manager {
 		}
 		return id;
 	}
-
+	/**
+	 * Returns the list of all quizzes
+	 *
+	 * @return quizList - list of every created quiz
+	 */
 	public ArrayList<Quiz> getQuizList() {
 		return quizList;
 	}

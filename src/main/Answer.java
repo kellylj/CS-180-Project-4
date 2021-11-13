@@ -39,11 +39,19 @@ public class Answer {
     public int getPoints() {
         return points;
     }
-
-    public void setID(String ID) {
-        this.id = ID;
+    /**
+     * Sets the new question id
+     *
+     * @param id - the new unique id for the answer
+     */
+    public void setID(String id) {
+        this.id = id;
     }
-
+    /**
+     * Returns the question's unique id
+     *
+     * @return id - the unique id for the question
+     */
     public String getId() {
         return id;
     }
@@ -55,6 +63,11 @@ public class Answer {
     public String getAnswer() {
         return answer;
     }
+    /**
+     * Returns the answer as a string for the answer class's toString
+     *
+     * @return answer - the string representation of the answer
+     */
     public String toString() {
         return answer;
     }

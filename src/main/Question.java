@@ -28,14 +28,27 @@ public class Question {
     public ArrayList<Answer> getAnswers() {
         return answers;
     }
+    /**
+     * Returns the String representation of the question
+     *
+     * @return question - The question string
+     */
     public String getQuestion() {
         return question;
     }
-
+    /**
+     * Changes the quiz ID to a new ID
+     *
+     * @param id - the new unique id for the quiz
+     */
     public void setId(String id) {
         this.id = id;
     }
-
+    /**
+     * Returns the unique quiz id
+     *
+     * @return id - the unique id for the quiz
+     */
     public String getId() {
         return id;
     }
