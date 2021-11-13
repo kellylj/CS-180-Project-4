@@ -22,11 +22,10 @@ public class Quiz {
     private boolean scrambled;
     private String course;
 
-    public Quiz(String name, String author, int numQuestions, int id, ArrayList<Question> questions, String quizType, boolean scrambled, String course) {
+    public Quiz(String name, String author, int numQuestions, int id, ArrayList<Question> questions,  boolean scrambled, String course) {
         this.name = name;
         this.author = author;
         this.numQuestions = numQuestions;
-        this.quizType = quizType;
         this.id = id;
         this.scrambled = scrambled;
         this.questions = questions;
@@ -65,14 +64,6 @@ public class Quiz {
         return numQuestions;
     }
     /**
-     * Returns type of the quiz
-     *
-     * @return quizType - the type of quiz (T/F, multiple choice, mixed)
-     */
-    public String getQuizType() {
-        return quizType;
-    }
-    /**
      * Sets quiz name
      *
      * @param name - the new name of the quiz
@@ -95,14 +86,6 @@ public class Quiz {
      */
     public void setID(int id) {
         this.id = id;
-    }
-    /**
-     * Sets quiz type
-     *
-     * @param quizType - the new question type of the quiz
-     */
-    public void setQuizType(String quizType) {
-        this.quizType = quizType;
     }
     /**
      * Sets number of questions fo the quiz
