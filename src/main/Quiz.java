@@ -15,21 +15,36 @@ import java.util.*;
 public class Quiz {
     private String name;
     private String author;
-    private int numQuestions;
-    private String quizType;
     ArrayList<Question> questions;
     private int id;
     private boolean scrambled;
     private String course;
 
-    public Quiz(String name, String author, int numQuestions, int id, ArrayList<Question> questions,  boolean scrambled, String course) {
+    public Quiz(String name, String author, int id, ArrayList<Question> questions,  boolean scrambled, String course) {
         this.name = name;
         this.author = author;
-        this.numQuestions = numQuestions;
         this.id = id;
         this.scrambled = scrambled;
         this.questions = questions;
         this.course = course;
+    }
+    public Quiz(LearningManagementSystem lms, String name, String course) {
+        this.name = name;
+        this.author = lms.getUIManager().getCurrentUser().getName();
+        this.id = lms.getQuizManager().getUniqueID();
+        this.scrambled = false;
+        this.questions = new ArrayList<>();
+        this.course = course;
+    }
+
+    public int generateUniqueQuestionId() {
+        int max = 0;
+        for (Question q: questions) {
+            if (q.getId() > max) {
+                max = q.getId();
+            }
+        }
+        return max + 1;
     }
     /**
      * Returns id of the quiz
@@ -56,14 +71,6 @@ public class Quiz {
         return author;
     }
     /**
-     * Returns number of questions of the quiz
-     *
-     * @return numQuestions - the number of questions the quiz conatins
-     */
-    public int getNumQuestions() {
-        return numQuestions;
-    }
-    /**
      * Sets quiz name
      *
      * @param name - the new name of the quiz
@@ -86,14 +93,6 @@ public class Quiz {
      */
     public void setID(int id) {
         this.id = id;
-    }
-    /**
-     * Sets number of questions fo the quiz
-     *
-     * @param numQuestions - the new number of questions the quiz contains
-     */
-    public void setNumQuestions(int numQuestions) {
-        this.numQuestions = numQuestions;
     }
     /**
      * Sets quiz scrambled boolean
@@ -147,7 +146,7 @@ public class Quiz {
     }
     public String toString() {
         String quizDescription = "Quiz name: " + name + ", Author: " + author;
-        quizDescription+= ", ID: " + id + ", Number of Questions: " + numQuestions + ".";
+        quizDescription+= ", ID: " + id + ", Course: " + course;
         return quizDescription;
     }
 
