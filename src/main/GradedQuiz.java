@@ -2,7 +2,14 @@ package main;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * Stores a list of all the graded quizzes
+ * <p>
+ *
+ * Graded Quiz Manager manages the list of quizzes, and provides methods for searching through them
+ * @author Sean Lee
+ * @see GradedQuizManager
+ */
 public class GradedQuiz { // should students be able to take quiz multiple times
     private Quiz quiz;
     private Student student;
@@ -28,47 +35,60 @@ public class GradedQuiz { // should students be able to take quiz multiple times
         this.submissionTime = submissionTime;
     }
 
-//    public Quiz getQuiz() {
-//        return quiz;
-//    }
-//
-//    public Quiz getQuiz(QuizManager quizManager) {
-//        return quizManager.searchQuizByID(quizID).get(0); // there should only be one quiz that matches the id
-//    }
-//
-//    public Student getStudent() {
-//        return student;
-//    }
-//
-//
-//    public String getID() {
-//        return String.format("G%d", quiz.getId());
-//    }
-
+    /**
+     * Returns the ID of the quiz that got graded
+     * @return Quiz ID
+     */
     public int getQuizID() {
         return this.quizID;
     }
 
+    /**
+    * Returns the ID of the student that took the quiz
+    * @return Student ID
+     */
     public int getStudentID() {
         return this.studentID;
     }
 
+    /**
+     * Adds a question to the Hash Map of questions and answers
+     * @param question
+     * @param answer
+     */
     public void addQuestion(Question question, Answer answer) {
         map.put(question.getId(), answer.getId());
     }
 
+    /**
+     * Returns string of ID of GradedQuiz
+     * @return String of Graded Quiz ID
+     */
     public String getID() {
         return String.format("G%d", quizID);
     }
 
+    /**
+     * Adds a question to the Hash Map of questions and answers
+     * @param questionID
+     * @param answerID
+     */
     public void addQuestion(int questionID, int answerID) {
         map.put(questionID, answerID);
     }
 
+    /**
+     * Returns submission time of quiz
+     * @return
+     */
     public String getSubmissionTime() {
         return submissionTime;
     }
 
+    /**
+     * Sets the submission time of quiz
+     * @param submissionTime
+     */
     public void setSubmissionTime(String submissionTime) {
         this.submissionTime = submissionTime;
     }

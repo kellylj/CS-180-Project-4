@@ -5,6 +5,7 @@ package main;
  *
  * @author Sean Lee
  * @version 11/7/21
+ * @see User
  */
 public class Teacher extends User {
     private final UserPermission userPermission;
