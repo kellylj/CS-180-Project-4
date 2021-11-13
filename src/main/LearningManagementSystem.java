@@ -41,7 +41,7 @@ public class LearningManagementSystem {
 		quizManager = new QuizManager(this);
 		quizFileManager = new QuizFileManager(this);
 		gradedQuizManager = new GradedQuizManager(this);
-		gradedQuizFileManager = new GradedQuizFileManager(); // TODO Pass instance
+		gradedQuizFileManager = new GradedQuizFileManager(this); // TODO Pass instance
 		uiManager = new UIManager(this);
 	}
 
