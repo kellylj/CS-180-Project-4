@@ -4,7 +4,6 @@ package main;
  * Class that contains the detail of a student
  *
  * @author Sean Lee
- * @version 11/7/21
  * @see User
  */
 public class Student extends User{
@@ -19,6 +18,10 @@ public class Student extends User{
     }
 
 
+    /**
+     *
+     * @return Student in String format
+     */
     public String toString() {
         return super.toString() + String.format(", User Permission: %s", userPermission);
     }

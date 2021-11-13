@@ -4,7 +4,7 @@ package main;
  * Super class that contains the details of a particular user
  *
  * @author Sean Lee
- * @version 11/7/21
+ * @see UserManager
  */
 
 public class User {
@@ -20,34 +20,66 @@ public class User {
         this.password = password;
     }
 
+    /**
+     * Returns name of User
+     * @return name of User
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Returns ID of user
+     * @return ID of user
+     */
     public int getID() {
         return ID;
     }
 
+    /**
+     * Sets ID of User
+     * @param ID of User
+     */
     public void setID(int ID) {
         this.ID = ID;
     }
 
+    /**
+     * Returns username of User
+     * @return username of User
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * Sets username of User
+     * @param username of User
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * Returns password of User
+     * @return password of User
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     *
+     * @param password of User
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * R=
+     * @return User in String form
+     */
     public String toString() {
         String format = "ID: %d, Username: %s, Password: %s";
         return String.format(format, ID, username, password);

@@ -1,7 +1,12 @@
 package main;
 import java.util.ArrayList;
 import java.util.Random;
-
+/**
+ * Manager for the Graded quizzes
+ *
+ * @author Sean Lee
+ * @see Manager
+ */
 public class GradedQuizManager implements Manager {
 
     LearningManagementSystem lms;
@@ -23,6 +28,10 @@ public class GradedQuizManager implements Manager {
         gradedQuizList.add(gradedQuiz);
     }
 
+    /**
+     * Removes a graded quiz from the list of graded quiz
+     * @param ID of quiz you want to remove
+     */
     public void removeQuiz(int ID) {
         int startingListLength = gradedQuizList.size();
         for (int i = 0; i < gradedQuizList.size(); i++) {
@@ -36,6 +45,10 @@ public class GradedQuizManager implements Manager {
         }
     }
 
+    /**
+     *
+     * @return List of graded quizzes
+     */
     public String listGradedQuizzes() {
         StringBuilder quizDescriptions = new StringBuilder();
         for (GradedQuiz q : gradedQuizList) {
@@ -47,6 +60,11 @@ public class GradedQuizManager implements Manager {
         return quizDescriptions.toString();
     }
 
+    /**
+     *
+     * @param course String inputted
+     * @return list of quizzes that contains the input String in course
+     */
     public ArrayList<GradedQuiz> searchGradedQuizzesByCourse(String course) {
         ArrayList<GradedQuiz> matchingQuizzes = new ArrayList<>();
         for (GradedQuiz gradedQuiz : gradedQuizList) {
