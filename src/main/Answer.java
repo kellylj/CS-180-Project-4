@@ -15,6 +15,7 @@ public class Answer {
     boolean isCorrect;
     int points;
     int id;
+
     public Answer(String answer, boolean correct, int points, int id) {
         this.answer = answer;
         this.isCorrect = correct;

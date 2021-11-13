@@ -403,16 +403,8 @@ public class UIManager implements Manager {
 	private OptionMenu getMenuAddQuiz(String name, String quizType, String course) {
 		// TODO Will we be doing the question bank?
 		// TODO Add simple constructor
-		Quiz quiz = new Quiz(
-			name, 
-			this.currentUser.getName(), 
-			0,
-			lms.getQuizManager().getUniqueID(), 
-			new ArrayList<Question>(), 
-			quizType, 
-			false, 
-			course
-		);
+		Quiz quiz = new Quiz(lms, name, course);
+		
 		OptionMenu menu = (new OptionMenu(this))
 			.onHeadingPrint(() -> {
 				System.out.println(ANSICodes.BOLD + "\nCreating Quiz: '" + quiz.getName() + "'" + ANSICodes.RESET);
@@ -444,6 +436,7 @@ public class UIManager implements Manager {
 					changeNameMenu.open();
 					return MenuState.RESTART;
 				}))
+			/*
 			.addOption((new MenuOption("Export Quiz to File"))
 					.onSelect(() -> {
 						InputMenu changeNameMenu = ((new InputMenu(this)))
@@ -469,7 +462,7 @@ public class UIManager implements Manager {
 							});
 						changeNameMenu.open();
 						return MenuState.RESTART;
-					}))
+					}))*/
 			.addOption((new MenuOption("Change Name"))
 				.onSelect(() -> {
 					MenuQuickInput quickInput = new MenuQuickInput(this, "What would you like the new name of the quiz to be?");
@@ -492,6 +485,13 @@ public class UIManager implements Manager {
 				.onSelect(() -> {
 					InputMenu addQuestionMenu = getAddQuestionMenu(quiz);
 					addQuestionMenu.open();
+					return MenuState.RESTART;
+				}))
+			.addOption((new MenuOption("Set Scrambled"))
+				.onSelect(() -> {
+					OptionMenu setScrambledMenu = (new OptionMenuYesNo(this));
+					setScrambledMenu.addHeading("Should the quiz be scrambled?");
+					setScrambledMenu.open();
 					return MenuState.RESTART;
 				}))
 			.addOption((new MenuOption("Save Quiz"))
@@ -520,21 +520,17 @@ public class UIManager implements Manager {
 			.addInputWithOptions("What type of question do you want to add?",
 				new String[] {"Multiple Choice", "True or False", "Dropdown"},
 				"Type"
-			);/*
+			)
 			.addInput("What is the question?", "Question")
 			.onInputFinish((Map<String, String> questionInfo) -> {
 				String type = questionInfo.get("Type");
 				String questionString = questionInfo.get("Question");
 				// TODO Question Create question object
-				int maxQuestionId = 0;
-				for(Question question: quiz.getQuestions()) {
-					if(question.getId() > maxQuestionId)
-						maxQuestionId = question.getId();
-				}
 				Question question = new Question(
 					new ArrayList<Answer>(), 
 					questionString, 
-					maxQuestionId + 1
+					quiz.generateUniqueQuestionId(),
+					type
 				);
 				// TODO Question - Type? -question.setType(type);
 				OptionMenu menu = (new OptionMenu(this))
@@ -549,17 +545,13 @@ public class UIManager implements Manager {
 									String answer = answerInfo.get("Answer");
 									// TODO Float not int
 									int pointvalue = Integer.parseInt(answerInfo.get("PointValue"));
-									int maxId = 0;
-									for(Answer a: question.getAnswers()) {
-										if(a.getId() > maxId)
-											maxId = a.getId();
-									}
+									
 									question.getAnswers().add(
 										new Answer(
 											answer, 
 											pointvalue > 0, 
 											pointvalue, 
-											maxId+1
+											question.generateUniqueAnswerId()+1
 										)
 									);
 									return MenuState.CLOSE;
@@ -589,6 +581,7 @@ public class UIManager implements Manager {
 							.onSelect(() -> {
 								OptionMenu quizMenu = (new OptionMenu(this));
 								quizMenu.addHeading("The following is how the question will look on the quiz.");
+								quizMenu.addHeading(question.getQuestion());
 								for(Answer a: question.getAnswers()) {
 									quizMenu.addOption((new MenuOption(a.getAnswer()))
 										.onSelect(() -> {
@@ -604,7 +597,7 @@ public class UIManager implements Manager {
 						}));
 				menu.open();
 				return MenuState.CLOSE;
-			});*/
+			});
 		return questionMenu;
 	}
 	
@@ -616,26 +609,31 @@ public class UIManager implements Manager {
 		for(Question question: questions) {
 			OptionMenu menu = (new OptionMenu(this));
 			menu.addHeading(question.getQuestion());
-			for(Answer a: question.getAnswers()) {  // TODO Question - question.getAnswers();
-				menu.addOption((new MenuOption(a.toString())) // TODO Answer - answer.getName();
+			for(Answer a: question.getAnswers()) {
+				menu.addOption((new MenuOption(a.getAnswer()))
 					.onSelect(() -> {
 						// TODO GradedQuiz gradedQuiz.addAnswer(question, answer);
+						
 						questionsMenus.poll().open();
 						return MenuState.CLOSE;
 					}));
 			}
 			questionsMenus.add(menu);
 		}
-		OptionMenu menu = (new OptionMenu(this));
-		menu.addHeading("You have finished the quiz.");
-		menu.addSubheading("Would you like to submit it?");
-		menu.addOption((new MenuOption("Submit"))
-			.onSelect(() -> {
-				// TODO GradedQuizManager - add graded quiz.
-				// lms.getGradedQuizManager().addGradedQuiz(gradedQuiz);
-				System.out.println("Successfully submitted the quiz.");
-				return MenuState.CLOSE;
-			}))
+		OptionMenu menu = (new OptionMenu(this))
+			.addHeading("You have finished the quiz.")
+			.addSubheading("Would you like to submit it?")
+			.addOption((new MenuOption("Submit"))
+				.onSelect(() -> {
+					lms.getGradedQuizManager().addGradedQuiz(gradedQuiz);
+					
+					// TODO Show score afterwards.
+					System.out.println("Successfully submitted the quiz.");
+					OptionMenuYesNo viewSubmission = new OptionMenuYesNo(this);
+					viewSubmission.addHeading("Would you like to see your score?");
+					viewSubmission.open();
+					return MenuState.CLOSE;
+				}))
 			.addOption((new MenuOption("Cancel"))
 				.onSelect(() -> {
 					OptionMenuYesNo exitMenu = new OptionMenuYesNo(this);
