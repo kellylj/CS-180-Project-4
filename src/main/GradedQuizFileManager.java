@@ -11,7 +11,7 @@ public class GradedQuizFileManager implements Manager {
 
     public GradedQuizFileManager(LearningManagementSystem lms) {
        this.lms = lms;
-       //this.gradedQuizzes = this.readGradedQuizzes();
+       this.gradedQuizzes = this.readGradedQuizzes();
     }
 
     @Override
@@ -35,25 +35,30 @@ public class GradedQuizFileManager implements Manager {
 
         for (int i = 0; i < contents.size(); i++) {
             String[] list = contents.get(i).split(";", 4);
-            String submissionTime = list[0];
-            int quizID = Integer.parseInt(list[1]);
-            int studentID = Integer.parseInt(list[2]);
-            HashMap<String, String> map = createHashmap(list[3]);
-            //tempGradQuiz.add(new GradedQuiz());
-        } //need a second constructor for GradedQuiz so that I can fill in all the values, go over HashMap values
+            int quizID = Integer.parseInt(list[0]);
+            int studentID = Integer.parseInt(list[1]);
+            HashMap<Integer, Integer> map = createHashmap(list[2]);
+            String submissionTime = list[3];
+            tempGradQuiz.add(new GradedQuiz(quizID, studentID, map, submissionTime));
+        }
         return tempGradQuiz;
     }
 
-    public HashMap<String, String> createHashmap(String contents) {
-        HashMap<String, String> map = new HashMap<>();
+    public HashMap<Integer, Integer> createHashmap(String contents) {
+        HashMap<Integer, Integer> map = new HashMap<>();
         String[] list = contents.split("/", -1);
 
         for (int i = 0; i < list.length; i++) {
             String[] parts = list[i].split(",", 2);
+            Integer questionId = Integer.parseInt(parts[0]);
+            Integer answerId = Integer.parseInt(parts[1]);
+            map.put(questionId, answerId);
         }
-
         return map;
     }
+
+
+
 
 
 }
