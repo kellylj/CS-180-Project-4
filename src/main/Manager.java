@@ -9,8 +9,14 @@ package main;
  * @version 1.0.0
  */
 public interface Manager {
-	//Useful for if you need to initialize anything before user does anything.
+
+	/**
+	 * Will be used to initialized anything before user does anything
+	 */
 	public void init();
-	//Make sure everything is saved to a file (if not automatically)!!!!
+
+	/**
+	 * Makes sure everything is saved to a file (if not automatically)
+	 */
 	public void exit();
 }

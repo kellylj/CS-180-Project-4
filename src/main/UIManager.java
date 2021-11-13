@@ -174,8 +174,7 @@ public class UIManager implements Manager {
 				return MenuState.CLOSE;
 			});
 
-		//Aryan will document this block of code
-
+		//Displays the teacher menu in the GUI
 		MENU_MAIN = (new OptionMenu(scanner))
 			.setCheckLogin(true)
 			.addHeading("Main Menu")
@@ -185,34 +184,40 @@ public class UIManager implements Manager {
 					return this.getCurrentUser() instanceof Teacher;
 				})
 				.onSelect(() -> {
+					//When teacher menu is selected, the GUI shows the next options
 					MENU_TEACHER.open();
 					return MenuState.RESTART;
 				}))
 			.addOption((new MenuOption("List All Quizzes"))
 				.onSelect(() -> {
+					//Displays the list of all quizzes once this option is selected
 					MENU_QUIZ_LIST_INFO.open();
 					return MenuState.RESTART;
 				}))
 			.addOption((new MenuOption("Take Quiz"))
 				.onSelect(() -> {
+					//Helps users take a quiz
 					MENU_QUIZ_LIST_TAKE.open();
 					return MenuState.RESTART;
 				}))
 			.addOption((new MenuOption("User Settings"))
 				.onSelect(() -> {
+					//Guides users to view/edit the user settings
 					MENU_USER_SETTINGS.open();
 					return MenuState.RESTART;
 				}))
 			.addOption((new MenuOption("Logout"))
 				.onSelect(() -> {
+					/*
+					When the logout option is selected, the GUI
+					goes back to the show the initialize screen
+					*/
 					this.setCurrentUser(null);
 					return MenuState.CLOSE;
 				}));
 
-		//Aryan will document this block of code
-		// here
 		/*
-
+		Guides users to the user settings menu in which users have the ability to edit various fields
 		 */
 		MENU_USER_SETTINGS = (new OptionMenu(scanner))
 			.setCheckLogin(true)
@@ -220,11 +225,12 @@ public class UIManager implements Manager {
 			.addSubheading("Select one of the following options:")
 			.addOption((new MenuOption("Edit User"))
 				.onSelect(() -> {
+					//Leads users to select different fields that can be modified in their account
 					OptionMenu editUserMenu = (new OptionMenu(scanner))
 						.addHeading("Edit User Menu")
 						.addOption ((new MenuOption("Username"))
 								.onSelect (() -> {
-									// here
+									//Helps the current user change their account's username
 									MenuQuickInput menuUsername = (new MenuQuickInput(scanner, "Type in your new username"));
 									menuUsername.open();
 									this.currentUser.setUsername(menuUsername.getResult());
@@ -233,7 +239,7 @@ public class UIManager implements Manager {
 								}))
 						.addOption ((new MenuOption("Password"))
 								.onSelect (() -> {
-									// here
+									//Helps the current user change their account's password
 									MenuQuickInput menuPassword = (new MenuQuickInput(scanner, "Type in your new password"));
 									menuPassword.open();
 									this.currentUser.setPassword(menuPassword.getResult());
@@ -243,7 +249,7 @@ public class UIManager implements Manager {
 								}))
 						.addOption ((new MenuOption("Name"))
 								.onSelect (() -> {
-									// here
+									//Helps the current user change their account's name
 									MenuQuickInput menuName = (new MenuQuickInput(scanner, "Type in your new name"));
 									menuName.open();
 									
@@ -254,7 +260,10 @@ public class UIManager implements Manager {
 								}))
 						.addOption ((new MenuOption("Save Changes"))
 								.onSelect (() -> {
-									// here
+									/*
+									Prompts a message that mentions that all changes were saved
+									Goes back to the menu before the User Settings Menu
+									*/
 									System.out.println("All changes were successfully saved");
 									return MenuState.CLOSE;
 								}));
@@ -264,8 +273,16 @@ public class UIManager implements Manager {
 				}))
 			.addOption((new MenuOption("Delete User"))
 				.onSelect(() -> {
+					/*
+					Allows the current user to delete their account along with
+					all the information associated with their account
+					 */
 					OptionMenuYesNo verifyMenu = new OptionMenuYesNo(scanner);
 					verifyMenu.addHeading("Are you sure you want to delete your account?");
+					/*
+					Reconfirms with the current user by asking them
+					if they want to delete their account or not
+					 */
 					verifyMenu.open();
 					if(verifyMenu.resultWasYes()) {
 						System.out.println("Your account has been successfully deleted.");
@@ -281,6 +298,7 @@ public class UIManager implements Manager {
 				}))
 			.addOption((new MenuOption("Exit"))
 				.onSelect(() -> {
+					//Goes back to the previous menu
 					return MenuState.CLOSE;
 				}));
 					
