@@ -2,6 +2,7 @@ package ui;
 
 import java.util.Scanner;
 
+import main.UIManager;
 import utils.NumberUtils;
 
 /**
@@ -19,10 +20,10 @@ public class MenuInputInt extends MenuInput {
 	}
 
 	@Override
-	public String getInput(Scanner scanner) {
+	public String getInput(UIManager uiManager) {
 		String input;
 		while(true) {
-			input = scanner.nextLine();
+			input = uiManager.getScanner().nextLine();
 			if(input != null && NumberUtils.isInteger(input))
 				break;
 			System.out.println("Please try again and enter a valid (integer) input.");

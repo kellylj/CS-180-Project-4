@@ -15,8 +15,6 @@ import org.junit.runner.notification.Failure;
 
 import utils.ANSICodes;
 
-import javax.xml.transform.Result;
-
 /**
  * A framework to run public test cases.
  *
@@ -27,7 +25,7 @@ import javax.xml.transform.Result;
  */
 public class JUnitTestCases {
 
-    private static Object JUnitCore;
+    //private static Object JUnitCore;
 
     public static void main(String[] args) {
         Result result = JUnitCore.runClasses(TestCase.class);

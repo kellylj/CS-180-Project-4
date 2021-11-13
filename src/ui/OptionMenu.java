@@ -1,8 +1,8 @@
 package ui;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
+import main.UIManager;
 import utils.ANSICodes;
 import utils.NumberUtils;
 
@@ -36,15 +36,15 @@ import utils.NumberUtils;
  */
 public class OptionMenu extends Menu {
 
-	Scanner scanner;
+	UIManager uiManager;
 	
 	ArrayList<String> headings;
 	ArrayList<MenuOption> options;
 	Runnable callbackOnHeadingPrint;
 	boolean checkLogin;
 
-	public OptionMenu(Scanner scanner) {
-		this.scanner = scanner;
+	public OptionMenu(UIManager uiManager) {
+		this.uiManager = uiManager;
 		options = new ArrayList<MenuOption>();
 		headings = new ArrayList<String>();
 		this.checkLogin = false;
@@ -82,10 +82,10 @@ public class OptionMenu extends Menu {
 
 	@Override
 	public void runMenu() {
-		/*if(this.checkLogin) {// && uiManager.getCurrentUser() == null) {
+		if(this.checkLogin && uiManager.getCurrentUser() == null) {
 			this.menuState = MenuState.CLOSE;
 			return;
-		}*/
+		}
 		for (String heading : headings) {
 			System.out.println(heading);
 		}
@@ -105,7 +105,7 @@ public class OptionMenu extends Menu {
 		}
 		MenuOption option = null;
 		while (option == null) {
-			String input = scanner.nextLine();
+			String input = uiManager.getScanner().nextLine();
 			if (!NumberUtils.isInteger(input)) {
 				System.out.println("Please use a valid integer when selecting an option.");
 				continue;

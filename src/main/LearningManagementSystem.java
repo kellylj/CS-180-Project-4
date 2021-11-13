@@ -14,8 +14,10 @@ public class LearningManagementSystem {
 	private UIManager uiManager;
 	private UserFileManager userFileManager;
 	private QuizFileManager quizFileManager;
+	private GradedQuizFileManager gradedQuizFileManager;
 	private UserManager userManager;
 	private QuizManager quizManager;
+	private GradedQuizManager gradedQuizManager;
 	
 	/**
 	 * Main method. Initializes the LMS instance
@@ -35,9 +37,11 @@ public class LearningManagementSystem {
 	 */
 	public LearningManagementSystem() {
 		userManager = new UserManager(this);
-		quizManager = new QuizManager(this);
 		userFileManager = new UserFileManager(this);
+		quizManager = new QuizManager(this);
 		quizFileManager = new QuizFileManager(this);
+		gradedQuizManager = new GradedQuizManager(this);
+		gradedQuizFileManager = new GradedQuizFileManager(); // TODO Pass instance
 		uiManager = new UIManager(this);
 	}
 
@@ -47,9 +51,11 @@ public class LearningManagementSystem {
 	 */
 	public void init() {
 		userManager.init();
-		quizManager.init();
 		userFileManager.init();
+		quizManager.init();
 		quizFileManager.init();
+		gradedQuizManager.init();
+		gradedQuizFileManager.init();
 		uiManager.init();
 	}
 	
@@ -68,10 +74,12 @@ public class LearningManagementSystem {
 	 */
 	public void exit() {
 		uiManager.exit();
-		userFileManager.exit();
+		gradedQuizManager.exit();
+		gradedQuizFileManager.exit();
+		quizManager.exit();
 		quizFileManager.exit();
 		userManager.exit();
-		quizManager.exit();
+		userFileManager.exit();
 	}
 	
 	public UIManager getUIManager() {
@@ -86,12 +94,20 @@ public class LearningManagementSystem {
 		return quizFileManager;
 	}
 
+	public GradedQuizFileManager getGradedQuizFileManager() {
+		return gradedQuizFileManager;
+	}
+
 	public UserManager getUserManager() {
 		return userManager;
 	}
 
 	public QuizManager getQuizManager() {
 		return quizManager;
+	}
+
+	public GradedQuizManager getGradedQuizManager() {
+		return gradedQuizManager;
 	}
 		
 }
