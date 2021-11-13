@@ -45,6 +45,10 @@ public class GradedQuiz { // should students be able to take quiz multiple times
 //        return String.format("G%d", quiz.getId());
 //    }
 
+    public void addQuestion(Question question, Answer answer) {
+        map.put(question.getId(), answer.getId());
+    }
+
     public String getID() {
         return String.format("G%d", quizID);
     }
