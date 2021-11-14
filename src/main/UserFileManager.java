@@ -55,13 +55,11 @@ public class UserFileManager implements Manager {
             return tempUsers;
         }
 
-        //debugPrint(contents);
-
         for (int i = 0; i < contents.size(); i++) {
             if (contents.get(i).isBlank() || contents.get(i).isEmpty()) {
                 continue;
             }
-            //System.out.println(contents.get(i));
+
             String[] list = contents.get(i).split("::", 2); //Two "::" colons are used to separate the type of user from the other information
             String[] info = list[1].split(";;", 4); //Two ";;" semicolons are used to separate the information used to construct a user
             int id = Integer.parseInt(info[0]);
@@ -73,8 +71,6 @@ public class UserFileManager implements Manager {
             } else { //student
                 tempUsers.add(new Student(id, username, password, name));
             }
-            //debugPrint(list);
-            //debugPrint(info);
         }
         return tempUsers;
     }

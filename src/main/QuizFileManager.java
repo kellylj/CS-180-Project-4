@@ -156,12 +156,12 @@ public class QuizFileManager implements Manager {
 			String questionType = questionParts[1];
 			int questionId = i;
 			ArrayList<Answer> answers = new ArrayList<>();
-			for (int j = 0; j < quizParts.length; j++) {
+			for (int j = 1; j < quizParts.length - 1; j++) {
 				String[] answerParts = quizParts[j].split(";;", 3); //Two ";;" semicolons separate the parts of the answer
 				String answer = answerParts[0];
 				boolean isCorrect = Boolean.parseBoolean(answerParts[1]);
 				int numPoints = Integer.parseInt(answerParts[2]);
-				int answerId = i - 1;
+				int answerId = j - 1;
 				answers.add(new Answer(answer, isCorrect, numPoints, answerId));
 			}
 			questions.add(new Question(answers, question, questionId, questionType));
