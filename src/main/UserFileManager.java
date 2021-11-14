@@ -20,6 +20,10 @@ public class UserFileManager implements Manager {
 
     @Override
     public void exit() {
+        this.save();
+    }
+
+    public void save() {
         this.users = lms.getUserManager().getUsers();
         this.writeUsers();
     } //gets the altered arraylist of users from UserManager after the program finishes, to be written to a file
