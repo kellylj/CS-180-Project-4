@@ -21,15 +21,15 @@ public class User {
 
     /**
      * Sets name of user
-     * @param name of User
+     * @param name Name of user
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * Returns name of User
-     * @return name of User
+     * Returns name of user
+     * @return Name of user
      */
     public String getName() {
         return name;
@@ -44,47 +44,47 @@ public class User {
     }
 
     /**
-     * Sets ID of User
-     * @param ID of User
+     * Sets ID of user
+     * @param ID ID of user
      */
     public void setID(int ID) {
         this.ID = ID;
     }
 
     /**
-     * Returns username of User
-     * @return username of User
+     * Returns username of user
+     * @return username of user
      */
     public String getUsername() {
         return username;
     }
 
     /**
-     * Sets username of User
-     * @param username of User
+     * Sets username of user
+     * @param username Username of user
      */
     public void setUsername(String username) {
         this.username = username;
     }
 
     /**
-     * Returns password of User
-     * @return password of User
+     * Returns password of user
+     * @return Password of user
      */
     public String getPassword() {
         return password;
     }
 
     /**
-     *
-     * @param password of User
+     * Sets password of user
+     * @param password Password of user
      */
     public void setPassword(String password) {
         this.password = password;
     }
 
     /**
-     *
+     * Returns the user in String form
      * @return User in String form
      */
     public String toString() {

@@ -2,31 +2,39 @@ package main;
 import java.util.ArrayList;
 import java.util.Random;
 /**
- * Manager for the Graded quizzes
+ * Manager for the Graded Quizzes
  *
  * @author Sean Lee
  * @see Manager
  */
 public class GradedQuizManager implements Manager {
 
-    LearningManagementSystem lms;
-    ArrayList<GradedQuiz> gradedQuizList = new ArrayList<>();
+    private LearningManagementSystem lms;
+    private ArrayList<GradedQuiz> gradedQuizList = new ArrayList<>();
+
     public GradedQuizManager(LearningManagementSystem lms) {
         this.lms = lms;
     }
 
-
+    /**
+     * Initializes information when the program starts
+     * Empty because no information needs to be initialized
+     */
     public void init() {
 
     }
 
+    /**
+     * Saves information for long-term as program closes
+     * Empty because this class does not need to do that
+     */
     public void exit() {
 
     }
 
     /**
-     *
-     * @param gradedQuiz that you want to add
+     * Adds a graded quiz to the list of graded quizzes
+     * @param gradedQuiz The graded quiz that needs to be added
      */
     public void addGradedQuiz(GradedQuiz gradedQuiz) {
         gradedQuizList.add(gradedQuiz);
@@ -42,7 +50,7 @@ public class GradedQuizManager implements Manager {
 
     /**
      * Removes a graded quiz from the list of graded quiz
-     * @param ID of quiz you want to remove
+     * @param ID The ID of the Graded Quiz that is to be removed
      */
     public void removeQuiz(int ID) {
         int startingListLength = gradedQuizList.size();
@@ -58,15 +66,15 @@ public class GradedQuizManager implements Manager {
     }
 
     /**
-     * Sets the graded Quiz list with input
-     * @param gradedQuizList of graded quizzes
+     * Sets the graded quiz list with input
+     * @param gradedQuizList The list of graded quizzes
      */
     public void setGradedQuiz(ArrayList<GradedQuiz> gradedQuizList) {
         this.gradedQuizList = gradedQuizList;
     }
 
     /**
-     *
+     * Lists the list of graded quizzes
      * @return List of graded quizzes
      */
     public String listGradedQuizzes() {
@@ -81,9 +89,9 @@ public class GradedQuizManager implements Manager {
     }
 
     /**
-     *
-     * @param course String inputted
-     * @return list of quizzes that contains the input String in course
+     * Searches the list of the quizzes by course
+     * @param course Course to search by
+     * @return List of quizzes that matches the inputted course
      */
     public ArrayList<GradedQuiz> searchGradedQuizzesByCourse(String course) {
         ArrayList<GradedQuiz> matchingQuizzes = new ArrayList<>();
@@ -96,8 +104,8 @@ public class GradedQuizManager implements Manager {
     }
 
     /**
-     *
-     * @return ArrayList of Graded Quizzes
+     * Returns the list of graded quizzes
+     * @return ArrayList of graded quizzes
      */
     public ArrayList<GradedQuiz> getGradedQuizList() {
         return gradedQuizList;
