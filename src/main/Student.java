@@ -14,7 +14,7 @@ public class Student extends User{
     }
 
     /**
-     *
+     * Returns the permission of the student
      * @return Permission of Student
      */
     public Enum<UserPermission> getUserPermission() {
@@ -23,7 +23,7 @@ public class Student extends User{
 
 
     /**
-     *
+     * Returns the student in string form
      * @return Student in String format
      */
     public String toString() {

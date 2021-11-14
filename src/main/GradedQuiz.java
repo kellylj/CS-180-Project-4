@@ -3,10 +3,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 /**
- * Stores a list of all the graded quizzes
- * <p>
  *
- * Graded Quiz Manager manages the list of quizzes, and provides methods for searching through them
+ * Graded Quiz that contains the information of a quiz that has been graded
+ *
  * @author Sean Lee
  * @see GradedQuizManager
  */
@@ -55,8 +54,8 @@ public class GradedQuiz { // should students be able to take quiz multiple times
 
     /**
      * Adds a question to the Hash Map of questions and answers
-     * @param question that will be added
-     * @param answer that will be added
+     * @param question Question that will be added
+     * @param answer Answer that will be added
      */
     public void addQuestion(Question question, Answer answer) {
         map.put(question.getId(), answer.getId());
@@ -73,7 +72,7 @@ public class GradedQuiz { // should students be able to take quiz multiple times
     /**
      * Adds a question to the Hash Map of questions and answers
      * @param questionID ID of question that will be added to hash map
-     * @param answerID ID of answer that will be aded to hash map
+     * @param answerID ID of answer that will be added to hash map
      */
     public void addQuestion(int questionID, int answerID) {
         map.put(questionID, answerID);
@@ -81,7 +80,7 @@ public class GradedQuiz { // should students be able to take quiz multiple times
 
     /**
      * Returns submission time of quiz
-     * @return submission time of quiz
+     * @return Submission time of quiz
      */
     public String getSubmissionTime() {
         return submissionTime;
@@ -89,7 +88,7 @@ public class GradedQuiz { // should students be able to take quiz multiple times
 
     /**
      * Sets the submission time of quiz
-     * @param submissionTime submission time of quiz
+     * @param submissionTime Submission time of quiz
      */
     public void setSubmissionTime(String submissionTime) {
         this.submissionTime = submissionTime;
