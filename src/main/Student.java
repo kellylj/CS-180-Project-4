@@ -13,6 +13,10 @@ public class Student extends User{
         this.userPermission = UserPermission.USER;
     }
 
+    /**
+     *
+     * @return Permission of Student
+     */
     public Enum<UserPermission> getUserPermission() {
         return userPermission;
     }

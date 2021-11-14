@@ -84,7 +84,7 @@ public class User {
     }
 
     /**
-     * R=
+     *
      * @return User in String form
      */
     public String toString() {

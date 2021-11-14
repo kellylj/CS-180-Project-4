@@ -13,6 +13,10 @@ public class Teacher extends User {
         userPermission = UserPermission.ADMIN;
     }
 
+    /**
+     *
+     * @return Teacher's Permission
+     */
     public Enum<UserPermission> getUserPermission() {
         return userPermission;
     }

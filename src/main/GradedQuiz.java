@@ -18,11 +18,6 @@ public class GradedQuiz { // should students be able to take quiz multiple times
     private int studentID;
     private HashMap<Integer, Integer> map = new HashMap<>();
 
-//    public GradedQuiz(Quiz quiz, Student student) {
-//        this.quiz = quiz;
-//        this.student = student;
-//    }
-
     public GradedQuiz(int quizID, int studentID) {
         this.quizID = quizID;
         this.studentID = studentID;
@@ -35,6 +30,9 @@ public class GradedQuiz { // should students be able to take quiz multiple times
         this.submissionTime = submissionTime;
     }
 
+    /**
+     * @return Hash Map of Graded Quizzes
+     */
     public HashMap<Integer, Integer> getGradedQuizMap() {
         return this.map;
     }
@@ -57,8 +55,8 @@ public class GradedQuiz { // should students be able to take quiz multiple times
 
     /**
      * Adds a question to the Hash Map of questions and answers
-     * @param question
-     * @param answer
+     * @param question that will be added
+     * @param answer that will be added
      */
     public void addQuestion(Question question, Answer answer) {
         map.put(question.getId(), answer.getId());
@@ -74,8 +72,8 @@ public class GradedQuiz { // should students be able to take quiz multiple times
 
     /**
      * Adds a question to the Hash Map of questions and answers
-     * @param questionID
-     * @param answerID
+     * @param questionID ID of question that will be added to hash map
+     * @param answerID ID of answer that will be aded to hash map
      */
     public void addQuestion(int questionID, int answerID) {
         map.put(questionID, answerID);
@@ -83,7 +81,7 @@ public class GradedQuiz { // should students be able to take quiz multiple times
 
     /**
      * Returns submission time of quiz
-     * @return
+     * @return submission time of quiz
      */
     public String getSubmissionTime() {
         return submissionTime;
@@ -91,7 +89,7 @@ public class GradedQuiz { // should students be able to take quiz multiple times
 
     /**
      * Sets the submission time of quiz
-     * @param submissionTime
+     * @param submissionTime submission time of quiz
      */
     public void setSubmissionTime(String submissionTime) {
         this.submissionTime = submissionTime;
