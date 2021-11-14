@@ -1,7 +1,5 @@
 package ui;
 
-import utils.Listable;
-
 /**
  * Lambda used for when a user has selected
  * an item in {@link OptionListMenu}.

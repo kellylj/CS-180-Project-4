@@ -1,6 +1,6 @@
 package ui;
 
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Lambda for requesting the items in a list.
@@ -13,5 +13,5 @@ import java.util.ArrayList;
  * TODO T extends Listable
  */
 public interface RunnableGetListItems<T> {
-	public ArrayList<T> getListItems();
+	public List<T> getListItems();
 }

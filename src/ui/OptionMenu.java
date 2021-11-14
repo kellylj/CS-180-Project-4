@@ -118,6 +118,8 @@ public class OptionMenu extends Menu {
 			option = visibleOptions.get(i - 1);
 			break;
 		}
+		// TODO Fun
+		System.out.println(ANSICodes.CLEAR_SCREEN + ANSICodes.CURSOR_TO_HOME);
 		menuState = option.onSelect();
 	}
 

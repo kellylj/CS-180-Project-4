@@ -1,12 +1,13 @@
 package ui;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import main.LearningManagementSystem;
+import main.Listable;
 import main.Quiz;
 import main.QuizManager;
 import main.UIManager;
-import utils.Listable;
 
 /**
  * {@link OptionMenu} for selecting an item from a arraylist.
@@ -26,11 +27,11 @@ import utils.Listable;
  * @param T the type of the item in the list. 
  * TODO T extends Listable
  */
-public class OptionListMenu<T> extends OptionMenuWithResult<T> {
+public class OptionListMenu<T extends Listable> extends OptionMenuWithResult<T> {
 
 	private static final int AMT_ITEMS_PER_PAGE = 5;
 
-	ArrayList<T> items;
+	List<T> items;
 	RunnableGetListItems<T> runnableGetListItems;
 	RunnableSelectListItem<T> runnableSelectListItem;
 	int page = 0;
@@ -49,7 +50,7 @@ public class OptionListMenu<T> extends OptionMenuWithResult<T> {
 		this.items = new ArrayList<T>();
 	}
 	
-	public OptionListMenu<T> setItems(ArrayList<T> items) {
+	public OptionListMenu<T> setItems(List<T> items) {
 		this.items = items;
 		return this;
 	}
@@ -75,6 +76,15 @@ public class OptionListMenu<T> extends OptionMenuWithResult<T> {
 	
 	@Override
 	public void runMenu() {
+		
+		if(items.size() == 0) {
+			System.out.println("No options are available.");
+			System.out.println("Press Enter to go back.");
+			uiManager.getScanner().nextLine();
+			this.menuState = MenuState.CLOSE;
+			return;
+		}
+		
 		// Clear options so that all options are new.
 		this.options.clear();
 		
@@ -93,7 +103,7 @@ public class OptionListMenu<T> extends OptionMenuWithResult<T> {
 			
 			final T item = items.get(j);
 			// TODO Quiz item.toString() -> item.getListName()
-			this.addOption((new MenuOption(item.toString())).onSelect(() -> {
+			this.addOption((new MenuOption(item.getListName())).onSelect(() -> {
 				this.setResult(item);
 				return MenuState.CLOSE;
 			}));

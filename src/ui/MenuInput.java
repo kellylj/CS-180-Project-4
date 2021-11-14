@@ -3,6 +3,7 @@ package ui;
 import java.util.Scanner;
 
 import main.UIManager;
+import utils.ANSICodes;
 
 /**
  * Datastructure used by {@link InputMenu} to store information about the input the menu should ask for.
