@@ -21,6 +21,10 @@ public class QuizFileManager implements Manager {
 
 	@Override
 	public void exit() {
+		this.save();
+	}
+
+	public void save() {
 		quizzes = lms.getQuizManager().getQuizList();
 		this.writeQuizzes();
 	} //gets the altered list of quizzes and writes them to a file

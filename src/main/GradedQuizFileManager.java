@@ -24,6 +24,10 @@ public class GradedQuizFileManager implements Manager {
 
     @Override
     public void exit() {
+        this.save();
+    }
+
+    public void save() {
         gradedQuizzes = lms.getGradedQuizManager().getGradedQuizList();
         this.writeGradedQuizzes();
     } //gets the altered arraylist of graded quizzes from GradedQuizManger and writes it to a file
