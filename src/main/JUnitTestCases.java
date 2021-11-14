@@ -208,6 +208,193 @@ public class JUnitTestCases {
 
         }
 
+        @Test(timeout = 1000)
+        public void testInvalidUser() {
+
+            String[] inputArr = new String[] {
+                    "1", "testUsername", "testPassword", "2", "3"
+            };
+
+            String[] expectedArr = new String[] {
+                    "Welcome to the Learning Management System!",
+                    "Please select one of the following options:",
+                    "1: Login",
+                    "2: Create User",
+                    "3: Exit",
+                    "Logging into the Learning Management System.",
+                    "Please enter your login details.",
+                    "Username:",
+                    "Password:",
+                    "Invalid login credentials.",
+                    "Would you like to try again?",
+                    "1: Yes",
+                    "2: No",
+                    "Welcome to the Learning Management System!",
+                    "Please select one of the following options:",
+                    "1: Login",
+                    "2: Create User",
+                    "3: Exit",
+                    "Okay! Bye!"
+
+            };
+            String errorMsg = "The output was not expected!";
+
+            tryTestInput(inputArr, expectedArr, errorMsg);
+
+        }
+
+        @Test(timeout = 1000)
+        public void testCreateQuiz() {
+
+            String[] inputArr = new String[] {
+                    "2", "Test User", "testUsername", "testPassword", "1", "1", "testUsername", "testPassword", "4",
+                    "Test Quiz", "Test Course", "2","2", "1", "Test Question?", "Correct Answer", "1", "1",
+                    "Incorrect Answer", "0", "5", "7", "1", "1", "1", "2", "7", "3"
+            };
+
+            String[] expectedArr = new String[] {
+                    "Welcome to the Learning Management System!",
+                    "Please select one of the following options:",
+                    "1: Login",
+                    "2: Create User",
+                    "3: Exit",
+                    "Creating a new User",
+                    "Please answer the following questions",
+                    "What is your name?",
+                    "What username do you want?",
+                    "What password do you want?",
+                    "Will you be a teacher or a student?",
+                    "1: Teacher",
+                    "2: Student",
+                    "The following are the values you gave:",
+                    "Username - testUsername",
+                    "User Type - Teacher",
+                    "Name - Test User",
+                    "Password - testPassword",
+                    "",
+                    "Are you satisfied with these values?",
+                    "1: Yes",
+                    "2: No",
+                    "",
+                    "",
+                    "Successfully created the user.",
+                    "Welcome to the Learning Management System!",
+                    "Please select one of the following options:",
+                    "1: Login",
+                    "2: Create User",
+                    "3: Exit",
+                    "You have successfully logged in!",
+                    "",
+                    "Teacher Menu",
+                    "1: List Quizzes",
+                    "2: List All Quiz Submissions",
+                    "3: Search Quiz Submissions",
+                    "4: Add New Quiz",
+                    "5: Modify Quizzes",
+                    "6: User Settings",
+                    "7: Logout",
+                    "Creating a new quiz.",
+                    "What would you like the name of this quiz to be?",
+                    "What is the name of the course this quiz will be in?",
+                    "Would you like to import this quiz from a file?",
+                    "1: Yes",
+                    "2: No",
+                    "Successfully created the quiz.",
+                    "Modifying Quiz: 'Test Quiz'",
+                    "Current Amount of Questions: 0",
+                    "1: View Questions",
+                    "2: Add Question",
+                    "3: Edit Questions",
+                    "4: Change Name",
+                    "5: Change Course",
+                    "6: Set Scrambled",
+                    "7: Save Quiz",
+                    "8: Delete Quiz",
+                    "What type of question do you want to add?",
+                    "1: Multiple Choice",
+                    "2: True or False",
+                    "3: Dropdown",
+                    "What is the question?",
+                    "Modifying Question: Test Question?",
+                    "1: Add Answer",
+                    "2: Remove Answer",
+                    "3: View Question",
+                    "4: View Point Values",
+                    "5: Save Question",
+                    "What is the answer?",
+                    "How many points is this answer worth?",
+                    "",
+                    "Modifying Question: Test Question?",
+                    "1: Add Answer",
+                    "2: Remove Answer",
+                    "3: View Question",
+                    "4: View Point Values",
+                    "5: Save Question",
+                    "What is the answer?",
+                    "How many points is this answer worth?",
+                    "Modifying Question: Test Question?",
+                    "1: Add Answer",
+                    "2: Remove Answer",
+                    "3: View Question",
+                    "4: View Point Values",
+                    "5: Save Question",
+                    "",
+                    "Modifying Quiz: 'Test Quiz'",
+                    "Current Amount of Questions: 0",
+                    "1: View Questions",
+                    "2: Add Question",
+                    "3: Edit Questions",
+                    "4: Change Name",
+                    "5: Change Course",
+                    "6: Set Scrambled",
+                    "7: Save Quiz",
+                    "8: Delete Quiz",
+                    "Teacher Menu",
+                    "1: List Quizzes",
+                    "2: List All Quiz Submissions",
+                    "3: Search Quiz Submissions",
+                    "4: Add New Quiz",
+                    "5: Modify Quizzes",
+                    "6: User Settings",
+                    "7: Logout",
+                    "",
+                    "Please select a course.",
+                    "1: Test Course",
+                    "2: Exit",
+                    "",
+                    "Please select a quiz to view.",
+                    "1: Test Quiz",
+                    "2: Exit",
+                    "",
+                    "Quiz Info",
+                    "Quiz name: Test Quiz, Author: Test User, ID: 626040, Course: Test Course",
+                    "Please press Enter to continue.",
+                    "",
+                    "Please select a quiz to view.",
+                    "1: Test Quiz",
+                    "2: Exit",
+                    "Teacher Menu",
+                    "1: List Quizzes",
+                    "2: List All Quiz Submissions",
+                    "3: Search Quiz Submissions",
+                    "4: Add New Quiz",
+                    "5: Modify Quizzes",
+                    "6: User Settings",
+                    "7: Logout",
+                    "",
+                    "Welcome to the Learning Management System!",
+                    "Please select one of the following options:",
+                    "1: Login",
+                    "2: Create User",
+                    "3: Exit",
+                    "Okay! Bye!"
+
+            };
+            String errorMsg = "The output was not expected!";
+
+            tryTestInput(inputArr, expectedArr, errorMsg);
+
+        }
     }
 
 }
