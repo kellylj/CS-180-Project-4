@@ -44,9 +44,13 @@ public class FileWrapper {
             while ((line = br.readLine()) != null) {
                 if (line.startsWith("/") && !readLine.isBlank()) { //if the line starts with a "/" (forward slash) and the buffer (readLine) is not empty, the buffer is added to the arraylist and reset to the line
                     contents.add(readLine);
-                    readLine = line.substring(1);
+                    readLine = line.substring(line.indexOf("/") + 1);
                 } else if (!line.startsWith("#")) { //ignores any lines starting with "#" (pound), adds a read line to the buffer
-                    readLine += line;
+                    if (line.startsWith("/")) {
+                        readLine += line.substring(line.indexOf("/") + 1);
+                    } else {
+                        readLine += line;
+                    }
                 }
             }
             if (!readLine.isBlank()) {

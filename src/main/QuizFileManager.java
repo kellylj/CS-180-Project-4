@@ -140,6 +140,8 @@ public class QuizFileManager implements Manager {
 
 		ArrayList<String> contents = fw.readImportFile(path);
 
+		System.out.println(String.join("\n", contents));
+
 		if (contents == null) {
 			return null;
 		}
