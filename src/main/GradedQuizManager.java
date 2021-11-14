@@ -46,6 +46,14 @@ public class GradedQuizManager implements Manager {
     }
 
     /**
+     * Sets the graded Quiz list with input
+     * @param gradedQuizList of graded quizzes
+     */
+    public void setGradedQuiz(ArrayList<GradedQuiz> gradedQuizList) {
+        this.gradedQuizList = gradedQuizList;
+    }
+
+    /**
      *
      * @return List of graded quizzes
      */
