@@ -29,7 +29,7 @@ public class GradedQuizManager implements Manager {
     }
 
     public void deleteAllByStudentID(int studentID) {  // TODO: check if this method works
-        for (int i = gradedQuizList.size(); i >= 0; i--) {  // iterates backwards to prevent array out of bounds exception
+        for (int i = gradedQuizList.size() - 1; i >= 0; i--) {  // iterates backwards to prevent array out of bounds exception
             if (gradedQuizList.get(i).getStudentID() == studentID) {
                 gradedQuizList.remove(gradedQuizList.get(i));
             }
