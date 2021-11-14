@@ -6,7 +6,6 @@ package main;
  * @author Sean Lee
  * @see UserManager
  */
-
 public class User {
     private int ID;
     private String username;
@@ -20,6 +19,10 @@ public class User {
         this.password = password;
     }
 
+    /**
+     * Sets name of user
+     * @param name of User
+     */
     public void setName(String name) {
         this.name = name;
     }
