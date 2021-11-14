@@ -36,7 +36,7 @@ public class QuizFileManager implements Manager {
 		}
 
 		for (int i = 0; i < contents.size(); i++) {
-			String[] components = contents.get(i).split(";", 8); //A ";" (semicolon) is used to separate the parts of a quiz
+			String[] components = contents.get(i).split(";;", 8); //Two ";;" (semicolons) are used to separate the parts of a quiz
 			String name = components[0];
 			String author = components[1];
 			ArrayList<Question> questions = this.readQuestions(components[2]); //format the list of questions
@@ -51,10 +51,10 @@ public class QuizFileManager implements Manager {
 	public ArrayList<Question> readQuestions(String questionList) {
 		ArrayList<Question> questions = new ArrayList<>();
 
-		String[] list = questionList.split(",", -1); //A "," (comma) is used to separate the different questions in a quiz
+		String[] list = questionList.split("::", -1); //Two "::" (colons) are used to separate the different questions in a quiz
 
 		for (int i = 0; i < list.length; i++) {
-			String[] questionParts = list[i].split("/", 4); //A "/" (forward slash) is used to separate the answers from the question asked
+			String[] questionParts = list[i].split("//", 4); //Two "//" (forward slashes) are used to separate the answers from the question asked
 			ArrayList<Answer> answers = this.readAnswers(questionParts[0]);
 			String question = questionParts[1];
 			int id = Integer.parseInt(questionParts[2]);
@@ -68,10 +68,10 @@ public class QuizFileManager implements Manager {
 	public ArrayList<Answer> readAnswers(String answerList) {
 		ArrayList<Answer> answers = new ArrayList<>();
 
-		String[] list = answerList.split("-"); //A "-" (dash) is used to separate the answers from each other
+		String[] list = answerList.split("--"); //Two "--" (dashes) are used to separate the answers from each other
 
 		for (int i = 0; i < list.length; i++) {
-			String[] answerParts = list[i].split("_", 4); //An "_" (underscore) is used to separate the parts of an answer
+			String[] answerParts = list[i].split("__", 4); //Two "__" (underscores) are used to separate the parts of an answer
 			String answer = answerParts[0];
 			boolean correct = Boolean.parseBoolean(answerParts[1]);
 			int points = Integer.parseInt(answerParts[2]);
@@ -93,7 +93,7 @@ public class QuizFileManager implements Manager {
 			int id = quizzes.get(i).getId();
 			boolean scrambled = quizzes.get(i).isScrambled();
 			String course = quizzes.get(i).getCourse();
-			String addon = String.format("%s;%s;%s;%s;%s;%s", name, author, questions, id, scrambled, course);
+			String addon = String.format("%s;;%s;;%s;;%s;;%s;;%s", name, author, questions, id, scrambled, course);
 			writableQuizzes.add(addon);
 		}
 
@@ -108,9 +108,9 @@ public class QuizFileManager implements Manager {
 			String id = Integer.toString(questions.get(i).getId());
 			String questionType = questions.get(i).getQuestionType();
 			if (i == questions.size() - 1) {
-				retVal += String.format("%s/%s/%s/%s", answers, question, id, questionType);
+				retVal += String.format("%s//%s//%s//%s", answers, question, id, questionType);
 			} else {
-				retVal += String.format("%s/%s/%s/%s,", answers, question, id, questionType);
+				retVal += String.format("%s//%s//%s//%s::", answers, question, id, questionType);
 			}
 		}
 		return retVal;
@@ -124,9 +124,9 @@ public class QuizFileManager implements Manager {
 			int points = answers.get(i).getPoints();
 			String id = Integer.toString(answers.get(i).getId());
 			if (i == answers.size() - 1) {
-				retVal += String.format("%s_%s_%s_%s", answer, correct, points, id);
+				retVal += String.format("%s__%s__%s__%s", answer, correct, points, id);
 			} else {
-				retVal += String.format("%s_%s_%s_%s-", answer, correct, points, id);
+				retVal += String.format("%s__%s__%s__%s--", answer, correct, points, id);
 			}
 		}
 		return retVal;
@@ -152,7 +152,7 @@ public class QuizFileManager implements Manager {
 			int questionId = i;
 			ArrayList<Answer> answers = new ArrayList<>();
 			for (int j = 1; j < quizParts.length; j++) {
-				String[] answerParts = quizParts[j].split(";", 3);
+				String[] answerParts = quizParts[j].split(";;", 3);
 				String answer = answerParts[0];
 				boolean isCorrect = Boolean.parseBoolean(answerParts[1]);
 				int numPoints = Integer.parseInt(answerParts[2]);
