@@ -49,10 +49,10 @@ TODO
 Classes used for storing data that don't inherently do anything by themselves.
 
 ### Quiz
-Class used for storing data about each quiz, including a toString which displays relevant information about the quiz.  It also is able to generate unique IDs for each question which haven't been used before.
+Implements Listable.  Class used for storing data about each quiz, including a toString which displays relevant information about the quiz.  It also is able to generate unique IDs for each question which haven't been used before.
 
 ### Question
-Class used for storing data about each question.  It also has a toString which is used for displaying the question to the user.  Each question has a type, which can be multiple choice, true/false, or dropdown.  Each question also includes an array of answers.
+Implements Listable.  Class used for storing data about each question.  It also has a toString which is used for displaying the question to the user.  Each question has a type, which can be multiple choice, true/false, or dropdown.  Each question also includes an array of answers.
 
 ### Answer
 Class used for storing data about each answer.  Each answer is assigned a point value by the teacher, and is either correct or incorerct.
