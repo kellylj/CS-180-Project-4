@@ -4,6 +4,7 @@ package main;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
@@ -275,6 +276,7 @@ public class UIManager implements Manager {
 						System.out.println("Your account has been successfully deleted.");
 						lms.getUserManager().removeUser(this.currentUser);
 						this.setCurrentUser(null);
+						lms.getGradedQuizManager().deleteAllByStudentID(this.currentUser.getID());
 						// TODO GradedQuizManager - remove all graded quizzes for deleted user?
 						return MenuState.CLOSE;
 					} else {
@@ -583,6 +585,7 @@ public class UIManager implements Manager {
 				}))
 			.addOption((new MenuOption("Save Quiz"))
 				.onSelect(() -> {
+					lms.getQuizFileManager().save();
 					return MenuState.CLOSE;
 				}))
 			.addOption((new MenuOption("Delete Quiz"))
@@ -791,7 +794,9 @@ public class UIManager implements Manager {
 	private OptionMenu getMenuTakeQuiz(Quiz quiz) {
 		// Queue is used to go from first to last question in order.
 		Queue<OptionMenu> questionsMenus = new LinkedList<OptionMenu>();
-		ArrayList<Question> questions = quiz.getQuestions();
+		ArrayList<Question> questions = new ArrayList<>(quiz.getQuestions());
+		if(quiz.isScrambled())
+			Collections.shuffle(questions);
 		GradedQuiz gradedQuiz = new GradedQuiz(quiz.getId(), this.getCurrentUser().getID());
 		int i = 1;
 		for(Question question: questions) {
@@ -799,7 +804,10 @@ public class UIManager implements Manager {
 			menu.addHeading("Question " + i);
 			i += 1;
 			menu.addHeading(question.getQuestion());
-			for(Answer answer: question.getAnswers()) {
+			ArrayList<Answer> answers = new ArrayList<>(question.getAnswers());
+			if(quiz.isScrambled())
+				Collections.shuffle(answers);
+			for(Answer answer: answers) {
 				menu.addOption((new MenuOption(answer.getAnswer()))
 					.onSelect(() -> {
 						gradedQuiz.addQuestion(question, answer);
