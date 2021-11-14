@@ -16,7 +16,6 @@ public class UserFileManager implements Manager {
     @Override
     public void init() {
         lms.getUserManager().setUsers(this.users);
-        System.out.println(this.users.size());
     } //Sets the UserManager's arraylist of users after reading saved data
 
     @Override
