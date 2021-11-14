@@ -68,7 +68,7 @@ public class GradedQuizManager implements Manager {
     public ArrayList<GradedQuiz> searchGradedQuizzesByCourse(String course) {
         ArrayList<GradedQuiz> matchingQuizzes = new ArrayList<>();
         for (GradedQuiz gradedQuiz : gradedQuizList) {
-            if (lms.getQuizManager().searchQuizByID(Integer.getInteger(gradedQuiz.getID().substring(1))).get(0).getCourse().equals(course)) {
+            if (lms.getQuizManager().searchQuizByID(Integer.getInteger(gradedQuiz.getID().substring(1))).getCourse().equals(course)) {
                 matchingQuizzes.add(gradedQuiz);
             }
         }
