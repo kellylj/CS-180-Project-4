@@ -19,15 +19,16 @@ public class GradedQuizFileManager implements Manager {
 
     @Override
     public void init() {
-
-    }
+        lms.getGradedQuizManager().setGradedQuiz(gradedQuizzes);
+    } //Sets the GradedQuizManger's arraylist of graded quizzes
 
     @Override
     public void exit() {
+        gradedQuizzes = lms.getGradedQuizManager().getGradedQuizList();
+        this.writeGradedQuizzes();
+    } //gets the altered arraylist of graded quizzes from GradedQuizManger and writes it to a file
 
-    }
-
-    public ArrayList<GradedQuiz> readGradedQuizzes() {
+    public ArrayList<GradedQuiz> readGradedQuizzes() { //Reads the file that stores the graded quiz data and creates an arraylist of graded quizzes
         ArrayList<GradedQuiz> tempGradQuiz = new ArrayList<>();
         String path = "./data/gradedQuizzes.txt";
         ArrayList<String> contents = fw.readFile(path);
@@ -37,22 +38,22 @@ public class GradedQuizFileManager implements Manager {
         }
 
         for (int i = 0; i < contents.size(); i++) {
-            String[] list = contents.get(i).split(";;", 4);
+            String[] list = contents.get(i).split(";;", 4); //Two ";;" semicolons are used to separate the parts of a graded quiz
             int quizID = Integer.parseInt(list[0]);
             int studentID = Integer.parseInt(list[1]);
-            HashMap<Integer, Integer> map = createHashmap(list[2]);
+            HashMap<Integer, Integer> map = createHashmap(list[2]); //handles creating the Hashmap
             String submissionTime = list[3];
             tempGradQuiz.add(new GradedQuiz(quizID, studentID, map, submissionTime));
         }
         return tempGradQuiz;
     }
 
-    public HashMap<Integer, Integer> createHashmap(String contents) {
+    public HashMap<Integer, Integer> createHashmap(String contents) { //Used to create the Hashmap
         HashMap<Integer, Integer> map = new HashMap<>();
-        String[] list = contents.split("//", -1);
+        String[] list = contents.split("//", -1); //Two "//" forward slashes are used to separate the key/value pairs from each other
 
         for (int i = 0; i < list.length; i++) {
-            String[] parts = list[i].split(",,", 2);
+            String[] parts = list[i].split(",,", 2); //Two ",," commas are used to separate the key and value
             Integer questionId = Integer.parseInt(parts[0]);
             Integer answerId = Integer.parseInt(parts[1]);
             map.put(questionId, answerId);
@@ -60,7 +61,7 @@ public class GradedQuizFileManager implements Manager {
         return map;
     }
 
-    public boolean writeGradedQuizzes() {
+    public boolean writeGradedQuizzes() { //Writes the arraylist of graded quizzes to a file for storage
         ArrayList<String> writableGradedQuizzes = new ArrayList<>();
         String path = "./data/gradedQuizzes.txt";
 
@@ -69,13 +70,13 @@ public class GradedQuizFileManager implements Manager {
             int studentId = gradedQuizzes.get(i).getStudentID();
             String mapList = this.formatHashmap(gradedQuizzes.get(i).getGradedQuizMap());
             String submissionTime = gradedQuizzes.get(i).getSubmissionTime();
-            writableGradedQuizzes.add(String.format("%d;;%d;;%s;;%s", quizId, studentId, mapList, submissionTime));
+            writableGradedQuizzes.add(String.format("%d;;%d;;%s;;%s", quizId, studentId, mapList, submissionTime)); //formats the graded quiz to written and adds it to the arraylist of strings to written
         }
 
         return fw.writeFile(path, writableGradedQuizzes);
     }
 
-    public String formatHashmap(HashMap<Integer, Integer> map) {
+    public String formatHashmap(HashMap<Integer, Integer> map) { //Used to format the Hashmap to be written
         StringJoiner joiner = new StringJoiner("//");
 
         for (Integer key : map.keySet()) {
