@@ -15,13 +15,11 @@ public class UserFileManager implements Manager {
 
     @Override
     public void init() {
-        // TODO Auto-generated method stub
         lms.getUserManager().setUsers(this.users);
     }
 
     @Override
     public void exit() {
-        // TODO Auto-generated method stub
         this.users = lms.getUserManager().getUsers();
         this.writeUsers();
     }
@@ -36,8 +34,8 @@ public class UserFileManager implements Manager {
         }
 
         for (int i = 0; i < contents.size(); i++) {
-            String[] list = contents.get(i).split(":", 2);
-            String[] info = list[1].split(";", 4);
+            String[] list = contents.get(i).split("::", 2);
+            String[] info = list[1].split(";;", 4);
             int id = Integer.parseInt(info[0]);
             String username = info[1];
             String password = info[2];
@@ -58,11 +56,11 @@ public class UserFileManager implements Manager {
         for (int i = 0; i < users.size(); i++) {
             String write = "";
             if (users.get(i) instanceof Teacher) {
-                write += "teacher:";
+                write += "teacher::";
             } else {
-                write += "student:";
+                write += "student::";
             }
-            write += String.format("%d;%s;%s;%s", users.get(i).getID(), users.get(i).getUsername(), users.get(i).getPassword(), users.get(i).getName());
+            write += String.format("%d;;%s;;%s;;%s", users.get(i).getID(), users.get(i).getUsername(), users.get(i).getPassword(), users.get(i).getName());
             writableUsers.add(write);
         }
         boolean success = fw.writeFile(path, writableUsers);
