@@ -51,9 +51,9 @@ public class InformationMenu extends Menu {
 		if(this.requiresEnter) {
 			System.out.println("Please press Enter to continue.");
 			this.uiManager.getScanner().nextLine();
+			// TODO Fun
+			System.out.print(ANSICodes.CLEAR_SCREEN + ANSICodes.CURSOR_TO_HOME);
 		}
-		// TODO Fun
-		System.out.print(ANSICodes.CLEAR_SCREEN + ANSICodes.CURSOR_TO_HOME);
 		this.menuState = MenuState.CLOSE;
 	}
 
