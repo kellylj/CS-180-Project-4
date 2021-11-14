@@ -43,8 +43,8 @@ public class Question implements Listable{
      */
     public String getListName() {
         String retVal = question;
-        if (retVal.length() > 20) {
-            retVal = retVal.substring(0, 20);
+        if (retVal.length() > 50) {
+            retVal = retVal.substring(0, 50);
         }
         return retVal;
     }
