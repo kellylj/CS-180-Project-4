@@ -9,9 +9,11 @@ Todo: Add our classes to here and explain what they do.
 This is the main class that ties all of the managers together. It contains the `main()` method. Upon running, it instantiates all of the following managers:
 
 - UserManager
-- UserFileManager
 - QuizManager
+- GradedQuizManager
 - QuizFileManager
+- UserFileManager
+- GradedQuizFileManager
 - UIManager
 
 Then, after instantiating them, it runs the `init()` method on all of them to notify them that the program is initializing. Once all the managers have initialized, the UIManager is ran, which opens the UI and prompts the user for input. Once the UI has exited, LMS then runs the `exit()` method on all of the managers to notify them that the program is exiting.
@@ -27,10 +29,21 @@ This interface is what blueprints all of other managers used in this application
 ### UIManager
 The manager that is responsible for the User Interface (UI). It uses the User Interface Menu System to create menus that the user then interacts with. In “init()” it creates all of the menus, which sets up the structure of the UI, and then in `run()` it runs the start menu, which is used as the entry point to the rest of the UI.
 
-### QuizManager
-The manager that holds the list of every created quiz.  It also provides methods for searching through the quizzes with various filters, such as name, author, etc.  It also is responsible for generating unique ids for new quizzes.
 ### UserManager
 The manager that is responsible for keeping track of users and providing functionalities such as `addUser()` or `authenticator()`. This manager performs actions that mainly require iterating through all the Users. For example, searching a user by his username or generating a unique id for each user is done through this class.
+
+### QuizManager
+The manager that holds the list of every created quiz.  It also provides methods for searching through the quizzes with various filters, such as name, author, etc.  It also is responsible for generating unique ids for new quizzes.
+
+### GradedQuizManager
+TODO
+### UserFileManager
+TODO
+### QuizFileManager
+TODO
+### GradedQuizFileManager
+TODO
+(Maybe combine file managers together, since they are similar?)
 
 ## Datastructure Classes
 Classes used for storing data that don't inherently do anything by themselves.
@@ -50,7 +63,15 @@ Class used for storing data about each answer.  Each answer is assigned a point 
 
 #### Student
 
+### GradedQuiz
+
 ### ... etc
+
+### Listable
+All classes that can be used in a list menu must implement this interface. It adds a function for how to represent the object in the list (`getListName()`).
+
+### ListableGradedQuiz
+This is a wrapper around GradedQuiz that includes fetching the names of the quiz and user so that it can be displayed to the user. The reason that it is not included in GradedQuiz itself is because GradedQuiz is for data storage, while this wrapper class is for data presentation. This wrapper class is used to contain redundant, slower to process, user-friendly data that is accessed via the other managers through LMS.
 
 ## User Interface Menu System:
 Each of the following classes are part of the User Interface Menu System. They all work together to form an abstract menu system that is then used to make the User Interface in UIManager.
@@ -70,6 +91,9 @@ A menu that prompts the user to select an option. When an option is selected, it
 
 ### MenuQuickInput
 A smaller input menu that only allows for one input question. The user input from that one question is then stored in a field and is accessible to any method with an instance of this menu.
+
+### InformationMenu
+A menu that is solely used for outputting data to the user. It is used for presenting quiz information, question information, and other pieces of information that do not require interaction with the user. Can require the user to press Enter to continue if `requireEnter()` is ran on object creation.
 
 ### OptionMenuWithResult<T>
 An OptionMenu that contains a result field (of parameterized type T) with accessor and mutator methods for it. Generally when the callback function `onSelect(()->{})` is ran (via OptionMenu running it), it will set the result. Then, once the menu exits, the surrounding code can access the result.
@@ -121,5 +145,4 @@ This class contains ANSI codes that are used for modifying text (like making it 
 ### NumberUtils
 A class containing number utility functions that have no specific other place and are used through the program. Specifically, it contains a function to check if a number is an integer or not.
 
-### Listable
-All classes that can be used in OptionListMenu have to implement this interface. It adds a function for how to represent the object in the list (`getListName()`).
+
