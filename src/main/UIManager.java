@@ -126,7 +126,7 @@ public class UIManager implements Manager {
 				
 				if(user != null) {
 					OptionMenuYesNo retryMenu = new OptionMenuYesNo(this);
-					retryMenu.addHeading("A user with those details already exists.");
+					retryMenu.addHeading("A user with that username already exists.");
 					retryMenu.addSubheading("Would you like to try creating a new user again?");
 					retryMenu.open();
 					if(retryMenu.resultWasNo()) {
@@ -147,6 +147,7 @@ public class UIManager implements Manager {
 						break;
 				}
 				lms.getUserManager().addUser(user);
+				lms.getUserFileManager().save();
 				System.out.println("Succesfully created the user.");
 				return MenuState.CLOSE;
 			});
