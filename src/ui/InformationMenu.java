@@ -53,7 +53,7 @@ public class InformationMenu extends Menu {
 			this.uiManager.getScanner().nextLine();
 		}
 		// TODO Fun
-		System.out.println(ANSICodes.CLEAR_SCREEN + ANSICodes.CURSOR_TO_HOME);
+		System.out.print(ANSICodes.CLEAR_SCREEN + ANSICodes.CURSOR_TO_HOME);
 		this.menuState = MenuState.CLOSE;
 	}
 

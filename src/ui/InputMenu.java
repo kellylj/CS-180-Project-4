@@ -159,7 +159,7 @@ public class InputMenu extends Menu {
 		}
 		
 		// TODO Fun
-		System.out.println(ANSICodes.CLEAR_SCREEN + ANSICodes.CURSOR_TO_HOME);
+		System.out.print(ANSICodes.CLEAR_SCREEN + ANSICodes.CURSOR_TO_HOME);
 
 		menuState = this.inputFinishEventRunnable.onInputFinish(values);
 	}
