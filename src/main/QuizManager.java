@@ -83,12 +83,9 @@ public class QuizManager implements Manager {
 	public ArrayList<Quiz> searchQuizByCourse(String course) {
 		ArrayList<Quiz> matchingQuizzes = new ArrayList<>();
 		for (Quiz q : quizList) {
-			if (q.getCourse().toLowerCase().contains(course.toLowerCase())) {
+			if (q.getCourse().toLowerCase().equals(course.toLowerCase())) {
 				matchingQuizzes.add(q);
 			}
-		}
-		if (matchingQuizzes.size() == 0) {
-			return null;
 		}
 		return matchingQuizzes;
 	}
@@ -161,11 +158,10 @@ public class QuizManager implements Manager {
 		ArrayList<String> courses = new ArrayList<>();
 		for (int i = 0; i < quizList.size(); i++) {
 			String course = quizList.get(i).getCourse();
-			for (int j = 0; j < courses.size(); j++) {
-				if (!(courses.get(j).equals(course))) {
-					courses.add(course);
-				}
+			if (!(courses.contains(course))) {
+				courses.add(course);
 			}
+
 		}
 		return courses;
 	}
