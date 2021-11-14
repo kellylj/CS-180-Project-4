@@ -17,15 +17,15 @@ public class QuizFileManager implements Manager {
 	@Override
 	public void init() {
 		lms.getQuizManager().setQuizList(quizzes);
-	}
+	} //Sets the QuizManager's arraylist of quizzes after reading the saved data
 
 	@Override
 	public void exit() {
 		quizzes = lms.getQuizManager().getQuizList();
 		this.writeQuizzes();
-	}
+	} //gets the altered list of quizzes and writes them to a file
 
-	public ArrayList<Quiz> readQuizzes() {
+	public ArrayList<Quiz> readQuizzes() { //reads the file that stores the quiz data and constructs an arraylist of quizzes out of it
 		ArrayList<Quiz> tempQuizzes = new ArrayList<>();
 		String path = "./data/quizzes.txt";
 		ArrayList<String> contents = fw.readFile(path);
@@ -47,7 +47,7 @@ public class QuizFileManager implements Manager {
 		return tempQuizzes;
 	}
 
-	public ArrayList<Question> readQuestions(String questionList) {
+	public ArrayList<Question> readQuestions(String questionList) { //Used to create the arraylist of questions that a quiz takes in its constructor
 		ArrayList<Question> questions = new ArrayList<>();
 
 		String[] list = questionList.split("::", -1); //Two "::" (colons) are used to separate the different questions in a quiz
@@ -64,7 +64,7 @@ public class QuizFileManager implements Manager {
 		return questions;
 	}
 
-	public ArrayList<Answer> readAnswers(String answerList) {
+	public ArrayList<Answer> readAnswers(String answerList) { //Used to create the arraylist of answers that a question takes in its constructor
 		ArrayList<Answer> answers = new ArrayList<>();
 
 		String[] list = answerList.split("--"); //Two "--" (dashes) are used to separate the answers from each other
@@ -80,7 +80,7 @@ public class QuizFileManager implements Manager {
 		return answers;
 	}
 
-	public boolean writeQuizzes() {
+	public boolean writeQuizzes() { //Writes the arraylist of quizzes "quizzes" to a file for storage
 		ArrayList<String> writableQuizzes = new ArrayList<>();
 		String path = "./data/quizzes.txt";
 
@@ -91,14 +91,14 @@ public class QuizFileManager implements Manager {
 			int id = quizzes.get(i).getId();
 			boolean scrambled = quizzes.get(i).isScrambled();
 			String course = quizzes.get(i).getCourse();
-			String addon = String.format("%s;;%s;;%s;;%s;;%s;;%s", name, author, questions, id, scrambled, course);
-			writableQuizzes.add(addon);
+			String addon = String.format("%s;;%s;;%s;;%s;;%s;;%s", name, author, questions, id, scrambled, course); //formats the quiz to be written
+			writableQuizzes.add(addon); //add a string that is formatted for storage to the arraylist that will be written to the file
 		}
 
 		return fw.writeFile(path, writableQuizzes);
 	}
 
-	public String formatQuestions(ArrayList<Question> questions) {
+	public String formatQuestions(ArrayList<Question> questions) { //Used to format the arraylist of questions to be written
 		String retVal = "";
 		for (int i = 0; i < questions.size(); i++) {
 			String answers = formatAnswers(questions.get(i).getAnswers());
@@ -106,15 +106,15 @@ public class QuizFileManager implements Manager {
 			String id = Integer.toString(questions.get(i).getId());
 			String questionType = questions.get(i).getQuestionType();
 			if (i == questions.size() - 1) {
-				retVal += String.format("%s//%s//%s//%s", answers, question, id, questionType);
+				retVal += String.format("%s//%s//%s//%s", answers, question, id, questionType); //format for final question
 			} else {
-				retVal += String.format("%s//%s//%s//%s::", answers, question, id, questionType);
+				retVal += String.format("%s//%s//%s//%s::", answers, question, id, questionType); //format with characters to separate questions
 			}
 		}
 		return retVal;
 	}
 
-	public String formatAnswers(ArrayList<Answer> answers) {
+	public String formatAnswers(ArrayList<Answer> answers) { //Used to format the arraylist of answers to be written
 		String retVal = "";
 		for (int i = 0; i < answers.size(); i++) {
 			String answer = answers.get(i).getAnswer();
@@ -122,17 +122,17 @@ public class QuizFileManager implements Manager {
 			int points = answers.get(i).getPoints();
 			String id = Integer.toString(answers.get(i).getId());
 			if (i == answers.size() - 1) {
-				retVal += String.format("%s__%s__%s__%s", answer, correct, points, id);
+				retVal += String.format("%s__%s__%s__%s", answer, correct, points, id); //format for final answer
 			} else {
-				retVal += String.format("%s__%s__%s__%s--", answer, correct, points, id);
+				retVal += String.format("%s__%s__%s__%s--", answer, correct, points, id); //format with characters to seperate answers
 			}
 		}
 		return retVal;
 	}
 
-	public Quiz importQuiz(String path, String name, String course) {
+	public Quiz importQuiz(String path, String name, String course) { //Creates and returns a quiz object generated from a file, with some values provided by UI
 		String user = lms.getUIManager().getCurrentUser().getName(); //use for author name
-		int quizId = lms.getQuizManager().getUniqueID();
+		int quizId = lms.getQuizManager().getUniqueID(); //use for quiz ID
 
 		ArrayList<String> contents = fw.readImportFile(path);
 
@@ -143,14 +143,14 @@ public class QuizFileManager implements Manager {
 		ArrayList<Question> questions = new ArrayList<>();
 
 		for (int i = 0; i < contents.size(); i++) {
-			String[] quizParts = contents.get(i).split("\n", -1);
-			String[] questionParts = quizParts[0].split("/", 2);
+			String[] quizParts = contents.get(i).split("\n", -1); //A "\n" newline separates question from answers
+			String[] questionParts = quizParts[0].split("/", 2); //A "/" forward slash separates the question form the type of question
 			String question = questionParts[0];
 			String questionType = questionParts[1];
 			int questionId = i;
 			ArrayList<Answer> answers = new ArrayList<>();
 			for (int j = 1; j < quizParts.length; j++) {
-				String[] answerParts = quizParts[j].split(";;", 3);
+				String[] answerParts = quizParts[j].split(";;", 3); //Two ";;" semicolons separate the parts of the answer
 				String answer = answerParts[0];
 				boolean isCorrect = Boolean.parseBoolean(answerParts[1]);
 				int numPoints = Integer.parseInt(answerParts[2]);

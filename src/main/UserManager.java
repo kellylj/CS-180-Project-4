@@ -86,6 +86,19 @@ public class UserManager implements Manager {
 	}
 
 	/**
+	 * Iterates through the ArrayList users and returns a user based
+	 * on a search by User ID
+	 */
+	public User getUserById(int id) {
+		for (User user : users) {
+			if (user.getID() == id) {
+				return user;
+			}
+		}
+		return null;
+	}
+	
+	/**
 	 * Generates a uniqueID for each User object in the ArrayList users
 	 */
 	public int getUniqueID() {

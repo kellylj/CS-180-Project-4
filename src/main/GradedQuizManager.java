@@ -46,6 +46,14 @@ public class GradedQuizManager implements Manager {
     }
 
     /**
+     * Sets the graded Quiz list with input
+     * @param gradedQuizList of graded quizzes
+     */
+    public void setGradedQuiz(ArrayList<GradedQuiz> gradedQuizList) {
+        this.gradedQuizList = gradedQuizList;
+    }
+
+    /**
      *
      * @return List of graded quizzes
      */
@@ -68,7 +76,7 @@ public class GradedQuizManager implements Manager {
     public ArrayList<GradedQuiz> searchGradedQuizzesByCourse(String course) {
         ArrayList<GradedQuiz> matchingQuizzes = new ArrayList<>();
         for (GradedQuiz gradedQuiz : gradedQuizList) {
-            if (lms.getQuizManager().searchQuizByID(Integer.getInteger(gradedQuiz.getID().substring(1))).get(0).getCourse().equals(course)) {
+            if (lms.getQuizManager().searchQuizByID(Integer.getInteger(gradedQuiz.getID().substring(1))).getCourse().equals(course)) {
                 matchingQuizzes.add(gradedQuiz);
             }
         }
