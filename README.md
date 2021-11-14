@@ -37,7 +37,7 @@ The manager that holds the list of every created quiz.  It also provides methods
 ### GradedQuizManager
 TODO
 ### UserFileManager, QuizFileManager, and GradedQuizFileManager
-The manager that reads and writes user, quiz, and graded quiz data to and from files. It gives its respective manager the list of users, quizzes, or graded quizzes at the start of the program and receives the list of users at the end. The file paths in `readUsers()`, `readQuizzes()`, and `readGradedQuizzes` as well as `writeUsers()`, `writeQuizzes()`, `writeGradedQuizzes()` are hard coded and should work as relative paths for the file that stores the desired information.
+The manager that reads and writes user, quiz, and graded quiz data to and from files. It gives its respective manager the list of users, quizzes, or graded quizzes at the start of the program and receives the list of users at the end. The file paths in `readUsers()`, `readQuizzes()`, and `readGradedQuizzes` as well as `writeUsers()`, `writeQuizzes()`, and `writeGradedQuizzes()` are hard coded and should work as relative paths for the file that stores the desired information.
 
 #### FileWrapper
 The class used for reading and writing to file. It contains static methods that are used in any situation where interacting with files is necessary. `readFile()` and `writeFile()` are generic methods that are used for reading and writing files. `readImportFile()` is a special read method used for importing existing quizzes from a file. It is special so that the people creating the quiz on a new file will have an easier time writing it and won't have to write it in a way that makes it easy for the program to read.
