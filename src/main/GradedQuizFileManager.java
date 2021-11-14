@@ -37,7 +37,7 @@ public class GradedQuizFileManager implements Manager {
         }
 
         for (int i = 0; i < contents.size(); i++) {
-            String[] list = contents.get(i).split(";", 4);
+            String[] list = contents.get(i).split(";;", 4);
             int quizID = Integer.parseInt(list[0]);
             int studentID = Integer.parseInt(list[1]);
             HashMap<Integer, Integer> map = createHashmap(list[2]);
@@ -49,10 +49,10 @@ public class GradedQuizFileManager implements Manager {
 
     public HashMap<Integer, Integer> createHashmap(String contents) {
         HashMap<Integer, Integer> map = new HashMap<>();
-        String[] list = contents.split("/", -1);
+        String[] list = contents.split("//", -1);
 
         for (int i = 0; i < list.length; i++) {
-            String[] parts = list[i].split(",", 2);
+            String[] parts = list[i].split(",,", 2);
             Integer questionId = Integer.parseInt(parts[0]);
             Integer answerId = Integer.parseInt(parts[1]);
             map.put(questionId, answerId);
@@ -69,19 +69,19 @@ public class GradedQuizFileManager implements Manager {
             int studentId = gradedQuizzes.get(i).getStudentID();
             String mapList = this.formatHashmap(gradedQuizzes.get(i).getGradedQuizMap());
             String submissionTime = gradedQuizzes.get(i).getSubmissionTime();
-            writableGradedQuizzes.add(String.format("%d;%d;%s;%s", quizId, studentId, mapList, submissionTime));
+            writableGradedQuizzes.add(String.format("%d;;%d;;%s;;%s", quizId, studentId, mapList, submissionTime));
         }
 
         return fw.writeFile(path, writableGradedQuizzes);
     }
 
     public String formatHashmap(HashMap<Integer, Integer> map) {
-        StringJoiner joiner = new StringJoiner("/");
+        StringJoiner joiner = new StringJoiner("//");
 
         for (Integer key : map.keySet()) {
             String question = Integer.toString(key);
             String answer = Integer.toString(map.get(key));
-            joiner.add(String.format("%s,%s", question, answer));
+            joiner.add(String.format("%s,,%s", question, answer));
         }
         return joiner.toString();
     }
