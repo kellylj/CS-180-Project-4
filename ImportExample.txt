@@ -1,10 +1,23 @@
-# Example for the format to import files: Question types are: Multiple Choice, True or False, Dropdown / isCorrect should be true or false, only and all questions lines should start with a "/", Lines that start with a "#" will be ignored
+# Example for the format to import files: 
+# Question types are: Multiple Choice, True or False, Dropdown. 
+# isCorrect should be true or false.
+# all questions lines should start with a "/".
+# Lines that start with a "#" will be ignored.
+#
 /Question number one?/question Type
 Answer #1;;isCorrect;;numPoints
 Answer #2;;isCorrect;;numPoints
 Answer #3;;isCorrect;;numPoints
 Answer #4;;isCorrect;;numPoints
-/Question number two?
+/Question number two?/question Type
 Answer #1;;isCorrect;;numPoints
 Answer #2;;isCorrect;;numPoints
+#
 # repeat as necessary
+# Example
+#
+/What is the square root of 4?/Multiple Choice
+1;;false;;0
+2;;true;;1
+3;;false;;0
+4;;false;;0

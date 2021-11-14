@@ -32,6 +32,4 @@ public class ListableGradedQuiz implements Listable {
 		return this.gradedQuiz;
 	}
 	
-	
-	
 }

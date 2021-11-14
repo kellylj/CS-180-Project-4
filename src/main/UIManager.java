@@ -202,6 +202,29 @@ public class UIManager implements Manager {
 					MENU_SELECT_QUIZ_TAKE.open();
 					return MenuState.RESTART;
 				}))
+			.addOption((new MenuOption("View Your Quiz Submissions"))
+				.onSelect(() -> {
+					Menu submissionsMenu = (new OptionListMenu<ListableGradedQuiz>(this))
+						.setItems(
+							lms.getGradedQuizManager()
+							.getGradedQuizList()
+							.stream()
+							.filter(gradedQuiz -> 
+								gradedQuiz.getStudentID() == this.getCurrentUser().getID()
+							)
+							.map(gradedQuiz -> 
+								new ListableGradedQuiz(lms, gradedQuiz)
+							)
+							.collect(Collectors.toList())
+						)
+						.onSelectListItem((ListableGradedQuiz listableGradedQuiz) -> {
+							Menu submissionMenu = getSubmissionMenu(listableGradedQuiz.getGradedQuiz());
+							submissionMenu.open();
+							return MenuState.CLOSE;
+						});
+					submissionsMenu.open();
+					return MenuState.RESTART;
+				}))
 			.addOption((new MenuOption("User Settings"))
 				.onSelect(() -> {
 					// Guides users to view/edit the user settings
@@ -363,7 +386,12 @@ public class UIManager implements Manager {
 		
 		MENU_SELECT_QUIZ_SUBMISSIONS = (new OptionListMenu<ListableGradedQuiz>(this))
 			.onRequestListItems(() -> {
-				return lms.getGradedQuizManager().getGradedQuizList().stream().map((gradedQuiz -> new ListableGradedQuiz(lms, gradedQuiz))).collect(Collectors.toList());
+				return lms
+					.getGradedQuizManager()
+					.getGradedQuizList()
+					.stream()
+					.map(gradedQuiz -> new ListableGradedQuiz(lms, gradedQuiz))
+					.collect(Collectors.toList());
 			})
 			.onSelectListItem((ListableGradedQuiz listableGradedQuiz) -> {
 				Menu submissionMenu = getSubmissionMenu(listableGradedQuiz.getGradedQuiz());
@@ -513,6 +541,20 @@ public class UIManager implements Manager {
 					addQuestionMenu.open();
 					return MenuState.RESTART;
 				}))
+			.addOption((new MenuOption("Edit Questions"))
+					.onSelect(() -> {
+						Menu menu = (new OptionListMenu<Question>(this))
+							.setItems(quiz.getQuestions())
+							.onSelectListItem((Question question) -> {
+								Menu questionMenu = getMenuModifyQuestion(question);
+								
+								questionMenu.open();
+								return MenuState.CLOSE;
+							})
+							.addHeading("Select a question to view it.");
+						menu.open();
+						return MenuState.RESTART;
+					}))
 			.addOption((new MenuOption("Change Name"))
 				.onSelect(() -> {
 					MenuQuickInput quickInput = new MenuQuickInput(this, "What would you like the new name of the quiz to be?");
@@ -577,26 +619,13 @@ public class UIManager implements Manager {
 					type
 				);
 				quiz.getQuestions().add(question);
-				// TODO Question - Type? -question.setType(type);
-				Menu menu = null;
-				switch(type) {
-					case "Multiple Choice":
-					case "Dropdown":
-						menu = getMenuModifyQuestionMultipleChoice(question);
-						break;
-					case "True or False":
-						question.getAnswers().add(new Answer("True", false, 0, 0));
-						question.getAnswers().add(new Answer("False", false, 0, 1));
-						menu = getMenuModifyQuestionTrueFalse(question);
-						break;
-					default:
-						menu = (new InformationMenu(this))
-							.addHeading("An error occurred.")
-							.addText("Unable to create the question.")
-							.addText("Please press Enter to go back.")
-							.requireEnter();
-						break;
+				
+				if(type.equals("True or False")) {
+					question.getAnswers().add(new Answer("True", false, 0, 0));
+					question.getAnswers().add(new Answer("False", false, 0, 1));
 				}
+				
+				Menu menu = getMenuModifyQuestion(question);
 				
 				menu.open();
 				return MenuState.CLOSE;
@@ -680,6 +709,22 @@ public class UIManager implements Manager {
 					.onSelect(() -> {
 						return MenuState.CLOSE;
 					}));
+	}
+	
+	private Menu getMenuModifyQuestion(Question question) {
+		switch(question.getQuestionType()) {
+			case "Multiple Choice":
+			case "Dropdown":
+				return getMenuModifyQuestionMultipleChoice(question);
+			case "True or False":
+				return getMenuModifyQuestionTrueFalse(question);
+			default:
+				return (new InformationMenu(this))
+					.addHeading("An error occurred.")
+					.addText("Unable to create the question.")
+					.addText("Please press Enter to go back.")
+					.requireEnter();
+		}
 	}
 	
 	private OptionMenu getMenuModifyQuestionTrueFalse(Question question) {
@@ -894,16 +939,12 @@ public class UIManager implements Manager {
 					for(Question question: quiz.getQuestions()) {
 						int chosenAnswerId = gradedQuiz.getGradedQuizMap().get(question.getId());
 						Answer chosen = null;
-						Answer best = question.getAnswers().get(0);
 						for(Answer answer: question.getAnswers()) {
 							if(answer.getId() == chosenAnswerId) {
 								chosen = answer;
 							}
-							if(answer.getPoints() > best.getPoints()) {
-								best = answer;
-							}
 						}
-						if(chosen.getPoints() != best.getPoints()) {
+						if(chosen.isCorrect()) {
 							questionsWithUnoptimalAnswers.add(question);
 						}
 					}
