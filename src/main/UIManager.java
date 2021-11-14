@@ -827,7 +827,9 @@ public class UIManager implements Manager {
 					LocalDateTime now = LocalDateTime.now();  
 					String time = dtf.format(now);
 					gradedQuiz.setSubmissionTime(time);
+					
 					lms.getGradedQuizManager().addGradedQuiz(gradedQuiz);
+					lms.getGradedQuizFileManager().save();
 					
 					System.out.println("Successfully submitted the quiz.");
 					OptionMenuYesNo viewSubmission = new OptionMenuYesNo(this);
