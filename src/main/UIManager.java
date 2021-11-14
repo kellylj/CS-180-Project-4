@@ -60,8 +60,6 @@ public class UIManager implements Manager {
 	private Menu MENU_SELECT_QUIZ_MODIFY; // Quiz List for Modify Quiz
 	
 	private Menu MENU_SELECT_QUIZ_SUBMISSIONS;
-	private Menu MENU_SEARCH_QUIZ_SUBMISSIONS;
-
 	
 	/**
 	 * Constructor for the UIManager.
@@ -148,7 +146,7 @@ public class UIManager implements Manager {
 				}
 				lms.getUserManager().addUser(user);
 				lms.getUserFileManager().save();
-				System.out.println("Succesfully created the user.");
+				System.out.println("Successfully created the user.");
 				return MenuState.CLOSE;
 			});
 		
@@ -348,11 +346,6 @@ public class UIManager implements Manager {
 			.addOption((new MenuOption("List All Quiz Submissions"))
 				.onSelect(() -> {
 					MENU_SELECT_QUIZ_SUBMISSIONS.open();
-					return MenuState.RESTART;
-				}))
-			.addOption((new MenuOption("Search Quiz Submissions"))
-				.onSelect(() -> {
-					MENU_SEARCH_QUIZ_SUBMISSIONS.open();
 					return MenuState.RESTART;
 				}))
 			.addOption((new MenuOption("Add New Quiz"))
@@ -681,11 +674,40 @@ public class UIManager implements Manager {
 						answerList.open();
 						return MenuState.RESTART;
 					}))
+				.addOption((new MenuOption("Modify Answer"))
+					.onSelect(() -> {
+						OptionMenu answerList = (new OptionMenu(this));
+						answerList.addHeading("Select an answer to modify.");
+						for(Answer answer: question.getAnswers()) {
+							answerList.addOption((new MenuOption(answer.toString()))
+								.onSelect(() -> {
+									InputMenu inpMenu = (new InputMenu(this))
+										.addInput("What should the answer be?", "AnswerString")
+										.addIntInput("How many points should this answer be worth?", "PointValue")
+										.onInputFinish((Map<String, String> answerInfo) -> {
+											String answerString = answerInfo.get("AnswerString");
+											int pointValue = Integer.parseInt(answerInfo.get("PointValue"));
+											
+											answer.setAnswer(answerString);
+											answer.setPointValue(pointValue);
+											return MenuState.CLOSE;
+										});
+									inpMenu.open();
+									return MenuState.CLOSE;
+								}));
+						}
+						answerList.addOption((new MenuOption("Cancel")
+							.onSelect(() -> {
+								return MenuState.CLOSE;
+							})));
+						answerList.open();
+						return MenuState.RESTART;
+					}))
 				.addOption((new MenuOption("View Question"))
 						.onSelect(() -> {
 							InformationMenu menu = (new InformationMenu(this))
 								.requireEnter()
-								.addHeading("The following is how the question will look on the exam.")
+								.addHeading("The following is how the question will look on the quiz.")
 								.addHeading(question.getQuestion());
 								
 							for(Answer answer: question.getAnswers()) {
@@ -762,7 +784,7 @@ public class UIManager implements Manager {
 					.onSelect(() -> {
 						InformationMenu menu = (new InformationMenu(this))
 							.requireEnter()
-							.addHeading("The following is how the question will look on the exam.")
+							.addHeading("The following is how the question will look on the quiz.")
 							.addHeading(question.getQuestion());
 						
 						for(Answer answer: question.getAnswers()) {
@@ -818,6 +840,29 @@ public class UIManager implements Manager {
 						return MenuState.CLOSE;
 					}));
 			}
+			menu.addOption((new MenuOption("Import Response From File"))
+				.onSelect(() -> {
+					OptionMenuYesNo verifyMenu = new OptionMenuYesNo(this);
+					verifyMenu.addHeading("Are you sure you want to import your response from a file?");
+					verifyMenu.addSubheading("The format of the file should be the response you to choose.");
+					verifyMenu.addSubheading("Ex. \"1\"");
+					verifyMenu.open();
+					if(verifyMenu.resultWasYes()) {
+						boolean importRequested = true;
+						do {
+							MenuQuickInput importMenu = new MenuQuickInput(this, "Okay. What is the file path?");
+							importMenu.open();
+	
+							ArrayList<String> resp = FileWrapper.readFile(importMenu.getResult());
+							if(resp == null) {
+								System.out.println("Invalid path. Would you like to try again?");
+								
+							}
+						} while(importRequested);
+					}
+					System.out.println("Okay.");
+					return MenuState.RESTART;
+				}));
 			questionsMenus.add(menu);
 		}
 		OptionMenu menu = (new OptionMenu(this))
