@@ -45,7 +45,7 @@ public class Answer {
         this.answer = answer;
     }
 
-    public void setPointValue() {
+    public void setPointValue(int points) {
         this.points = points;
     }
     /**
