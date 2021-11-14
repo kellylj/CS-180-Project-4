@@ -26,7 +26,6 @@ public class QuizFileManager implements Manager {
 	}
 
 	public ArrayList<Quiz> readQuizzes() {
-		//TODO: determine final separating characters
 		ArrayList<Quiz> tempQuizzes = new ArrayList<>();
 		String path = "./data/quizzes.txt";
 		ArrayList<String> contents = fw.readFile(path);
@@ -82,7 +81,6 @@ public class QuizFileManager implements Manager {
 	}
 
 	public boolean writeQuizzes() {
-		//TODO: Determine final separator characters
 		ArrayList<String> writableQuizzes = new ArrayList<>();
 		String path = "./data/quizzes.txt";
 
