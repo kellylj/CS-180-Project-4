@@ -49,6 +49,9 @@ public class FileWrapper {
                     readLine += line;
                 }
             }
+            if (!readLine.isBlank()) {
+                contents.add(readLine);
+            }
         } catch (FileNotFoundException | NullPointerException e) {
             return null;
         } catch (Exception e) {
