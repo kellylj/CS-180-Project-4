@@ -16,26 +16,24 @@ public class UserFileManager implements Manager {
     @Override
     public void init() {
         // TODO Auto-generated method stub
-        //lms.getUserManager().setUsers();
+        lms.getUserManager().setUsers(this.users);
     }
 
     @Override
     public void exit() {
         // TODO Auto-generated method stub
-        //lms.getUserManager().getUsers();
+        this.users = lms.getUserManager().getUsers();
         this.writeUsers();
     }
 
     public ArrayList<User> readUsers() {
         ArrayList<User> tempUsers = new ArrayList<>();
-        String path = "";
+        String path = "./data/users.txt";
         ArrayList<String> contents = fw.readFile(path);
 
         if (contents == null) {
             return tempUsers;
         }
-
-        //TODO: review written and read components
 
         for (int i = 0; i < contents.size(); i++) {
             String[] list = contents.get(i).split(":", 2);
@@ -55,8 +53,8 @@ public class UserFileManager implements Manager {
 
     public boolean writeUsers() {
         ArrayList<String> writableUsers = new ArrayList<>();
-        String path = "";
-        //TODO: review written and read component
+        String path = "./data/users.txt";
+
         for (int i = 0; i < users.size(); i++) {
             String write = "";
             if (users.get(i) instanceof Teacher) {

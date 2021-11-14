@@ -1,0 +1,10 @@
+# Example for the format to import files: Question types are: Multiple Choice, True or False, Dropdown / isCorrect should be true or false
+/Question number one?/question Type
+Answer #1;isCorrect;numPoints
+Answer #2;isCorrect;numPoints
+Answer #3;isCorrect;numPoints
+Answer #4;isCorrect;numPoints
+/Question number two?
+Answer #1;isCorrect;numPoints
+Answer #2;isCorrect;numPoints
+# repeat as necessary

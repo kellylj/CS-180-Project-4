@@ -29,7 +29,7 @@ public class GradedQuizFileManager implements Manager {
 
     public ArrayList<GradedQuiz> readGradedQuizzes() {
         ArrayList<GradedQuiz> tempGradQuiz = new ArrayList<>();
-        String path = "";
+        String path = "./data/gradedQuizzes.txt";
         ArrayList<String> contents = fw.readFile(path);
 
         if (contents == null) {
@@ -62,14 +62,14 @@ public class GradedQuizFileManager implements Manager {
 
     public boolean writeGradedQuizzes() {
         ArrayList<String> writableGradedQuizzes = new ArrayList<>();
-        String path = "";
+        String path = "./data/gradedQuizzes.txt";
 
         for (int i = 0; i < gradedQuizzes.size(); i++) {
-            //int quizId = gradedQuizzes.get(i).getQuizId();
-            //int studentId = gradedQuizzes.get(i).getStudentId();
-            //String mapList = method for hashmap
+            int quizId = gradedQuizzes.get(i).getQuizID();
+            int studentId = gradedQuizzes.get(i).getStudentID();
+            String mapList = this.formatHashmap(gradedQuizzes.get(i).getGradedQuizMap());
             String submissionTime = gradedQuizzes.get(i).getSubmissionTime();
-            //writableGradedQuizzes.add(String.format("%d;%d;%s;%s", quizId, studentId, mapList, submissionTime));
+            writableGradedQuizzes.add(String.format("%d;%d;%s;%s", quizId, studentId, mapList, submissionTime));
         }
 
         return fw.writeFile(path, writableGradedQuizzes);

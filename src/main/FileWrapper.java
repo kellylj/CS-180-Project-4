@@ -1,4 +1,5 @@
 package main;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -35,14 +36,26 @@ public class FileWrapper {
         return true;
     }
 
-    public static boolean canReadFile(String path) {
-        File file = new File(path);
-        return file.exists() && file.canRead();
-    }
-
-    public static boolean canWriteFile(String path) {
-        File file = new File(path);
-        return file.exists() && file.canWrite();
+    public static ArrayList<String> readImportFile(String path) {
+        ArrayList<String> contents = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            String line;
+            String readLine = "";
+            while ((line = br.readLine()) != null) {
+                if (line.startsWith("/") && !readLine.isBlank()) {
+                    contents.add(readLine);
+                    readLine = line.substring(1);
+                } else if (!line.startsWith("#")) {
+                    readLine += line;
+                }
+            }
+        } catch (FileNotFoundException | NullPointerException e) {
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return contents;
     }
 
 }

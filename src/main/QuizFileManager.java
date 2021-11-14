@@ -26,9 +26,9 @@ public class QuizFileManager implements Manager {
 	}
 
 	public ArrayList<Quiz> readQuizzes() {
-		//TODO: change filepath, determine final separating characters
+		//TODO: determine final separating characters
 		ArrayList<Quiz> tempQuizzes = new ArrayList<>();
-		String path = ""; // Change path to the path of the file that stores the quizzes
+		String path = "./data/quizzes.txt";
 		ArrayList<String> contents = fw.readFile(path);
 
 		if (contents == null) {
@@ -82,9 +82,9 @@ public class QuizFileManager implements Manager {
 	}
 
 	public boolean writeQuizzes() {
-		//TODO: Determine final filepath and separator characters
+		//TODO: Determine final separator characters
 		ArrayList<String> writableQuizzes = new ArrayList<>();
-		String path = "";
+		String path = "./data/quizzes.txt";
 
 		for (int i = 0; i < quizzes.size(); i++) {
 			String name = quizzes.get(i).getName();
@@ -132,11 +132,39 @@ public class QuizFileManager implements Manager {
 		return retVal;
 	}
 
-	public boolean importQuiz(String path) {
-		//TODO: import quiz, return success boolean;
+	public Quiz importQuiz(String path, String name, String course) {
 		String user = lms.getUIManager().getCurrentUser().getName(); //use for author name
-		//use lms.getQuizManager().addQuiz(new Quiz(stuff));
-		return false;
+		int quizId = lms.getQuizManager().getUniqueID();
+
+		ArrayList<String> contents = fw.readImportFile(path);
+
+		if (contents == null) {
+			return null;
+		}
+
+		ArrayList<Question> questions = new ArrayList<>();
+
+		for (int i = 0; i < contents.size(); i++) {
+			String[] quizParts = contents.get(i).split("\n", -1);
+			String[] questionParts = quizParts[0].split("/", 2);
+			String question = questionParts[0];
+			String questionType = questionParts[1];
+			int questionId = i;
+			ArrayList<Answer> answers = new ArrayList<>();
+			for (int j = 1; j < quizParts.length; j++) {
+				String[] answerParts = quizParts[j].split(";", 3);
+				String answer = answerParts[0];
+				boolean isCorrect = Boolean.parseBoolean(answerParts[1]);
+				int numPoints = Integer.parseInt(answerParts[2]);
+				int answerId = i - 1;
+				answers.add(new Answer(answer, isCorrect, numPoints, answerId));
+			}
+			questions.add(new Question(answers, question, questionId, questionType));
+		}
+
+		Quiz quiz = new Quiz(name, user, quizId, questions, false, course);
+
+		return quiz;
 	}
 
 	public void setQuizzes(ArrayList<Quiz> quizzes) {
