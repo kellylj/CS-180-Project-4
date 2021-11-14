@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @author Liam Kelly
  * @see Quiz
  */
-public class Question {
+public class Question implements Listable{
     ArrayList<Answer> answers;
     String question;
     int id;
@@ -34,6 +34,13 @@ public class Question {
             }
         }
         return max + 1;
+    }
+    public String getListName() {
+        String retVal = question;
+        if (retVal.length() > 20) {
+            retVal = retVal.substring(0, 20);
+        }
+        return retVal;
     }
     /**
      * Returns the list of answers
