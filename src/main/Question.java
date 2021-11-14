@@ -15,6 +15,7 @@ public class Question implements Listable{
     String question;
     int id;
     String questionType;
+
     public Question(ArrayList<Answer> answers, String question, int id, String questionType) {
         this.answers = answers;
         this.question = question;
@@ -35,6 +36,11 @@ public class Question implements Listable{
         }
         return max + 1;
     }
+    /**
+     * Returns the question string, with a limit of 20 characters
+     *
+     * @return retVal - question string, capped at 20 characters
+     */
     public String getListName() {
         String retVal = question;
         if (retVal.length() > 20) {

@@ -125,13 +125,18 @@ public class Quiz implements Listable{
         Collections.shuffle(questions);
     }
     /**
-     * Returns the name of the course the quiz is a part of
+     * Returns the name of the quiz
      *
-     * @return course - A string containing the course name
+     * @return name - a string containing the quiz's name
      */
     public String getListName() {
         return name;
     }
+    /**
+     * Returns the name of the course the quiz is a part of
+     *
+     * @return course - A string containing the course name
+     */
     public String getCourse() {
         return course;
     }
