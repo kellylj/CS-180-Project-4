@@ -212,7 +212,7 @@ public class JUnitTestCases {
         public void testInvalidUser() {
 
             String[] inputArr = new String[] {
-                    "1", "testUsername", "testPassword", "2", "3"
+                    "1", "test", "test", "2", "3"
             };
 
             String[] expectedArr = new String[] {
@@ -221,14 +221,18 @@ public class JUnitTestCases {
                     "1: Login",
                     "2: Create User",
                     "3: Exit",
+                    "",
                     "Logging into the Learning Management System.",
                     "Please enter your login details.",
-                    "Username:",
-                    "Password:",
+                    "Username: ",
+                    "Password: ",
+                    "",
                     "Invalid login credentials.",
                     "Would you like to try again?",
                     "1: Yes",
                     "2: No",
+                    "Okay. Going back to the main menu.",
+                    "",
                     "Welcome to the Learning Management System!",
                     "Please select one of the following options:",
                     "1: Login",
@@ -258,7 +262,8 @@ public class JUnitTestCases {
                     "1: Login",
                     "2: Create User",
                     "3: Exit",
-                    "Creating a new User",
+                    "",
+                    "Creating a new user",
                     "Please answer the following questions",
                     "What is your name?",
                     "What username do you want?",
@@ -266,6 +271,7 @@ public class JUnitTestCases {
                     "Will you be a teacher or a student?",
                     "1: Teacher",
                     "2: Student",
+                    "",
                     "The following are the values you gave:",
                     "Username - testUsername",
                     "User Type - Teacher",
@@ -367,7 +373,10 @@ public class JUnitTestCases {
                     "2: Exit",
                     "",
                     "Quiz Info",
-                    "Quiz name: Test Quiz, Author: Test User, ID: 626040, Course: Test Course",
+                    "Quiz name: Test Quiz" +
+                            "Author: Test User" +
+                            "ID: 626046" +
+                            "Course: Test Course",
                     "Please press Enter to continue.",
                     "",
                     "Please select a quiz to view.",
@@ -395,6 +404,8 @@ public class JUnitTestCases {
             tryTestInput(inputArr, expectedArr, errorMsg);
 
         }
+
+
     }
 
 }

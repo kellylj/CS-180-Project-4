@@ -40,6 +40,14 @@ public class Answer {
     public int getPoints() {
         return points;
     }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public void setPointValue() {
+        this.points = points;
+    }
     /**
      * Sets the new question id
      *
