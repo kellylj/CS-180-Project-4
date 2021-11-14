@@ -759,33 +759,33 @@ public class UIManager implements Manager {
 						return MenuState.RESTART;
 					}))
 				.addOption((new MenuOption("View Question"))
-						.onSelect(() -> {
-							InformationMenu menu = (new InformationMenu(this))
-								.requireEnter()
-								.addHeading("The following is how the question will look on the exam.")
-								.addHeading(question.getQuestion());
-							
-							for(Answer answer: question.getAnswers()) {
-								menu.addListItem(answer.getAnswer());
-							}
-							menu.addText("");
-							menu.open();
-							return MenuState.RESTART;
-						}))
+					.onSelect(() -> {
+						InformationMenu menu = (new InformationMenu(this))
+							.requireEnter()
+							.addHeading("The following is how the question will look on the exam.")
+							.addHeading(question.getQuestion());
+						
+						for(Answer answer: question.getAnswers()) {
+							menu.addListItem(answer.getAnswer());
+						}
+						menu.addText("");
+						menu.open();
+						return MenuState.RESTART;
+					}))
 				.addOption((new MenuOption("View Point Values"))
-						.onSelect(() -> {
-							InformationMenu menu = (new InformationMenu(this))
-								.requireEnter()
-								.addHeading("The following is the point values of each answer.")
-								.addHeading(question.getQuestion());
-								
-							for(Answer answer: question.getAnswers()) {
-								menu.addListItem(answer.getAnswer() + " - Worth " + answer.getPoints() + " Points");
-							}
-							menu.addText("");
-							menu.open();
-							return MenuState.RESTART;
-						}))
+					.onSelect(() -> {
+						InformationMenu menu = (new InformationMenu(this))
+							.requireEnter()
+							.addHeading("The following is the point values of each answer.")
+							.addHeading(question.getQuestion());
+							
+						for(Answer answer: question.getAnswers()) {
+							menu.addListItem(answer.getAnswer() + " - Worth " + answer.getPoints() + " Points");
+						}
+						menu.addText("");
+						menu.open();
+						return MenuState.RESTART;
+					}))
 				.addOption((new MenuOption("Save Question"))
 					.onSelect(() -> {
 						return MenuState.CLOSE;
@@ -809,9 +809,11 @@ public class UIManager implements Manager {
 			if(quiz.isScrambled())
 				Collections.shuffle(answers);
 			for(Answer answer: answers) {
+				final Question currentQuestion = question;
+				final Answer chosenAnswer = answer;
 				menu.addOption((new MenuOption(answer.getAnswer()))
 					.onSelect(() -> {
-						gradedQuiz.addQuestion(question, answer);
+						gradedQuiz.addQuestion(currentQuestion, chosenAnswer);
 						questionsMenus.poll().open();
 						return MenuState.CLOSE;
 					}));
@@ -955,7 +957,7 @@ public class UIManager implements Manager {
 								chosen = answer;
 							}
 						}
-						if(chosen.isCorrect()) {
+						if(!chosen.isCorrect()) {
 							questionsWithUnoptimalAnswers.add(question);
 						}
 					}
