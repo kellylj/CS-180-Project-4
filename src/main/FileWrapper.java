@@ -10,7 +10,9 @@ public class FileWrapper {
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = br.readLine()) != null) {
-                contents.add(line);
+                if (!line.isEmpty() && !line.isBlank()) {
+                    contents.add(line);
+                }
             }
         } catch (FileNotFoundException | NullPointerException e) {
             return null;
@@ -44,12 +46,12 @@ public class FileWrapper {
             while ((line = br.readLine()) != null) {
                 if (line.startsWith("/") && !readLine.isBlank()) { //if the line starts with a "/" (forward slash) and the buffer (readLine) is not empty, the buffer is added to the arraylist and reset to the line
                     contents.add(readLine);
-                    readLine = line.substring(line.indexOf("/") + 1);
+                    readLine = line.substring(line.indexOf("/") + 1) + "\n";
                 } else if (!line.startsWith("#")) { //ignores any lines starting with "#" (pound), adds a read line to the buffer
                     if (line.startsWith("/")) {
-                        readLine += line.substring(line.indexOf("/") + 1);
+                        readLine += line.substring(line.indexOf("/") + 1) + "\n";
                     } else {
-                        readLine += line;
+                        readLine += line + "\n";
                     }
                 }
             }

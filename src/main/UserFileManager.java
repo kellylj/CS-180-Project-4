@@ -16,12 +16,31 @@ public class UserFileManager implements Manager {
     @Override
     public void init() {
         lms.getUserManager().setUsers(this.users);
+        System.out.println(this.users.size());
     } //Sets the UserManager's arraylist of users after reading saved data
 
     @Override
     public void exit() {
         this.save();
     }
+
+    /*
+    public void debugPrint(ArrayList<?> list) {
+        System.out.println(list.toString());
+        for(Object o: list) {
+            System.out.println(o.toString());
+        }
+        System.out.println("0000");
+    }
+
+    public void debugPrint(Object[] list) {
+        System.out.println(list.toString());
+        for(Object o: list) {
+            System.out.println(o.toString());
+        }
+        System.out.println("0000");
+    }
+     */
 
     public void save() {
         this.users = lms.getUserManager().getUsers();
@@ -37,7 +56,13 @@ public class UserFileManager implements Manager {
             return tempUsers;
         }
 
+        //debugPrint(contents);
+
         for (int i = 0; i < contents.size(); i++) {
+            if (contents.get(i).isBlank() || contents.get(i).isEmpty()) {
+                continue;
+            }
+            //System.out.println(contents.get(i));
             String[] list = contents.get(i).split("::", 2); //Two "::" colons are used to separate the type of user from the other information
             String[] info = list[1].split(";;", 4); //Two ";;" semicolons are used to separate the information used to construct a user
             int id = Integer.parseInt(info[0]);
@@ -49,6 +74,8 @@ public class UserFileManager implements Manager {
             } else { //student
                 tempUsers.add(new Student(id, username, password, name));
             }
+            //debugPrint(list);
+            //debugPrint(info);
         }
         return tempUsers;
     }

@@ -39,6 +39,9 @@ public class QuizFileManager implements Manager {
 		}
 
 		for (int i = 0; i < contents.size(); i++) {
+			if (contents.get(i).isEmpty() || contents.get(i).isBlank()) {
+				continue;
+			}
 			String[] components = contents.get(i).split(";;", 8); //Two ";;" (semicolons) are used to separate the parts of a quiz
 			String name = components[0];
 			String author = components[1];
@@ -139,8 +142,6 @@ public class QuizFileManager implements Manager {
 		int quizId = lms.getQuizManager().getUniqueID(); //use for quiz ID
 
 		ArrayList<String> contents = fw.readImportFile(path);
-
-		System.out.println(String.join("\n", contents));
 
 		if (contents == null) {
 			return null;

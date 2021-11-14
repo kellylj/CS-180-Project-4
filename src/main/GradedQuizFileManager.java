@@ -42,6 +42,9 @@ public class GradedQuizFileManager implements Manager {
         }
 
         for (int i = 0; i < contents.size(); i++) {
+            if (contents.get(i).isBlank() || contents.get(i).isEmpty()) {
+                continue;
+            }
             String[] list = contents.get(i).split(";;", 4); //Two ";;" semicolons are used to separate the parts of a graded quiz
             int quizID = Integer.parseInt(list[0]);
             int studentID = Integer.parseInt(list[1]);
