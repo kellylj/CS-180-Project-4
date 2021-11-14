@@ -123,6 +123,14 @@ public class JUnitTestCases {
             clazz = UserFileManager.class;
             checkManagerClass(className, clazz);
 
+            className = "GradedQuizManager";
+            clazz = GradedQuizManager.class;
+            checkManagerClass(className, clazz);
+
+            className = "GradedQuizFileManager";
+            clazz = GradedQuizFileManager.class;
+            checkManagerClass(className, clazz);
+
         }
 
         public void receiveInput(String input) {
