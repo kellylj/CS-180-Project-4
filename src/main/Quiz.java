@@ -12,7 +12,7 @@ import java.util.*;
  * @author Liam Kelly
  * @see QuizManager
  */
-public class Quiz {
+public class Quiz implements Listable{
     private String name;
     private String author;
     ArrayList<Question> questions;
@@ -129,6 +129,9 @@ public class Quiz {
      *
      * @return course - A string containing the course name
      */
+    public String getListName() {
+        return name;
+    }
     public String getCourse() {
         return course;
     }

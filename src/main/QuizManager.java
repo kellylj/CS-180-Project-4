@@ -142,17 +142,13 @@ public class QuizManager implements Manager {
 	 * @return matchingQuizzes - a list of quizzes that match the specified ID
 	 * @param ID - the ID to search for
 	 */
-	public ArrayList<Quiz> searchQuizByID(int ID) {
-		ArrayList<Quiz> matchingQuizzes = new ArrayList<>();
+	public Quiz searchQuizByID(int ID) {
 		for (Quiz q : quizList) {
 			if (q.getId() == ID) {
-				matchingQuizzes.add(q);
+				return q;
 			}
 		}
-		if (matchingQuizzes.size() == 0) {
-			return null;
-		}
-		return matchingQuizzes;
+		return null;
 	}
 	/**
 	 * Returns the list of all courses created
