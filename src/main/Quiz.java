@@ -159,8 +159,8 @@ public class Quiz implements Listable{
         return questions;
     }
     public String toString() {
-        String quizDescription = "Quiz name: " + name + ", Author: " + author;
-        quizDescription+= ", ID: " + id + ", Course: " + course;
+        String quizDescription = "Quiz name: " + name + "\nAuthor: " + author;
+        quizDescription+= "\nID: " + id + "\nCourse: " + course;
         return quizDescription;
     }
 
