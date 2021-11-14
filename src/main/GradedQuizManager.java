@@ -28,6 +28,14 @@ public class GradedQuizManager implements Manager {
         gradedQuizList.add(gradedQuiz);
     }
 
+    public void deleteAllByStudentID(int studentID) {  // TODO: check if this method works
+        for (int i = gradedQuizList.size(); i >= 0; i--) {  // iterates backwards to prevent array out of bounds exception
+            if (gradedQuizList.get(i).getStudentID() == studentID) {
+                gradedQuizList.remove(gradedQuizList.get(i));
+            }
+        }
+    }
+
     /**
      * Removes a graded quiz from the list of graded quiz
      * @param ID of quiz you want to remove

@@ -5,7 +5,7 @@ import java.util.*;
  * A quiz, which contains an arraylist of questions along with various attributes of the quiz
  * <p>
  * Each quiz contains all the necessary attributes of a quiz, along with getters and setters for each
- * ,so they can be used
+ * , so they can be used
  * <p>
  *
  *
