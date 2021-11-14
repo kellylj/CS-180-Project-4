@@ -24,6 +24,10 @@ public class GradedQuizManager implements Manager {
 
     }
 
+    /**
+     *
+     * @param gradedQuiz that you want to add
+     */
     public void addGradedQuiz(GradedQuiz gradedQuiz) {
         gradedQuizList.add(gradedQuiz);
     }
@@ -91,6 +95,10 @@ public class GradedQuizManager implements Manager {
         return matchingQuizzes;
     }
 
+    /**
+     *
+     * @return ArrayList of Graded Quizzes
+     */
     public ArrayList<GradedQuiz> getGradedQuizList() {
         return gradedQuizList;
     }

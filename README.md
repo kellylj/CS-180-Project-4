@@ -25,7 +25,6 @@ Classes that each handle a vital function of the program.
 ### Manager
 This interface is what blueprints all of other managers used in this application such as UIManager, QuizManager, and UserManager. There are 2 methods in this interface: `init()` and `exit()`. These methods help initialize and save data. 
 
-
 ### UIManager
 The manager that is responsible for the User Interface (UI). It uses the User Interface Menu System to create menus that the user then interacts with. In “init()” it creates all of the menus, which sets up the structure of the UI, and then in `run()` it runs the start menu, which is used as the entry point to the rest of the UI.
 
@@ -37,13 +36,11 @@ The manager that holds the list of every created quiz.  It also provides methods
 
 ### GradedQuizManager
 TODO
-### UserFileManager
-TODO
-### QuizFileManager
-TODO
-### GradedQuizFileManager
-TODO
-(Maybe combine file managers together, since they are similar?)
+### UserFileManager, QuizFileManager, and GradedQuizFileManager
+The manager that reads and writes user, quiz, and graded quiz data to and from files. It gives its respective manager the list of users, quizzes, or graded quizzes at the start of the program and receives the list of users at the end. The file paths in `readUsers()`, `readQuizzes()`, and `readGradedQuizzes` as well as `writeUsers()`, `writeQuizzes()`, `writeGradedQuizzes()` are hard coded and should work as relative paths for the file that stores the desired information.
+
+#### FileWrapper
+The class used for reading and writing to file. It contains static methods that are used in any situation where interacting with files is necessary. `readFile()` and `writeFile()` are generic methods that are used for reading and writing files. `readImportFile()` is a special read method used for importing existing quizzes from a file. It is special so that the people creating the quiz on a new file will have an easier time writing it and won't have to write it in a way that makes it easy for the program to read.
 
 ## Datastructure Classes
 Classes used for storing data that don't inherently do anything by themselves.
