@@ -294,46 +294,46 @@ public class UIManager implements Manager {
 		MENU_EDIT_USER = (new OptionMenu(this))
 			.addHeading("Edit User Menu")
 			.addOption ((new MenuOption("Username"))
-					.onSelect (() -> {
-						// Helps the current user change their account's username
-						MenuQuickInput menuUsername = new MenuQuickInput(this, "Type in your new username");
-						menuUsername.open();
-						this.currentUser.setUsername(menuUsername.getResult());
-						System.out.println("Successfully changed your username");
-						return MenuState.RESTART;
-					}))
+				.onSelect (() -> {
+					// Helps the current user change their account's username
+					MenuQuickInput menuUsername = new MenuQuickInput(this, "Type in your new username");
+					menuUsername.open();
+					this.currentUser.setUsername(menuUsername.getResult());
+					System.out.println("Successfully changed your username");
+					return MenuState.RESTART;
+				}))
 			.addOption ((new MenuOption("Password"))
-					.onSelect (() -> {
-						// Helps the current user change their account's password
-						MenuQuickInput menuPassword = new MenuQuickInput(this, "Type in your new password");
-						menuPassword.open();
-						this.currentUser.setPassword(menuPassword.getResult());
-						System.out.println("Successfully changed your password");
+				.onSelect (() -> {
+					// Helps the current user change their account's password
+					MenuQuickInput menuPassword = new MenuQuickInput(this, "Type in your new password");
+					menuPassword.open();
+					this.currentUser.setPassword(menuPassword.getResult());
+					System.out.println("Successfully changed your password");
 
-						return MenuState.RESTART;
-					}))
+					return MenuState.RESTART;
+				}))
 			.addOption ((new MenuOption("Name"))
-					.onSelect (() -> {
-						// Helps the current user change their account's name
-						MenuQuickInput menuName = new MenuQuickInput(this, "Type in your new name");
-						menuName.open();
-						
-						this.currentUser.setName(menuName.getResult());
-						System.out.println("Successfully changed your name");
-						return MenuState.RESTART;
-					}))
+				.onSelect (() -> {
+					// Helps the current user change their account's name
+					MenuQuickInput menuName = new MenuQuickInput(this, "Type in your new name");
+					menuName.open();
+					
+					this.currentUser.setName(menuName.getResult());
+					System.out.println("Successfully changed your name");
+					return MenuState.RESTART;
+				}))
 			.addOption ((new MenuOption("Save Changes"))
-					.onSelect (() -> {
-						/*
-						This doesn't actually do anything because 
-						the changes were already saved
-						
-						Sends a message that mentions that all changes were saved
-						Goes back to the menu before the User Settings Menu
-						*/
-						System.out.println("All changes were successfully saved");
-						return MenuState.CLOSE;
-					}));
+				.onSelect (() -> {
+				 	/*
+					This doesn't actually do anything because 
+					the changes were already saved
+					
+					Sends a message that mentions that all changes were saved
+					Goes back to the menu before the User Settings Menu
+					*/
+					System.out.println("All changes were successfully saved");
+					return MenuState.CLOSE;
+				}));
 		
 		// Displays the teacher menu in the GUI
 		MENU_MAIN_TEACHER = (new OptionMenu(this))
