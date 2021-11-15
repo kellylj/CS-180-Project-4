@@ -45,22 +45,22 @@ public class UIManager implements Manager {
 	private Scanner scanner;
 	private User currentUser;
 	
-	private Menu MENU_START;
-	private Menu MENU_LOGIN;
-	private Menu MENU_CREATE_USER;
+	private Menu menuStart;
+	private Menu menuLogin;
+	private Menu menuCreateUser;
 
-	private Menu MENU_SELECT_QUIZ_VIEW; // Quiz List for Show Quiz Info
-	private Menu MENU_USER_SETTINGS;
-	private Menu MENU_EDIT_USER;
+	private Menu menuSelectQuizView; // Quiz List for Show Quiz Info
+	private Menu menuUserSettings;
+	private Menu menuEditUser;
 	
-	private Menu MENU_MAIN_STUDENT;
-	private Menu MENU_SELECT_QUIZ_TAKE; // Quiz List for Take Quiz
+	private Menu menuMainStudent;
+	private Menu menuSelectQuizTake; // Quiz List for Take Quiz
 	
-	private Menu MENU_MAIN_TEACHER;
-	private Menu MENU_ADD_QUIZ;
-	private Menu MENU_SELECT_QUIZ_MODIFY; // Quiz List for Modify Quiz
+	private Menu menuMainTeacher;
+	private Menu menuAddQuiz;
+	private Menu menuSelectQuizModify; // Quiz List for Modify Quiz
 	
-	private Menu MENU_SELECT_QUIZ_SUBMISSIONS;
+	private Menu menuSelectQuizSubmissions;
 	
 	/**
 	 * Constructor for the UIManager.
@@ -88,15 +88,15 @@ public class UIManager implements Manager {
 	 */
 	@Override
 	public void init() {
-		MENU_START = (new OptionMenu(this))
+		menuStart = (new OptionMenu(this))
 		    .addHeading("Welcome to the Learning Management System!")
 		    .addSubheading("Please select one of the following options:")
 		    .addOption((new MenuOption("Login")).onSelect(() -> {
-				MENU_LOGIN.open();
+				menuLogin.open();
 				return MenuState.RESTART;
 			}))
 		    .addOption((new MenuOption("Create User")).onSelect(() -> {
-				MENU_CREATE_USER.open();
+		    	menuCreateUser.open();
 				return MenuState.RESTART;
 			}))
 		    .addOption((new MenuOption("Exit")).onSelect(() -> {
@@ -104,7 +104,7 @@ public class UIManager implements Manager {
 				return MenuState.CLOSE;
 			}));
 		
-		MENU_CREATE_USER = (new InputMenu(this))
+		menuCreateUser = (new InputMenu(this))
 		    .addHeading("Creating a new user")
 		    .addSubheading("Please answer the following questions")
 		    .addInput("What is your name?", "Name")
@@ -151,7 +151,7 @@ public class UIManager implements Manager {
 				return MenuState.CLOSE;
 			});
 		
-		MENU_LOGIN = (new InputMenu(this))
+		menuLogin = (new InputMenu(this))
 		    .addHeading("Logging into the Learning Management System.")
 		    .addSubheading("Please enter your login details.")
 		    .addInput("Username: ", "Username")
@@ -166,9 +166,9 @@ public class UIManager implements Manager {
 					this.setCurrentUser(user);
 					System.out.println("You have successfully logged in!");
 					if (user instanceof Teacher) {
-						MENU_MAIN_TEACHER.open();
+						menuMainTeacher.open();
 					} else {
-						MENU_MAIN_STUDENT.open();
+						menuMainStudent.open();
 					}
 					return MenuState.CLOSE;
 				}
@@ -187,20 +187,20 @@ public class UIManager implements Manager {
 				return MenuState.CLOSE;
 			});
 
-		MENU_MAIN_STUDENT = (new OptionMenu(this))
+		menuMainStudent = (new OptionMenu(this))
 		    .setCheckLogin(true)
 		    .addHeading("Main Menu")
 		    .addSubheading("Please select one of the following options:")
 		    .addOption((new MenuOption("View Quizzes"))
 			    .onSelect(() -> {
 					// Displays the list of all quizzes once this option is selected
-					MENU_SELECT_QUIZ_VIEW.open();
+					menuSelectQuizView.open();
 					return MenuState.RESTART;
 				}))
 		    .addOption((new MenuOption("Take Quiz"))
 			    .onSelect(() -> {
 					// Helps users take a quiz
-					MENU_SELECT_QUIZ_TAKE.open();
+					menuSelectQuizTake.open();
 					return MenuState.RESTART;
 				}))
 		    .addOption((new MenuOption("View Your Quiz Submissions"))
@@ -229,7 +229,7 @@ public class UIManager implements Manager {
 		    .addOption((new MenuOption("User Settings"))
 			    .onSelect(() -> {
 					// Guides users to view/edit the user settings
-					MENU_USER_SETTINGS.open();
+					menuUserSettings.open();
 					return MenuState.RESTART;
 				}))
 		    .addOption((new MenuOption("Logout"))
@@ -245,7 +245,7 @@ public class UIManager implements Manager {
 		/*
 		Guides users to the user settings menu in which users have the ability to edit various fields
 		 */
-		MENU_USER_SETTINGS = (new OptionMenu(this))
+		menuUserSettings = (new OptionMenu(this))
 		    .setCheckLogin(true) // Check if they have logged out
 		    .addHeading("User Settings Menu")
 		    .addSubheading("Select one of the following options:")
@@ -255,7 +255,7 @@ public class UIManager implements Manager {
 					 * Opens the "Edit User" menu so that they can select things to 
 					 * change in their account. (Or delete it)
 					 */
-					MENU_EDIT_USER.open();
+					menuEditUser.open();
 					
 					return MenuState.RESTART;
 				}))
@@ -291,10 +291,10 @@ public class UIManager implements Manager {
 				}));
 					
 		// Leads users to select different fields that can be modified in their account
-		MENU_EDIT_USER = (new OptionMenu(this))
+		menuEditUser = (new OptionMenu(this))
 		    .addHeading("Edit User Menu")
 		    .addOption((new MenuOption("Username"))
-			    .onSelect (() -> {
+			    .onSelect(() -> {
 					// Helps the current user change their account's username
 					MenuQuickInput menuUsername = new MenuQuickInput(this, "Type in your new username");
 					menuUsername.open();
@@ -303,7 +303,7 @@ public class UIManager implements Manager {
 					return MenuState.RESTART;
 				}))
 		    .addOption((new MenuOption("Password"))
-			    .onSelect (() -> {
+			    .onSelect(() -> {
 					// Helps the current user change their account's password
 					MenuQuickInput menuPassword = new MenuQuickInput(this, "Type in your new password");
 					menuPassword.open();
@@ -313,7 +313,7 @@ public class UIManager implements Manager {
 					return MenuState.RESTART;
 				}))
 		    .addOption((new MenuOption("Name"))
-			    .onSelect (() -> {
+			    .onSelect(() -> {
 					// Helps the current user change their account's name
 					MenuQuickInput menuName = new MenuQuickInput(this, "Type in your new name");
 					menuName.open();
@@ -323,7 +323,7 @@ public class UIManager implements Manager {
 					return MenuState.RESTART;
 				}))
 		    .addOption((new MenuOption("Save Changes"))
-			    .onSelect (() -> {
+			    .onSelect(() -> {
 				 	/*
 					This doesn't actually do anything because 
 					the changes were already saved
@@ -336,33 +336,33 @@ public class UIManager implements Manager {
 				}));
 		
 		// Displays the teacher menu in the GUI
-		MENU_MAIN_TEACHER = (new OptionMenu(this))
+		menuMainTeacher = (new OptionMenu(this))
 		    .setCheckLogin(true) // Check if they have logged out when it refreshes
 		    .addHeading("Teacher Menu")
 		    .addOption((new MenuOption("List Quizzes"))
 			    .onSelect(() -> {
-					MENU_SELECT_QUIZ_VIEW.open();
+					menuSelectQuizView.open();
 					return MenuState.RESTART;
 				}))
 		    .addOption((new MenuOption("List All Quiz Submissions"))
 			    .onSelect(() -> {
-					MENU_SELECT_QUIZ_SUBMISSIONS.open();
+					menuSelectQuizSubmissions.open();
 					return MenuState.RESTART;
 				}))
 		    .addOption((new MenuOption("Add New Quiz"))
 			    .onSelect(() -> {
-					MENU_ADD_QUIZ.open();
+					menuAddQuiz.open();
 					return MenuState.RESTART;
 				}))
 		    .addOption((new MenuOption("Modify Quizzes"))
 			    .onSelect(() -> {
-					MENU_SELECT_QUIZ_MODIFY.open();
+					menuSelectQuizModify.open();
 					return MenuState.RESTART;
 				}))
 		    .addOption((new MenuOption("User Settings"))
 			    .onSelect(() -> {
 					// Guides users to view/edit the user settings
-					MENU_USER_SETTINGS.open();
+					menuUserSettings.open();
 					return MenuState.RESTART;
 				}))
 		    .addOption((new MenuOption("Logout"))
@@ -370,7 +370,7 @@ public class UIManager implements Manager {
 					return MenuState.CLOSE;
 				}));
 		
-		MENU_SELECT_QUIZ_VIEW = getCourseQuizSelectionMenu("Please select a quiz to view.",
+		menuSelectQuizView = getCourseQuizSelectionMenu("Please select a quiz to view.",
 			(Quiz quiz) -> {
 				InformationMenu viewQuizMenu = (new InformationMenu(this))
 				    .addHeading("Quiz Info")
@@ -381,7 +381,7 @@ public class UIManager implements Manager {
 			}
 		);
 		
-		MENU_SELECT_QUIZ_SUBMISSIONS = (new OptionListMenu<ListableGradedQuiz>(this))
+		menuSelectQuizSubmissions = (new OptionListMenu<ListableGradedQuiz>(this))
 		    .onRequestListItems(() -> {
 				return lms
 				    .getGradedQuizManager()
@@ -396,7 +396,7 @@ public class UIManager implements Manager {
 				return MenuState.CLOSE;
 			});
 		
-		MENU_SELECT_QUIZ_TAKE = getCourseQuizSelectionMenu("Please select a quiz to take.",
+		menuSelectQuizTake = getCourseQuizSelectionMenu("Please select a quiz to take.",
 			(Quiz quiz) -> {
 				InformationMenu viewQuizMenu = (new InformationMenu(this))
 				    .addHeading("Quiz Info")
@@ -416,7 +416,7 @@ public class UIManager implements Manager {
 			}
 		);
 		
-		MENU_SELECT_QUIZ_MODIFY = getCourseQuizSelectionMenu("Please select a quiz to modify.",
+		menuSelectQuizModify = getCourseQuizSelectionMenu("Please select a quiz to modify.",
 			(Quiz quiz) -> {
 				OptionMenu menu = getMenuModifyQuiz(quiz);
 				menu.open();
@@ -424,7 +424,7 @@ public class UIManager implements Manager {
 			}
 		);
 		
-		MENU_ADD_QUIZ = (new InputMenu(this))
+		menuAddQuiz = (new InputMenu(this))
 		    .addHeading("Creating a new quiz.")
 		    .addInput("What would you like the name of this quiz to be?", "Name")
 		    .addInput("What is the name of the course this quiz will be in?", "Course")
@@ -616,9 +616,9 @@ public class UIManager implements Manager {
 	private InputMenu getAddQuestionMenu(Quiz quiz) {
 		
 		InputMenu questionMenu = (new InputMenu(this))
-		    .addInputWithOptions("What type of question do you want to add?",
-				new String[] {"Multiple Choice", "True or False", "Dropdown"},
-				"Type"
+		   .addInputWithOptions("What type of question do you want to add?",
+				  new String[] {"Multiple Choice", "True or False", "Dropdown"},
+				  "Type"
 			)
 		    .addInput("What is the question?", "Question")
 		    .onInputFinish((Map<String, String> questionInfo) -> {
@@ -626,10 +626,10 @@ public class UIManager implements Manager {
 				String questionString = questionInfo.get("Question");
 				
 				Question question = new Question(
-					new ArrayList<Answer>(), 
-					questionString, 
-					quiz.generateUniqueQuestionId(),
-					type
+				    new ArrayList<Answer>(), 
+				    questionString, 
+				    quiz.generateUniqueQuestionId(),
+				    type
 				);
 				quiz.getQuestions().add(question);
 				
@@ -660,12 +660,12 @@ public class UIManager implements Manager {
 								int pointvalue = Integer.parseInt(answerInfo.get("PointValue"));
 								
 								question.getAnswers().add(
-									new Answer(
-										answer, 
-										pointvalue > 0, 
-										pointvalue, 
-										question.generateUniqueAnswerId() + 1
-									)
+								   new Answer(
+								      answer, 
+									  pointvalue > 0, 
+									  pointvalue, 
+									  question.generateUniqueAnswerId() + 1
+								   )
 								);
 								return MenuState.CLOSE;
 							});
@@ -776,7 +776,10 @@ public class UIManager implements Manager {
 				    .onSelect(() -> {
 						InputMenu correctAnswerMenu = (new InputMenu(this))
 						    .addHeading("Please answer the following questions.")
-						    .addInputWithOptions("What is the correct answer?", new String[] {"True", "False"}, "CorrectAnswer")
+						    .addInputWithOptions("What is the correct answer?", 
+						       new String[] {"True", "False"}, 
+						       "CorrectAnswer"
+						    )
 						    .addIntInput("How many points is the correct answer worth?", "Points")
 						    .onInputFinish((Map<String, String> results) -> {
 								ArrayList<Answer> answers = question.getAnswers();
@@ -790,7 +793,7 @@ public class UIManager implements Manager {
 								}
 								answers.add(new Answer("True", truePoints > 0, truePoints, 0));
 								answers.add(new Answer("False", falsePoints > 0, falsePoints, 1));
-								// TODO question.setAnswers(answers);
+								
 								return MenuState.CLOSE;
 							});
 						correctAnswerMenu.open();
@@ -942,7 +945,7 @@ public class UIManager implements Manager {
 			}
 		}
 		menu.addText("The given answer was: " + (question.getAnswers().indexOf(chosen) + 1) + ": " + 
-			(chosen == null ? "Unknown" : chosen.getAnswer()));
+		    (chosen == null ? "Unknown" : chosen.getAnswer()));
 		menu.addText("The best answer was: " + (question.getAnswers().indexOf(best) + 1) + ": " + best.getAnswer());
 		menu.addText("Points earned: " + chosen.getPoints() + "/" + best.getPoints());
 		menu.open();
@@ -964,7 +967,7 @@ public class UIManager implements Manager {
 			    .requireEnter();
 		}
 		String heading = "Viewing " + student.getName() + "'s submission of Quiz: '" + 
-			quiz.getName() + "' in course: " + quiz.getCourse();
+		    quiz.getName() + "' in course: " + quiz.getCourse();
 		if (student == this.getCurrentUser())
 			heading = "Viewing your submission of Quiz: " + quiz.getName() + " in course: " + quiz.getCourse();
 		
@@ -1031,7 +1034,7 @@ public class UIManager implements Manager {
 								return MenuState.RESTART;
 							})
 						    .addHeading("Select a question to view it.");
-						menu.open();
+					menu.open();
 					return MenuState.RESTART;
 				}))
 		    .addOption((new MenuOption("Exit"))
@@ -1063,7 +1066,7 @@ public class UIManager implements Manager {
 		System.out.print(ANSICodes.CLEAR_SCREEN);
 		System.out.print(ANSICodes.CURSOR_TO_HOME);
 		
-		MENU_START.open();
+		menuStart.open();
 	}
 	
 	/**
@@ -1087,8 +1090,8 @@ public class UIManager implements Manager {
 	/**
 	 * Sets the current {@link User}
 	 * <p>
-	 * Is used inside {@link #MENU_LOGIN} to set the logged-in user, 
-	 * and is set to null inside {@link #MENU_MAIN_STUDENT} and {@link #MENU_MAIN_TEACHER} to logout the user.
+	 * Is used inside {@link #menuLogin} to set the logged-in user, 
+	 * and is set to null inside {@link #menuMainStudent} and {@link #menuMainTeacher} to logout the user.
 	 * 
 	 * @param currentUser The current user. Can be null.
 	 */
