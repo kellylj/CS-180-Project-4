@@ -90,10 +90,10 @@ public class OptionListMenu<T extends Listable> extends OptionMenuWithResult<T> 
 
         // Add "Previous Page" option, which causes the page to decrease.
         this.addOption((new MenuOption("Previous Page"))
-        	.addVisibilityCondition(() -> {
+            .addVisibilityCondition(() -> {
         		return this.page > 0;
         	})
-        	.onSelect(() -> {
+            .onSelect(() -> {
 	            this.page -= 1;
 	            return MenuState.RESTART;
 	        })
@@ -114,10 +114,10 @@ public class OptionListMenu<T extends Listable> extends OptionMenuWithResult<T> 
 
         // Add Next Page option, which increases the page, but only if there's more quizzes to see.
         this.addOption((new MenuOption("Next Page"))
-        	.addVisibilityCondition(() -> {
+            .addVisibilityCondition(() -> {
         		return items.size() > (page + 1) * AMT_ITEMS_PER_PAGE;
         	})
-        	.onSelect(() -> {
+            .onSelect(() -> {
 	            this.page += 1;
 	            return MenuState.RESTART;
 	        })
