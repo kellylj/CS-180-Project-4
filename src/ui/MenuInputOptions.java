@@ -27,7 +27,7 @@ public class MenuInputOptions extends MenuInput {
 					optionMenu.setResult(option);
 					return MenuState.CLOSE;
 				})
-		        );
+	        );
 		}
 	}
 	
