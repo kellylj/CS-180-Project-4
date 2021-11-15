@@ -64,7 +64,7 @@ public class Question implements Listable {
         }
         for (Answer a: answers) {
             if (a.getPoints() == bestAnswerPointValue) {
-                getBestAnswers().add(a);
+                bestAnswers.add(a);
             }
         }
         return bestAnswers;
