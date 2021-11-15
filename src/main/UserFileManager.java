@@ -80,9 +80,9 @@ public class UserFileManager implements Manager {
             String password = info[2];
             String name = info[3];
             if (list[0].equals("teacher")) {
-                tempUsers.add(new Teacher(id, username, password, name));
+                tempUsers.add(new Teacher(id, name, username, password));
             } else { //student
-                tempUsers.add(new Student(id, username, password, name));
+                tempUsers.add(new Student(id, name, username, password));
             }
         }
         return tempUsers;
