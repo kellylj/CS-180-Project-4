@@ -5,7 +5,8 @@ import main.UIManager;
 /**
  * Datastructure used by {@link InputMenu} for menu inputs where an option is desired.
  * <p>
- * Internally uses its own {@link OptionMenuWithResult} to store a list of {@link String} options and prompt the user to choose one.
+ * Internally uses its own {@link OptionMenuWithResult} to store a list of {@link String}
+ * options and prompt the user to choose one.
  * <p>
  * Once the user chooses a valid option, the resulting chosen string is returned.
  * 
@@ -20,12 +21,12 @@ public class MenuInputOptions extends MenuInput {
 	public MenuInputOptions(String question, String[] options, String resultKey, UIManager uiManager) {
 		super(question, resultKey);
 		this.optionMenu = new OptionMenuWithResult<String>(uiManager);
-		for(String option: options) {
+		for (String option: options) {
 			optionMenu.addOption(((new MenuOption(option))
-				.onSelect(() -> {
-					optionMenu.setResult(option);
-					return MenuState.CLOSE;
-				})
+				   .onSelect(() -> {
+					   optionMenu.setResult(option);
+					   return MenuState.CLOSE;
+			   	   })
 			));
 		}
 	}

@@ -1,9 +1,6 @@
 package ui;
 
-import java.util.Scanner;
-
 import main.UIManager;
-import utils.NumberUtils;
 
 /**
  * Extension of {@link MenuInput} that requires the input to be an integer.
@@ -23,13 +20,22 @@ public class MenuInputInt extends MenuInput {
 	@Override
 	public String getInput(UIManager uiManager) {
 		String input;
-		while(true) {
+		while (true) {
 			input = uiManager.getScanner().nextLine();
-			if(input != null && NumberUtils.isInteger(input))
+			if (input != null && isInteger(input))
 				break;
 			System.out.println("Please try again and enter a valid (integer) input.");
 		}
 		return input;
+	}
+	
+	public boolean isInteger(String number) {
+		try {
+			Integer.parseInt(number);
+			return true;
+		} catch(NumberFormatException e) {
+			return false;
+		}
 	}
 	
 }

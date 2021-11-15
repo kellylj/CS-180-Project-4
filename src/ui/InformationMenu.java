@@ -3,7 +3,6 @@ package ui;
 import java.util.StringJoiner;
 
 import main.UIManager;
-import utils.ANSICodes;
 
 /**
  * Menu to show the user information without the need
@@ -58,10 +57,10 @@ public class InformationMenu extends Menu {
 	@Override
 	public void runMenu() {
 		System.out.println(text.toString());
-		if(this.requiresEnter) {
+		if (this.requiresEnter) {
 			System.out.println("Please press Enter to continue.");
 			this.uiManager.getScanner().nextLine();
-			// TODO Fun
+			// Fun
 			System.out.print(ANSICodes.CLEAR_SCREEN + ANSICodes.CURSOR_TO_HOME);
 		}
 		this.menuState = MenuState.CLOSE;

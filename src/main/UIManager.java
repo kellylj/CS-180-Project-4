@@ -11,6 +11,7 @@ import java.util.Queue;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import ui.ANSICodes;
 import ui.InformationMenu;
 import ui.InputMenu;
 import ui.Menu;
@@ -21,7 +22,6 @@ import ui.OptionListMenu;
 import ui.OptionMenu;
 import ui.OptionMenuYesNo;
 import ui.RunnableSelectListItem;
-import utils.ANSICodes;
 
 /**
  * The manager for the UI of the application.

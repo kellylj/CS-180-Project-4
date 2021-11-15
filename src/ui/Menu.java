@@ -3,11 +3,15 @@ package ui;
 /**
  * Abstract class that represents a menu in the user interface.
  * <p>
- * All menus will be a child of this class. When a menu should be opened, {@link #open()} should be ran, which will run {@link #runMenu()} until the {@link #menuState} is {@link MenuState.CLOSE}.
+ * All menus will be a child of this class. When a menu should be opened, 
+ * {@link #open()} should be ran, which will run {@link #runMenu()} until 
+ * the {@link #menuState} is {@link MenuState.CLOSE}.
  * <p>
- * Subclasses will implement the {@link #runMenu()} method, and should not override the {@link #open()} unless necessary.
+ * Subclasses will implement the {@link #runMenu()} method, and should
+ * not override the {@link #open()} unless necessary.
  * <p>
- * {@link #menuState} should be updated appropriately in {@link #runMenu()} depending on the desire of the Menu to stay open or not.
+ * {@link #menuState} should be updated appropriately in {@link #runMenu()}
+ * depending on the desire of the Menu to stay open or not.
  * 
  * @author Isaac Fleetwood
  * @version 1.0.0
@@ -33,7 +37,8 @@ public abstract class Menu {
 	 * Ran whenever the menu is opened.
 	 */
 	public void start() {
-		// TODO: Figure out what needs to go here, if anything.
+		// Here in case we need to override it,
+		// Or for when we start GUIs
 	}
 
 	/**
@@ -63,7 +68,8 @@ public abstract class Menu {
 	 * Ran whenever the menu is finally closed.
 	 */
 	public void end() {
-		// TODO: Figure out what needs to go here, if anything.
+		// Here in case we need to override it,
+		// Or for when we start GUIs
 	}
 	
 }

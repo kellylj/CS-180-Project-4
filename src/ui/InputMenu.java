@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import main.UIManager;
-import utils.ANSICodes;
 
 /**
  * Class extending {@link Menu} that adds the option of prompting the 
@@ -68,8 +67,8 @@ public class InputMenu extends Menu {
 		return this;
 	}
 
-	public InputMenu onInputFinish(RunnableInputFinish inputFinishEventRunnable) {
-		this.inputFinishEventRunnable = inputFinishEventRunnable;
+	public InputMenu onInputFinish(RunnableInputFinish runnable) {
+		this.inputFinishEventRunnable = runnable;
 		return this;
 	}
 
@@ -87,6 +86,14 @@ public class InputMenu extends Menu {
 		return this;
 	}
 
+	/**
+	 * The state returned from a validation reuqest.
+	 * Indicates if the input should continue, restart,
+	 * or exit.
+	 * 
+	 * @author Isaac Fleetwood
+	 * @version 1.0.0
+	 */
 	private enum ValidationState {
 		CONTINUE, RESTART, EXIT;
 	}
@@ -99,7 +106,6 @@ public class InputMenu extends Menu {
 		}
 		verifyMenu.addHeading("Are you satisfied with these values?");
 		verifyMenu.open();
-		// TODO BUG - "Please use a valid integer?????????"
 		
 		boolean isYes = verifyMenu.getResult();
 		if (isYes)
@@ -122,12 +128,15 @@ public class InputMenu extends Menu {
 	 * Runs the menu. Prints out all headings
 	 * then prompts the user for input based on the inputs given beforehand.
 	 * <p>
-	 * If {@link #addValidationRequest()} was ran beforehand, it will call {@link #requestValidation()} to make the user verify the data is correct.
+	 * If {@link #addValidationRequest()} was ran beforehand, it will call 
+	 * {@link #requestValidation()} to make the user verify the data is correct.
 	 * <p>
-	 * If {@link #addValidationRequest()} was never ran, or {@link #requestValidation()} returns {@link ValidationState.CONTINUE} then 
-	 * {@link #inputFinishEventRunnable} will be ran with the HashMap containing the data from the input.
+	 * If {@link #addValidationRequest()} was never ran, or {@link #requestValidation()} 
+	 * returns {@link ValidationState.CONTINUE} then {@link #inputFinishEventRunnable} will 
+	 * be ran with the HashMap containing the data from the input.
 	 * <p>
-	 * @param None - However, it will use the previous data given via methods like {@link #addInput(String, String)} {@link #addHeading(String)} and {@link #addValidationRequest()}.
+	 * @param None - However, it will use the previous data given via methods like 
+	 * {@link #addInput(String, String)} {@link #addHeading(String)} and {@link #addValidationRequest()}.
 	 * If you are having problems, verify those methods are giving the correct data.
 	 */
 	public void runMenu() {
@@ -159,7 +168,7 @@ public class InputMenu extends Menu {
 			}
 		}
 		
-		// TODO Fun
+		// Fun
 		System.out.print(ANSICodes.CLEAR_SCREEN + ANSICodes.CURSOR_TO_HOME);
 
 		menuState = this.inputFinishEventRunnable.onInputFinish(values);

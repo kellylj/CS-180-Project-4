@@ -1,17 +1,18 @@
-package utils;
-
-import ui.InputMenu;
-import ui.OptionMenu;
+package ui;
 
 /**
  * 
- * Wrapper class containing all ANSI Codes used in the project. Contains codes for changing the color or background color of text.
+ * Wrapper class containing all ANSI Codes used in the project. 
+ * Contains codes for changing the color or background color of text.
  * <p>
- * This class is used by printing one of the codes in front of a string, causing the string to change color in the final terminal output.
+ * This class is used by printing one of the codes in front of a string, 
+ * causing the string to change color in the final terminal output.
  * <p>
- * NOTE: ANSICodes.{@link #RESET} must be used when the specified color has to stop. Otherwise that color will maintain until ANSICodes.{@link #RESET} is printed.
+ * NOTE: ANSICodes.{@link #RESET} must be used when the specified color has
+ *  to stop. Otherwise that color will maintain until ANSICodes.{@link #RESET} is printed.
  * <p>
- * ANSI can be used for more things, including moving the cursor and clearing the screen. However there is no guarantee on widespread compatibility with this, so we decided to not use it.
+ * ANSI can be used for more things, including moving the cursor and clearing the screen. 
+ * However there is no guarantee on widespread compatibility with this, so we decided to not use it.
  * 
  * @author Isaac Fleetwood
  * @version 1.0.0

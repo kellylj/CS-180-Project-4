@@ -3,8 +3,6 @@ package ui;
 import java.util.ArrayList;
 
 import main.UIManager;
-import utils.ANSICodes;
-import utils.NumberUtils;
 
 /**
  * {@link Menu} in which options are given that the user can choose from.
@@ -107,7 +105,7 @@ public class OptionMenu extends Menu {
 		MenuOption option = null;
 		while (option == null) {
 			String input = uiManager.getScanner().nextLine();
-			if (!NumberUtils.isInteger(input)) {
+			if (!isInteger(input)) {
 				System.out.println("Please use a valid integer when selecting an option.");
 				continue;
 			}
@@ -119,9 +117,18 @@ public class OptionMenu extends Menu {
 			option = visibleOptions.get(i - 1);
 			break;
 		}
-		// TODO Fun
+		// Fun
 		System.out.print(ANSICodes.CLEAR_SCREEN + ANSICodes.CURSOR_TO_HOME);
 		menuState = option.onSelect();
+	}
+	
+	public boolean isInteger(String number) {
+		try {
+			Integer.parseInt(number);
+			return true;
+		} catch(NumberFormatException e) {
+			return false;
+		}
 	}
 
 }

@@ -1,7 +1,6 @@
 package ui;
 
 import main.UIManager;
-import utils.ANSICodes;
 
 /**
  * Menu for requesting a single of input from the user
