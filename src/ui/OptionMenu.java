@@ -49,8 +49,8 @@ public class OptionMenu extends Menu {
 		this.checkLogin = false;
 	}
 
-	public OptionMenu setCheckLogin(boolean checkLogin) {
-		this.checkLogin = checkLogin;
+	public OptionMenu setCheckLogin(boolean checkLoginBool) {
+		this.checkLogin = checkLoginBool;
 		return this;
 	}
 	
@@ -59,8 +59,8 @@ public class OptionMenu extends Menu {
 		return this;
 	}
 
-	public OptionMenu setHeadings(ArrayList<String> headings) {
-		this.headings = headings;
+	public OptionMenu setHeadings(ArrayList<String> headingsArr) {
+		this.headings = headingsArr;
 		return this;
 	}
 
@@ -74,14 +74,14 @@ public class OptionMenu extends Menu {
 		return this;
 	}
 
-	public OptionMenu onHeadingPrint(Runnable callbackOnHeadingPrint) {
-		this.callbackOnHeadingPrint = callbackOnHeadingPrint;
+	public OptionMenu onHeadingPrint(Runnable runnable) {
+		this.callbackOnHeadingPrint = runnable;
 		return this;
 	}
 
 	@Override
 	public void runMenu() {
-		if(this.checkLogin && uiManager.getCurrentUser() == null) {
+		if (this.checkLogin && uiManager.getCurrentUser() == null) {
 			this.menuState = MenuState.CLOSE;
 			return;
 		}
@@ -100,7 +100,7 @@ public class OptionMenu extends Menu {
 			MenuOption option = visibleOptions.get(i);
 			int optionNumber = i + 1;
 			System.out.println(
-					ANSICodes.CYAN + ANSICodes.BOLD + optionNumber + ": " + ANSICodes.RESET + option.getOptionString());
+			    ANSICodes.CYAN + ANSICodes.BOLD + optionNumber + ": " + ANSICodes.RESET + option.getOptionString());
 		}
 		MenuOption option = null;
 		while (option == null) {
@@ -117,7 +117,6 @@ public class OptionMenu extends Menu {
 			option = visibleOptions.get(i - 1);
 			break;
 		}
-		// Fun
 		System.out.print(ANSICodes.CLEAR_SCREEN + ANSICodes.CURSOR_TO_HOME);
 		menuState = option.onSelect();
 	}
@@ -126,7 +125,7 @@ public class OptionMenu extends Menu {
 		try {
 			Integer.parseInt(number);
 			return true;
-		} catch(NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			return false;
 		}
 	}

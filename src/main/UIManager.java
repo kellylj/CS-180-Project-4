@@ -503,9 +503,9 @@ public class UIManager implements Manager {
 				    .getQuizManager()
 				    .getListOfCourses()
 				    .stream()
-				    .map(course -> (
-				    	new StringListable(course)
-				    ))
+				    .map(
+				    	course -> new StringListable(course)
+				    )
 				    .collect(Collectors.toList());
 			})
 		    .onSelectListItem(
@@ -572,7 +572,7 @@ public class UIManager implements Manager {
 		    .addOption((new MenuOption("Change Name"))
 			    .onSelect(() -> {
 					MenuQuickInput quickInput = new MenuQuickInput(this, 
-						"What would you like the new name of the quiz to be?");
+					    "What would you like the new name of the quiz to be?");
 					quickInput.open();
 					String newName = quickInput.getResult();
 					quiz.setName(newName);
@@ -582,7 +582,7 @@ public class UIManager implements Manager {
 		    .addOption((new MenuOption("Change Course"))
 			    .onSelect(() -> {
 					MenuQuickInput quickInput = new MenuQuickInput(this, 
-						"What course would you like this quiz to be in?");
+					    "What course would you like this quiz to be in?");
 					quickInput.open();
 					String newCourse = quickInput.getResult();
 					quiz.setCourse(newCourse);
