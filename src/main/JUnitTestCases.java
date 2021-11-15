@@ -97,7 +97,7 @@ public class JUnitTestCases {
          * - Shown in this.testImportQuiz();
          * 
          * Students can attach a file to any question as a response. 
-         * - Shown in this.testImportReponse();
+         * - Shown in this.testImportResponse();
          * 
     	 * Teachers can choose to randomize the order of questions 
     	 * and the order of potential options for a question.
@@ -126,11 +126,8 @@ public class JUnitTestCases {
 		    testOut = new ByteArrayOutputStream();
 		    System.setOut(new PrintStream(testOut));
 		    /*
-		     * 
-		    this.testImportQuiz();
-		    this.testImportReponse();
-		    this.testShuffle();
-		    */
+		     * this.testShuffle();
+		     */
 	    }
 
         @After
@@ -1947,6 +1944,398 @@ public class JUnitTestCases {
     		};
         	
             String errorMsg = "Unable to modify a quiz!";
+
+            tryTestInput(inputArr, expectedArr, errorMsg);
+
+        }
+
+        @Test(timeout = 1000)
+        public void testImportQuiz() {
+
+        	clearFiles();
+        	
+            String[] inputArr = new String[] {
+                "2", // Create User
+                "Test User", // Name
+                "testUsername", // Username
+                "testPassword", // Password
+                "1", // Teacher
+                "1", // Yes, Make it
+                "1", // Login 
+                "testUsername", // Username
+                "testPassword", // Password
+                "3", // Add new Quiz
+                "Test Quiz", 
+                "Test Course", 
+                "1", // Dont import
+                "./TestImport.txt", // File path
+                "1", // View qustions
+                "4", // Exit
+                "8", // save quiz
+                "1", // list quizzes
+                "1", // select test course
+                "1", // select test quiz
+                "", // Enter to go back
+                "2", // Go back
+                "6", // Logout
+                "3" // Exit
+            };
+            
+            String[] expectedArr = new String[] {
+        	    "",
+        	    "Welcome to the Learning Management System!",
+        	    "Please select one of the following options:",
+        	    "1: Login",
+        	    "2: Create User",
+        	    "3: Exit",
+        	    "",
+        	    "Creating a new user",
+        	    "Please answer the following questions",
+        	    "What is your name?",
+        	    "What username do you want?",
+        	    "What password do you want?",
+        	    "Will you be a teacher or a student?",
+        	    "1: Teacher",
+        	    "2: Student",
+        	    "",
+        	    "The following are the values you gave:",
+        	    "Username - testUsername",
+        	    "User Type - Teacher",
+        	    "Name - Test User",
+        	    "Password - testPassword",
+        	    "",
+        	    "Are you satisfied with these values?",
+        	    "1: Yes",
+        	    "2: No",
+        	    "Successfully created the user.",
+        	    "",
+        	    "Welcome to the Learning Management System!",
+        	    "Please select one of the following options:",
+        	    "1: Login",
+        	    "2: Create User",
+        	    "3: Exit",
+        	    "",
+        	    "Logging into the Learning Management System.",
+        	    "Please enter your login details.",
+        	    "Username: ",
+        	    "Password: ",
+        	    "You have successfully logged in!",
+        	    "",
+        	    "Teacher Menu",
+        	    "1: List Quizzes",
+        	    "2: List All Quiz Submissions",
+        	    "3: Add New Quiz",
+        	    "4: Modify Quizzes",
+        	    "5: User Settings",
+        	    "6: Logout",
+        	    "",
+        	    "Creating a new quiz.",
+        	    "What would you like the name of this quiz to be?",
+        	    "What is the name of the course this quiz will be in?",
+        	    "Would you like to import this quiz from a file?",
+        	    "1: Yes",
+        	    "2: No",
+        	    "",
+        	    "Importing the quiz from a file.",
+        	    "What is the file path?",
+        	    "Successfully imported the quiz.",
+        	    "",
+        	    "Modifying Quiz: 'Test Quiz'",
+        	    "Current Amount of Questions: 3",
+        	    "1: View Questions",
+        	    "2: Add Question",
+        	    "3: Edit Questions",
+        	    "4: Remove Question",
+        	    "5: Change Name",
+        	    "6: Change Course",
+        	    "7: Set Scrambled",
+        	    "8: Save Quiz",
+        	    "9: Delete Quiz",
+        	    "",
+        	    "Select a question to view it.",
+        	    "1: What is my name?",
+        	    "2: This is true.",
+        	    "3: What is the correct answer?",
+        	    "4: Exit",
+        	    "",
+        	    "Modifying Quiz: 'Test Quiz'",
+        	    "Current Amount of Questions: 3",
+        	    "1: View Questions",
+        	    "2: Add Question",
+        	    "3: Edit Questions",
+        	    "4: Remove Question",
+        	    "5: Change Name",
+        	    "6: Change Course",
+        	    "7: Set Scrambled",
+        	    "8: Save Quiz",
+        	    "9: Delete Quiz",
+        	    "",
+        	    "Teacher Menu",
+        	    "1: List Quizzes",
+        	    "2: List All Quiz Submissions",
+        	    "3: Add New Quiz",
+        	    "4: Modify Quizzes",
+        	    "5: User Settings",
+        	    "6: Logout",
+        	    "",
+        	    "Please select a course.",
+        	    "1: Test Course",
+        	    "2: Exit",
+        	    "",
+        	    "Please select a quiz to view.",
+        	    "1: Test Quiz",
+        	    "2: Exit",
+        	    "",
+        	    "Quiz Info",
+        	    "Quiz name: Test Quiz",
+        	    "Author: Test User",
+        	    "Course: Test Course",
+        	    "Please press Enter to continue.",
+        	    "",
+        	    "Please select a quiz to view.",
+        	    "1: Test Quiz",
+        	    "2: Exit",
+        	    "",
+        	    "Teacher Menu",
+        	    "1: List Quizzes",
+        	    "2: List All Quiz Submissions",
+        	    "3: Add New Quiz",
+        	    "4: Modify Quizzes",
+        	    "5: User Settings",
+        	    "6: Logout",
+        	    "",
+        	    "Welcome to the Learning Management System!",
+        	    "Please select one of the following options:",
+        	    "1: Login",
+        	    "2: Create User",
+        	    "3: Exit",
+        	    "Okay! Bye!",
+        	};
+        	
+            String errorMsg = "Unable to import a quiz!";
+
+            tryTestInput(inputArr, expectedArr, errorMsg);
+
+        }
+        
+        @Test(timeout = 1000)
+        public void testImportResponse() {
+
+        	// Create a 2 question quiz and second quiz
+        	this.testQuizzes();
+        	
+        	// Then try take the quiz as a new student
+        	// With a file response
+            String[] inputArr = new String[] {
+                "2", // Create User
+                "Student Name", // Name
+                "studentUsername", // Username
+                "studentPassword", // Password
+                "2", // Student
+                "1", // Yes, Make it
+                "1", // Login 
+                "studentUsername", // Username
+                "studentPassword", // Password
+                "1", // View quizzes
+                "1", // Course
+                "1", // Quiz
+                "", // Enter
+                "3", // Back
+                "2", // Take Quiz
+                "1", // Select Course
+                "1", // Select Quiz
+                "1", // Yes, take it
+                "3", // Question 1
+                "1", // Yes I want to import a response as a file
+                "./QuestionResponse.txt", // File path
+                "2", // Question 2 answer
+                "1", // Submit
+                "1", // See Score
+                "1", // View Questions
+                "1", // View question 1
+                "", // Enter
+                "3", // Exit
+                "3", // Exit
+                "5", // logout
+                "3" // Exit
+            };
+            
+            String[] expectedArr = new String[] {
+        	    "",
+        	    "Welcome to the Learning Management System!",
+        	    "Please select one of the following options:",
+        	    "1: Login",
+        	    "2: Create User",
+        	    "3: Exit",
+        	    "",
+        	    "Creating a new user",
+        	    "Please answer the following questions",
+        	    "What is your name?",
+        	    "What username do you want?",
+        	    "What password do you want?",
+        	    "Will you be a teacher or a student?",
+        	    "1: Teacher",
+        	    "2: Student",
+        	    "",
+        	    "The following are the values you gave:",
+        	    "Username - studentUsername",
+        	    "User Type - Student",
+        	    "Name - Student Name",
+        	    "Password - studentPassword",
+        	    "",
+        	    "Are you satisfied with these values?",
+        	    "1: Yes",
+        	    "2: No",
+        	    "Successfully created the user.",
+        	    "",
+        	    "Welcome to the Learning Management System!",
+        	    "Please select one of the following options:",
+        	    "1: Login",
+        	    "2: Create User",
+        	    "3: Exit",
+        	    "",
+        	    "Logging into the Learning Management System.",
+        	    "Please enter your login details.",
+        	    "Username: ",
+        	    "Password: ",
+        	    "You have successfully logged in!",
+        	    "",
+        	    "Main Menu",
+        	    "Please select one of the following options:",
+        	    "1: View Quizzes",
+        	    "2: Take Quiz",
+        	    "3: View Your Quiz Submissions",
+        	    "4: User Settings",
+        	    "5: Logout",
+        	    "",
+        	    "Please select a course.",
+        	    "1: Test Course",
+        	    "2: Exit",
+        	    "",
+        	    "Please select a quiz to view.",
+        	    "1: Test Quiz",
+        	    "2: Test Quiz 2",
+        	    "3: Exit",
+        	    "",
+        	    "Quiz Info",
+        	    "Quiz name: Test Quiz",
+        	    "Author: Test User",
+        	    "Course: Test Course",
+        	    "Please press Enter to continue.",
+        	    "",
+        	    "Please select a quiz to view.",
+        	    "1: Test Quiz",
+        	    "2: Test Quiz 2",
+        	    "3: Exit",
+        	    "",
+        	    "Main Menu",
+        	    "Please select one of the following options:",
+        	    "1: View Quizzes",
+        	    "2: Take Quiz",
+        	    "3: View Your Quiz Submissions",
+        	    "4: User Settings",
+        	    "5: Logout",
+        	    "",
+        	    "Please select a course.",
+        	    "1: Test Course",
+        	    "2: Exit",
+        	    "",
+        	    "Please select a quiz to take.",
+        	    "1: Test Quiz",
+        	    "2: Test Quiz 2",
+        	    "3: Exit",
+        	    "",
+        	    "Quiz Info",
+        	    "Quiz name: Test Quiz",
+        	    "Author: Test User",
+        	    "Course: Test Course",
+        	    "",
+        	    "Would you like to take this quiz",
+        	    "1: Yes",
+        	    "2: No",
+        	    "Okay. Beginning the quiz.",
+        	    "",
+        	    "Question 1",
+        	    "",
+        	    "Test Question?",
+        	    "1: Correct Answer",
+        	    "2: Incorrect Answer",
+        	    "3: Import Response From File",
+        	    "",
+        	    "Are you sure you want to import your response from a file?",
+        	    "The format of the file should be the response you wish to give.",
+        	    "Ex. \"1\" to select Answer #1",
+        	    "1: Yes",
+        	    "2: No",
+        	    "",
+        	    "Importing the answer from a file.",
+        	    "What is the file path?",
+        	    "",
+        	    "Question 2",
+        	    "",
+        	    "Question 2!",
+        	    "1: Totally not correct",
+        	    "2: Totally not incorrect",
+        	    "3: Import Response From File",
+        	    "",
+        	    "You have finished the quiz.",
+        	    "Would you like to submit it?",
+        	    "1: Submit",
+        	    "2: Cancel",
+        	    "Successfully submitted the quiz.",
+        	    "",
+        	    "Would you like to see your score?",
+        	    "1: Yes",
+        	    "2: No",
+        	    "",
+        	    "Viewing your submission of Quiz: Test Quiz in course: Test Course",
+        	    "Total Score: 1/2",
+        	    "1: View All Questions",
+        	    "2: View Incorrect Answers",
+        	    "3: Exit",
+        	    "",
+        	    "Select a question to view it.",
+        	    "1: Test Question?",
+        	    "2: Question 2!",
+        	    "3: Exit",
+        	    "",
+        	    "Question Info",
+        	    "Test Question?",
+        	    "1: Correct Answer",
+        	    "2: Incorrect Answer",
+        	    "The given answer was: 1: Correct Answer",
+        	    "The best answer was: 1: Correct Answer",
+        	    "Points earned: 1/1",
+        	    "Please press Enter to continue.",
+        	    "",
+        	    "Select a question to view it.",
+        	    "1: Test Question?",
+        	    "2: Question 2!",
+        	    "3: Exit",
+        	    "",
+        	    "Viewing your submission of Quiz: Test Quiz in course: Test Course",
+        	    "Total Score: 1/2",
+        	    "1: View All Questions",
+        	    "2: View Incorrect Answers",
+        	    "3: Exit",
+        	    "",
+        	    "Main Menu",
+        	    "Please select one of the following options:",
+        	    "1: View Quizzes",
+        	    "2: Take Quiz",
+        	    "3: View Your Quiz Submissions",
+        	    "4: User Settings",
+        	    "5: Logout",
+        	    "",
+        	    "Welcome to the Learning Management System!",
+        	    "Please select one of the following options:",
+        	    "1: Login",
+        	    "2: Create User",
+        	    "3: Exit",
+        	    "Okay! Bye!",
+        	};
+
+            String errorMsg = "Unable to import a response as a file!";
 
             tryTestInput(inputArr, expectedArr, errorMsg);
 

@@ -936,7 +936,6 @@ public class UIManager implements Manager {
 									if (selectedAnswer != null) {
 										gradedQuiz.addQuestion(question, selectedAnswer);
 										questionsMenus.poll().open();
-										menu.open();
 										return MenuState.CLOSE;
 									}
 									invFileMenu.addHeading("Invalid file format (must contain the desired answer).");
