@@ -28,7 +28,7 @@ public class MenuQuickInput extends Menu {
 	public void runMenu() {
 		System.out.println(ANSICodes.CYAN + ANSICodes.BOLD + question + ANSICodes.RESET);
 		this.result = uiManager.getScanner().nextLine();
-		// TODO Fun
+		// Fun
 		System.out.print(ANSICodes.CLEAR_SCREEN + ANSICodes.CURSOR_TO_HOME);
 		this.menuState = MenuState.CLOSE;
 	}
