@@ -222,7 +222,8 @@ public class UIManager implements Manager {
 							Menu submissionMenu = getSubmissionMenu(listableGradedQuiz.getGradedQuiz());
 							submissionMenu.open();
 							return MenuState.CLOSE;
-						});
+						})
+					    .addHeading("Please Select one of the following quiz submissions.");
 					submissionsMenu.open();
 					return MenuState.RESTART;
 				}))
@@ -275,9 +276,8 @@ public class UIManager implements Manager {
 					if (verifyMenu.resultWasYes()) {
 						System.out.println("Your account has been successfully deleted.");
 						lms.getUserManager().removeUser(this.currentUser);
-						this.setCurrentUser(null);
 						lms.getGradedQuizManager().deleteAllByStudentID(this.currentUser.getID());
-						
+						this.setCurrentUser(null);
 						return MenuState.CLOSE;
 					} else {
 						System.out.println("Okay. Your account has not been deleted.");
@@ -400,8 +400,7 @@ public class UIManager implements Manager {
 			(Quiz quiz) -> {
 				InformationMenu viewQuizMenu = (new InformationMenu(this))
 				    .addHeading("Quiz Info")
-				    .addText(quiz.toString())
-				    .requireEnter();
+				    .addText(quiz.toString());
 				viewQuizMenu.open();
 				OptionMenuYesNo menuTakeQuizQuestion = new OptionMenuYesNo(this);
 				menuTakeQuizQuestion.addHeading("Would you like to take this quiz");
@@ -737,6 +736,7 @@ public class UIManager implements Manager {
 							answerList.addOption((new MenuOption(answer.toString()))
 							    .onSelect(() -> {
 									InputMenu inpMenu = (new InputMenu(this))
+									    .addHeading("Modifying the selected answer.")
 									    .addInput("What should the answer be?", "AnswerString")
 									    .addIntInput("How many points should this answer be worth?", "PointValue")
 									    .onInputFinish((Map<String, String> answerInfo) -> {
@@ -906,21 +906,52 @@ public class UIManager implements Manager {
 			    .onSelect(() -> {
 					OptionMenuYesNo verifyMenu = new OptionMenuYesNo(this);
 					verifyMenu.addHeading("Are you sure you want to import your response from a file?");
-					verifyMenu.addSubheading("The format of the file should be the response you to choose.");
-					verifyMenu.addSubheading("Ex. \"1\"");
+					verifyMenu.addSubheading("The format of the file should be the response you wish to give.");
+					verifyMenu.addSubheading("Ex. \"1\" to select Answer #1");
 					verifyMenu.open();
 					if (verifyMenu.resultWasYes()) {
-						boolean importRequested = true;
-						do {
-							MenuQuickInput importMenu = new MenuQuickInput(this, "Okay. What is the file path?");
-							importMenu.open();
-	
-							ArrayList<String> resp = FileWrapper.readFile(importMenu.getResult());
-							if (resp == null) {
-								System.out.println("Invalid path. Would you like to try again?");
+						InputMenu importMenu = ((new InputMenu(this)))
+						    .addHeading("Importing the answer from a file.")
+						    .addInput("What is the file path?", "FilePath")
+						    .onInputFinish((Map<String, String> resultsImport) -> {
+								String filePath = resultsImport.get("FilePath");
 								
-							}
-						} while(importRequested);
+								ArrayList<String> response = FileWrapper.readFile(filePath);
+
+								OptionMenuYesNo invFileMenu = new OptionMenuYesNo(this);
+								if (response != null) {
+									String choice = response.get(0);
+									Answer selectedAnswer = null;
+									for (int j = 0; j < question.getAnswers().size(); j++) {
+										Answer answer = question.getAnswers().get(j);
+										if (choice.equals(Integer.toString(j + 1))) {
+											selectedAnswer = answer;
+											break;
+										}
+										if(answer.getAnswer().equalsIgnoreCase(choice)) {
+											selectedAnswer = answer;
+											break;
+										}
+									}
+									if(selectedAnswer != null) {
+										gradedQuiz.addQuestion(question, selectedAnswer);
+										questionsMenus.poll().open();
+										menu.open();
+										return MenuState.CLOSE;
+									}
+									invFileMenu.addHeading("Invalid file format (must contain the desired answer).");
+								} else {
+									invFileMenu.addHeading("Invalid file path.");
+								}
+								invFileMenu.addSubheading("Would you like to try again?");
+								invFileMenu.open();
+								if (invFileMenu.resultWasYes())
+									return MenuState.RESTART;
+								System.out.println("Okay. Cancelling importing a response from a file.");
+								return MenuState.CLOSE;
+							});
+						importMenu.open();
+						return MenuState.CLOSE;
 					}
 					System.out.println("Okay.");
 					return MenuState.RESTART;
