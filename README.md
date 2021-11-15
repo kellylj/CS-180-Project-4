@@ -11,6 +11,9 @@ Voccheck (the script used by Vocareum to check coding style) only runs on .java 
 ## JUnit Test Cases instructions.
 The JUnit test cases can be ran by running `run_test_cases.sh` in the root project directory. Alternatively, they can also be ran via running the main method found in main/JUnitTestCases.java
 
+## Importing File Instructions
+The instructions for importing quizzes from a file can be found in `ImportExample.txt`. If you would like to see an example of a file formatted properly to be imported, view `TestImport.txt`.
+
 # Classes Summary
 
 ## Main Class
