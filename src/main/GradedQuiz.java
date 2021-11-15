@@ -7,6 +7,7 @@ import java.util.Map;
  * Graded Quiz that contains the information of a quiz that has been graded
  *
  * @author Sean Lee
+ * @version 11/14/21
  * @see GradedQuizManager
  */
 public class GradedQuiz { // should students be able to take quiz multiple times
