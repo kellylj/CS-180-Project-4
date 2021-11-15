@@ -11,7 +11,6 @@ import java.util.List;
  * @author Isaac Fleetwood
  * @version 1.0.0
  * @param <T>
- * TODO T extends Listable
  */
 public interface RunnableGetListItems<T> {
 	public List<T> getListItems();

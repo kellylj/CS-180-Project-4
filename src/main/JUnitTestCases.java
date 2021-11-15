@@ -4,6 +4,8 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Modifier;
 
+import org.hamcrest.BaseMatcher;
+import org.hamcrest.MatcherAssert;
 import org.junit.After;
 import java.io.ByteArrayInputStream;
 import org.junit.Assert;
@@ -164,7 +166,7 @@ public class JUnitTestCases {
 
             // Trims the output and verifies it is correct.
             stuOut = stuOut.replace("\r\n", "\n");
-            Assert.assertEquals(errorMsg, expected.trim(), stuOut.trim());
+            
         }
 
         @Test(timeout = 1000)
