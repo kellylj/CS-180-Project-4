@@ -280,39 +280,6 @@ public class JUnitTestCases {
 
             Assert.assertEquals(errorMsg, expected.trim(), stuOut.trim());
         }
-
-        public void printOutput(String[] inputArr) {
-        	// Converts the input and output arrays
-            // into strings seperated by new lines.
-            String input = "";
-            for (int i = 0; i < inputArr.length; i++) {
-            	input += inputArr[i] + "\n";
-            }
-            
-            // Reset output
-            outputStart();
-            
-            // Runs the program with the input values
-            // Replace TestProgram with the name of the class with the main method
-            receiveInput(input);
-            try {
-            	LearningManagementSystem.main(new String[0]);
-            } catch (Exception e) {
-            	e.printStackTrace();
-            }
-            String stuOut = ANSICodes.stripCodes(testOut.toString());
-
-            // Trims the output and verifies it is correct.
-            stuOut = stuOut.replace("\r\n", "\n");
-            
-            restoreInputAndOutput();
-            
-            System.out.println("String[] expectedArr = new String[] {");
-            for (String str: stuOut.split("\n")) {
-                System.out.println("    \"" + str + "\",");
-            }
-            System.out.println("};");
-        }
         
         public void clearFiles() {
         	boolean success1 = FileWrapper.writeFile("./data/gradedQuizzes.txt", new ArrayList<String>());
@@ -1565,11 +1532,11 @@ public class JUnitTestCases {
         	    "5: Logout",
         	    "",
         	    "Please Select one of the following quiz submissions.",
-        	    "1: Student Name - Test Quiz - .*", // RegEx for any date
+        	    "1: Student Name - Test Quiz - .*",
         	    "2: Exit",
         	    "",
         	    "Viewing your submission of Quiz: Test Quiz in course: Test Course",
-        	    "Total Score: 1\\/2",
+        	    "Total Score: 1/2",
         	    "1: View All Questions",
         	    "2: View Incorrect Answers",
         	    "3: Exit",
@@ -1624,7 +1591,9 @@ public class JUnitTestCases {
         	    "4: Modify Quizzes",
         	    "5: User Settings",
         	    "6: Logout",
-        	    "1: Student Name - Test Quiz - .*", // RegEx for any date
+        	    "",
+        	    "Select a quiz submission to view it.",
+        	    "1: Student Name - Test Quiz - .*",
         	    "2: Exit",
         	    "",
         	    "Viewing Student Name's submission of Quiz: 'Test Quiz' in course: Test Course",
