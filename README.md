@@ -5,6 +5,9 @@ To compile and run the project, run the `compile_and_run.sh` script found in the
 
 _Note: If the script is ran on Windows (or any system that doesn't support .sh scripts), you can also compile the project normally via the javac command or via an IDE._
 
+## Voccheck instructions
+Voccheck (the script used by Vocareum to check coding style) only runs on .java files in the root directory. As such, it does not run with our project structure that is organized inside of directories. Because of this, we have provided a handy script `run_voccheck.sh` that will run voccheck on all of our .java files in our source code. Run run_voccheck.sh in Vocareum to view the output of voccheck on our code. If you want, you can also view the source code of the script to verify it is properly checking our code.
+
 # Classes Summary
 
 ## Main Class
