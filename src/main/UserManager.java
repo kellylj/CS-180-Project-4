@@ -109,7 +109,7 @@ public class UserManager implements Manager {
 			exists = false;
 			id = rand.nextInt(999999);
 			for (int i = 0; i < users.size(); i++) {
-				if(users.get(i).getID() == i) {
+				if (users.get(i).getID() == i) {
 					exists = true;
 				}
 			}
