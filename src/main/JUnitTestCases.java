@@ -313,7 +313,7 @@ public class JUnitTestCases {
             restoreInputAndOutput();
             
             System.out.println("String[] expectedArr = new String[] {");
-            for(String str: stuOut.split("\n")) {
+            for (String str: stuOut.split("\n")) {
                 System.out.println("    \"" + str + "\",");
             }
             System.out.println("};");
