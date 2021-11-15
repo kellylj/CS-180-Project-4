@@ -1,0 +1,11 @@
+/What is my name?/Multiple Choice
+Name;;false;;0
+My Name;;true;;1
+Your Name;;false;;0
+/This is true./True or False
+True;;true;;1
+False;;false;;0
+/What is the correct answer?/Multiple Choice
+This answer;;false;;0
+The answer above this;;false;;0
+The correct answer;;true;;1
