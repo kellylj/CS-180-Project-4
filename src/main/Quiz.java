@@ -10,7 +10,7 @@ import java.util.*;
  *
  *
  * @author Liam Kelly
- * @verion 11/14/21
+ * @version 11/14/21
  * @see QuizManager
  */
 public class Quiz implements Listable {
