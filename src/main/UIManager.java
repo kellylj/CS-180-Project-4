@@ -588,7 +588,7 @@ public class UIManager implements Manager {
 							verifyMenu.addHeading("Are you sure you want to delete this question?");
 							verifyMenu.open();
 							
-							if(verifyMenu.resultWasYes()) {
+							if (verifyMenu.resultWasYes()) {
 								quiz.getQuestions().remove(question);
 								System.out.println("The question was succesfully deleted.");
 								return MenuState.CLOSE;
@@ -630,7 +630,7 @@ public class UIManager implements Manager {
 				}))
 		    .addOption((new MenuOption("Save Quiz"))
 			    .onSelect(() -> {
-			    	if(quiz.getQuestions().size() == 0) {
+			    	if (quiz.getQuestions().size() == 0) {
 			    		System.out.println("You cannot save a quiz that has no questions!");
 			    		return MenuState.RESTART;
 			    	}
@@ -788,7 +788,7 @@ public class UIManager implements Manager {
 						}))
 			    .addOption((new MenuOption("Save Question"))
 				    .onSelect(() -> {
-				    	if(question.getAnswers().size() == 0) {
+				    	if (question.getAnswers().size() == 0) {
 				    		System.out.println("You cannot save a question that has no answers!");
 				    		return MenuState.RESTART;
 				    	}
