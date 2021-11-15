@@ -4,6 +4,7 @@ package main;
  * Super class that contains the details of a particular user
  *
  * @author Sean Lee
+ * @version 11/14/21
  * @see UserManager
  */
 public class User {
@@ -12,8 +13,8 @@ public class User {
     private String password;
     private String name;
 
-    public User(int ID, String name, String username, String password) {
-        this.ID = ID;
+    public User(int id, String name, String username, String password) {
+        this.ID = id;
         this.name = name;
         this.username = username;
         this.password = password;
