@@ -18,8 +18,13 @@ public class ListableGradedQuiz implements Listable {
 	private GradedQuiz gradedQuiz;
 	
 	public ListableGradedQuiz(LearningManagementSystem lms, GradedQuiz gradedQuiz) {
-		this.nameUser = lms.getUserManager().getUserById(gradedQuiz.getStudentID()).getName();
-		this.nameQuiz = lms.getQuizManager().searchQuizByID(gradedQuiz.getQuizID()).getName();
+		try {
+			this.nameUser = lms.getUserManager().getUserById(gradedQuiz.getStudentID()).getName();
+			this.nameQuiz = lms.getQuizManager().searchQuizByID(gradedQuiz.getQuizID()).getName();
+		} catch (NullPointerException e) {
+			this.nameUser = "Unknown";
+			this.nameQuiz = "Unknown";
+		}
 		this.gradedQuiz = gradedQuiz;
 	}
 	
