@@ -1106,7 +1106,7 @@ public class UIManager implements Manager {
 		menu.addText("The given answer was: " + (question.getAnswers().indexOf(chosen) + 1) + ": " + 
 		    (chosen == null ? "Unknown" : chosen.getAnswer()));
 		int bestPoints = 0;
-		if(bestAnswers.size() == 1) {
+		if (bestAnswers.size() == 1) {
 			Answer best = bestAnswers.get(0);
 			bestPoints = best.getPoints();
 			menu.addText("The best answer was: " + (question.getAnswers().indexOf(best) + 1) + ": " + best.getAnswer());
