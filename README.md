@@ -1,7 +1,11 @@
 # CS-180-Project-4
 
+# Compilation Instructions
+To compile and run the project, run the `compile_and_run.sh` script found in the root project directory. This script will compile all of the java classes, run the main class, and then clean away all of the .class files once the program has exited.
+
+_Note: If the script is ran on Windows (or any system that doesn't support .sh scripts), you can also compile the project normally via the javac command or via an IDE._
+
 # Classes Summary
-Todo: Add our classes to here and explain what they do.
 
 ## Main Class
 ### LearningManagementSystem
@@ -37,13 +41,13 @@ The manager that holds the list of every created quiz.  It also provides methods
 ### GradedQuizManager
 TODO
 ### UserFileManager, QuizFileManager, and GradedQuizFileManager
-The manager that reads and writes user, quiz, and graded quiz data to and from files. It gives its respective manager the list of users, quizzes, or graded quizzes at the start of the program and receives the list of users at the end. The file paths in `readUsers()`, `readQuizzes()`, and `readGradedQuizzes` as well as `writeUsers()`, `writeQuizzes()`, and `writeGradedQuizzes()` are hard coded and should work as relative paths for the file that stores the desired information.
+The managers that reads and writes user, quiz, and graded quiz data to and from files. Each gives its respective manager the list of users, quizzes, or graded quizzes at the start of the program and receives the list of them at the end. The file paths in `readUsers()`, `readQuizzes()`, and `readGradedQuizzes` as well as `writeUsers()`, `writeQuizzes()`, and `writeGradedQuizzes()` are hard coded and should work as relative paths for the file that stores the desired information.
 
 #### FileWrapper
 The class used for reading and writing to file. It contains static methods that are used in any situation where interacting with files is necessary. `readFile()` and `writeFile()` are generic methods that are used for reading and writing files. `readImportFile()` is a special read method used for importing existing quizzes from a file. It is special so that the people creating the quiz on a new file will have an easier time writing it and won't have to write it in a way that makes it easy for the program to read.
 
 ## Datastructure Classes
-Classes used for storing data that don't inherently do anything by themselves.
+The following are classes used for storing data that don't inherently do anything by themselves.
 
 ### Quiz
 Implements Listable.  Class used for storing data about each quiz, including a toString which displays relevant information about the quiz.  It also is able to generate unique IDs for each question which haven't been used before.

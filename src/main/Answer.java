@@ -8,6 +8,7 @@ package main;
  *
  *
  * @author Liam Kelly
+ * @version 11/14/21
  * @see Question
  */
 public class Answer {
@@ -40,11 +41,19 @@ public class Answer {
     public int getPoints() {
         return points;
     }
-
+    /**
+     * Sets a new answer
+     *
+     * @param answer - the new answer String
+     */
     public void setAnswer(String answer) {
         this.answer = answer;
     }
-
+    /**
+     * Sets a new point value for the question
+     *
+     * @param points - the new point value
+     */
     public void setPointValue(int points) {
         this.points = points;
     }
