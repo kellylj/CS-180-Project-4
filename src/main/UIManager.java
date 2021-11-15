@@ -123,12 +123,12 @@ public class UIManager implements Manager {
 				String userType = values.get("User Type");
 				User user = lms.getUserManager().getUser(username);
 				
-				if(user != null) {
+				if (user != null) {
 					OptionMenuYesNo retryMenu = new OptionMenuYesNo(this);
 					retryMenu.addHeading("A user with that username already exists.");
 					retryMenu.addSubheading("Would you like to try creating a new user again?");
 					retryMenu.open();
-					if(retryMenu.resultWasNo()) {
+					if (retryMenu.resultWasNo()) {
 						System.out.println("Cancelling creation of a new user.");
 						return MenuState.CLOSE;
 					} else {
@@ -161,11 +161,11 @@ public class UIManager implements Manager {
 				String password = values.get("Password");
 				
 				boolean correctUsernamePassword = lms.getUserManager().authenticator(username, password);
-				if(correctUsernamePassword) {
+				if (correctUsernamePassword) {
 					User user = lms.getUserManager().getUser(username);
 					this.setCurrentUser(user);
 					System.out.println("You have successfully logged in!");
-					if(user instanceof Teacher) {
+					if (user instanceof Teacher) {
 						MENU_MAIN_TEACHER.open();
 					} else {
 						MENU_MAIN_STUDENT.open();
@@ -178,7 +178,7 @@ public class UIManager implements Manager {
 				tryAgainMenu.addSubheading("Would you like to try again?");
 				tryAgainMenu.open();
 				boolean isYes = tryAgainMenu.resultWasYes();
-				if(isYes) {
+				if (isYes) {
 					System.out.println("Okay.");
 					return MenuState.RESTART;
 				}
@@ -272,7 +272,7 @@ public class UIManager implements Manager {
 					if they want to delete their account or not
 					 */
 					verifyMenu.open();
-					if(verifyMenu.resultWasYes()) {
+					if (verifyMenu.resultWasYes()) {
 						System.out.println("Your account has been successfully deleted.");
 						lms.getUserManager().removeUser(this.currentUser);
 						this.setCurrentUser(null);
@@ -406,7 +406,7 @@ public class UIManager implements Manager {
 				OptionMenuYesNo menuTakeQuizQuestion = new OptionMenuYesNo(this);
 				menuTakeQuizQuestion.addHeading("Would you like to take this quiz");
 				menuTakeQuizQuestion.open();
-				if(menuTakeQuizQuestion.resultWasYes()) {
+				if (menuTakeQuizQuestion.resultWasYes()) {
 					System.out.println("Okay. Beginning the quiz.");
 					getMenuTakeQuiz(quiz).open();
 					return MenuState.CLOSE;
@@ -434,7 +434,7 @@ public class UIManager implements Manager {
 				String course = results.get("Course");
 				boolean wantsFileImport = results.get("FileImport").equals("Yes");
 				
-				if(wantsFileImport) {
+				if (wantsFileImport) {
 					
 					InputMenu importMenu = ((new InputMenu(this)))
 						.addHeading("Importing the quiz from a file.")
@@ -444,7 +444,7 @@ public class UIManager implements Manager {
 							
 							Quiz newQuiz = lms.getQuizFileManager().importQuiz(filePath, name, course);
 							
-							if(newQuiz != null) {
+							if (newQuiz != null) {
 								System.out.println("Successfully imported the quiz.");
 								lms.getQuizManager().addQuiz(newQuiz);
 								OptionMenu menu = getMenuModifyQuiz(newQuiz);
@@ -456,7 +456,7 @@ public class UIManager implements Manager {
 							verifyMenu.addHeading("Invalid file.");
 							verifyMenu.addSubheading("Would you like to try again?");
 							verifyMenu.open();
-							if(verifyMenu.resultWasYes())
+							if (verifyMenu.resultWasYes())
 								return MenuState.RESTART;
 							System.out.println("Okay. Cancelling adding a new quiz.");
 							return MenuState.CLOSE;
@@ -521,7 +521,7 @@ public class UIManager implements Manager {
 									.addHeading("Question Info")
 									.addText(question.getQuestion());
 								
-								for(Answer answer: question.getAnswers()) {
+								for (Answer answer: question.getAnswers()) {
 									infoMenu.addListItem(answer.getAnswer());
 								}
 								infoMenu.addText("");
@@ -589,7 +589,7 @@ public class UIManager implements Manager {
 					verifyMenu.addHeading("Are you sure you want to delete this quiz?");
 					verifyMenu.open();
 					boolean isYes = verifyMenu.getResult();
-					if(isYes) {
+					if (isYes) {
 						lms.getQuizManager().removeQuiz(quiz.getId());
 						return MenuState.CLOSE;
 					}
@@ -618,7 +618,7 @@ public class UIManager implements Manager {
 				);
 				quiz.getQuestions().add(question);
 				
-				if(type.equals("True or False")) {
+				if (type.equals("True or False")) {
 					question.getAnswers().add(new Answer("True", false, 0, 0));
 					question.getAnswers().add(new Answer("False", false, 0, 1));
 				}
@@ -661,7 +661,7 @@ public class UIManager implements Manager {
 					.onSelect(() -> {
 						OptionMenu answerList = (new OptionMenu(this));
 						answerList.addHeading("Select an answer to remove.");
-						for(Answer answer: question.getAnswers()) {
+						for (Answer answer: question.getAnswers()) {
 							answerList.addOption((new MenuOption(answer.toString()))
 								.onSelect(() -> {
 									question.getAnswers().remove(answer);
@@ -679,7 +679,7 @@ public class UIManager implements Manager {
 					.onSelect(() -> {
 						OptionMenu answerList = (new OptionMenu(this));
 						answerList.addHeading("Select an answer to modify.");
-						for(Answer answer: question.getAnswers()) {
+						for (Answer answer: question.getAnswers()) {
 							answerList.addOption((new MenuOption(answer.toString()))
 								.onSelect(() -> {
 									InputMenu inpMenu = (new InputMenu(this))
@@ -711,7 +711,7 @@ public class UIManager implements Manager {
 								.addHeading("The following is how the question will look on the quiz.")
 								.addHeading(question.getQuestion());
 								
-							for(Answer answer: question.getAnswers()) {
+							for (Answer answer: question.getAnswers()) {
 								menu.addListItem(answer.getAnswer());
 							}
 							menu.addText("");
@@ -725,7 +725,7 @@ public class UIManager implements Manager {
 								.addHeading("The following is the point values of each answer.")
 								.addHeading(question.getQuestion());
 								
-							for(Answer answer: question.getAnswers()) {
+							for (Answer answer: question.getAnswers()) {
 								menu.addListItem(answer.getAnswer() + " - Worth " + answer.getPoints() + " Points");
 							}
 							menu.addText("");
@@ -768,7 +768,7 @@ public class UIManager implements Manager {
 								answers.clear();
 								int truePoints = 0;
 								int falsePoints = 0;
-								if(results.get("CorrectAnswer").equals("True")) {
+								if (results.get("CorrectAnswer").equals("True")) {
 									truePoints = Integer.parseInt(results.get("Points"));
 								} else { // False is correct.
 									falsePoints = Integer.parseInt(results.get("Points"));
@@ -788,7 +788,7 @@ public class UIManager implements Manager {
 							.addHeading("The following is how the question will look on the quiz.")
 							.addHeading(question.getQuestion());
 						
-						for(Answer answer: question.getAnswers()) {
+						for (Answer answer: question.getAnswers()) {
 							menu.addListItem(answer.getAnswer());
 						}
 						menu.addText("");
@@ -802,7 +802,7 @@ public class UIManager implements Manager {
 							.addHeading("The following is the point values of each answer.")
 							.addHeading(question.getQuestion());
 							
-						for(Answer answer: question.getAnswers()) {
+						for (Answer answer: question.getAnswers()) {
 							menu.addListItem(answer.getAnswer() + " - Worth " + answer.getPoints() + " Points");
 						}
 						menu.addText("");
@@ -819,19 +819,19 @@ public class UIManager implements Manager {
 		// Queue is used to go from first to last question in order.
 		Queue<OptionMenu> questionsMenus = new LinkedList<OptionMenu>();
 		ArrayList<Question> questions = new ArrayList<>(quiz.getQuestions());
-		if(quiz.isScrambled())
+		if (quiz.isScrambled())
 			Collections.shuffle(questions);
 		GradedQuiz gradedQuiz = new GradedQuiz(quiz.getId(), this.getCurrentUser().getID());
 		int i = 1;
-		for(Question question: questions) {
+		for (Question question: questions) {
 			OptionMenu menu = (new OptionMenu(this));
 			menu.addHeading("Question " + i);
 			i += 1;
 			menu.addHeading(question.getQuestion());
 			ArrayList<Answer> answers = new ArrayList<>(question.getAnswers());
-			if(quiz.isScrambled())
+			if (quiz.isScrambled())
 				Collections.shuffle(answers);
-			for(Answer answer: answers) {
+			for (Answer answer: answers) {
 				final Question currentQuestion = question;
 				final Answer chosenAnswer = answer;
 				menu.addOption((new MenuOption(answer.getAnswer()))
@@ -848,14 +848,14 @@ public class UIManager implements Manager {
 					verifyMenu.addSubheading("The format of the file should be the response you to choose.");
 					verifyMenu.addSubheading("Ex. \"1\"");
 					verifyMenu.open();
-					if(verifyMenu.resultWasYes()) {
+					if (verifyMenu.resultWasYes()) {
 						boolean importRequested = true;
 						do {
 							MenuQuickInput importMenu = new MenuQuickInput(this, "Okay. What is the file path?");
 							importMenu.open();
 	
 							ArrayList<String> resp = FileWrapper.readFile(importMenu.getResult());
-							if(resp == null) {
+							if (resp == null) {
 								System.out.println("Invalid path. Would you like to try again?");
 								
 							}
@@ -883,7 +883,7 @@ public class UIManager implements Manager {
 					OptionMenuYesNo viewSubmission = new OptionMenuYesNo(this);
 					viewSubmission.addHeading("Would you like to see your score?");
 					viewSubmission.open();
-					if(viewSubmission.resultWasNo()) {
+					if (viewSubmission.resultWasNo()) {
 						System.out.println("Okay.");
 						return MenuState.CLOSE;
 					}
@@ -897,7 +897,7 @@ public class UIManager implements Manager {
 					exitMenu.addHeading("Are you sure you want to cancel submitting this quiz?");
 					exitMenu.addSubheading("If you cancel now, all your answers will be gone.");
 					exitMenu.open();
-					if(exitMenu.resultWasYes()) {
+					if (exitMenu.resultWasYes()) {
 						System.out.println("Going back to the main menu.");
 						return MenuState.CLOSE;
 					} else {
@@ -916,17 +916,18 @@ public class UIManager implements Manager {
 		
 		Answer chosen = null;
 		Answer best = question.getAnswers().get(0);
-		for(Answer answer: question.getAnswers()) {
+		for (Answer answer: question.getAnswers()) {
 			menu.addListItem(answer.getAnswer());
 			
-			if(answer.getId() == chosenAnswerId) {
+			if (answer.getId() == chosenAnswerId) {
 				chosen = answer;
 			}
-			if(answer.getPoints() > best.getPoints()) {
+			if (answer.getPoints() > best.getPoints()) {
 				best = answer;
 			}
 		}
-		menu.addText("The given answer was: " + (question.getAnswers().indexOf(chosen) + 1) + ": " + (chosen == null ? "Unknown" : chosen.getAnswer()));
+		menu.addText("The given answer was: " + (question.getAnswers().indexOf(chosen) + 1) + ": " + 
+			(chosen == null ? "Unknown" : chosen.getAnswer()));
 		menu.addText("The best answer was: " + (question.getAnswers().indexOf(best) + 1) + ": " + best.getAnswer());
 		menu.addText("Points earned: " + chosen.getPoints() + "/" + best.getPoints());
 		menu.open();
@@ -934,39 +935,40 @@ public class UIManager implements Manager {
 	
 	private Menu getSubmissionMenu(GradedQuiz gradedQuiz) {
 		User student = lms.getUserManager().getUserById(gradedQuiz.getStudentID()); 
-		if(student == null) {
+		if (student == null) {
 			return (new InformationMenu(this))
 				.addText("An error occurred when getting the submitted quiz.")
 				.addText("The student doesn't exist.")
 				.requireEnter();
 		}
 		Quiz quiz = lms.getQuizManager().searchQuizByID(gradedQuiz.getQuizID());
-		if(quiz == null) {
+		if (quiz == null) {
 			return (new InformationMenu(this))
 				.addText("An error occurred when getting the submitted quiz.")
 				.addText("The quiz doesn't exist.")
 				.requireEnter();
 		}
-		String heading = "Viewing " + student.getName() + "'s submission of Quiz: '" + quiz.getName() + "' in course: " + quiz.getCourse();
-		if(student == this.getCurrentUser())
+		String heading = "Viewing " + student.getName() + "'s submission of Quiz: '" + 
+			quiz.getName() + "' in course: " + quiz.getCourse();
+		if (student == this.getCurrentUser())
 			heading = "Viewing your submission of Quiz: " + quiz.getName() + " in course: " + quiz.getCourse();
 		
 		int earnedPoints = 0;
 		int possiblePoints = 0;
 		
-		for(Question question: quiz.getQuestions()) {
+		for (Question question: quiz.getQuestions()) {
 			int chosenAnswerId = gradedQuiz.getGradedQuizMap().get(question.getId());
 			Answer chosen = null;
 			Answer best = question.getAnswers().get(0);
-			for(Answer answer: question.getAnswers()) {
-				if(answer.getId() == chosenAnswerId) {
+			for (Answer answer: question.getAnswers()) {
+				if (answer.getId() == chosenAnswerId) {
 					chosen = answer;
 				}
-				if(answer.getPoints() > best.getPoints()) {
+				if (answer.getPoints() > best.getPoints()) {
 					best = answer;
 				}
 			}
-			if(chosen == null) {
+			if (chosen == null) {
 				return (new InformationMenu(this))
 					.addText("Error: The quiz has been modified since this submission was given.")
 					.addText("An answer has been chosen that no longer exists.")
@@ -995,15 +997,15 @@ public class UIManager implements Manager {
 			.addOption((new MenuOption("View Incorrect Answers"))
 				.onSelect(() -> {
 					ArrayList<Question> questionsWithUnoptimalAnswers = new ArrayList<Question>();
-					for(Question question: quiz.getQuestions()) {
+					for (Question question: quiz.getQuestions()) {
 						int chosenAnswerId = gradedQuiz.getGradedQuizMap().get(question.getId());
 						Answer chosen = null;
-						for(Answer answer: question.getAnswers()) {
-							if(answer.getId() == chosenAnswerId) {
+						for (Answer answer: question.getAnswers()) {
+							if (answer.getId() == chosenAnswerId) {
 								chosen = answer;
 							}
 						}
-						if(!chosen.isCorrect()) {
+						if (!chosen.isCorrect()) {
 							questionsWithUnoptimalAnswers.add(question);
 						}
 					}
