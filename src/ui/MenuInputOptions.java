@@ -23,10 +23,10 @@ public class MenuInputOptions extends MenuInput {
 		this.optionMenu = new OptionMenuWithResult<String>(uiManager);
 		for (String option: options) {
 			optionMenu.addOption(((new MenuOption(option))
-				   .onSelect(() -> {
-					   optionMenu.setResult(option);
-					   return MenuState.CLOSE;
-			   	   })
+				.onSelect(() -> {
+					optionMenu.setResult(option);
+					return MenuState.CLOSE;
+				})
 			));
 		}
 	}

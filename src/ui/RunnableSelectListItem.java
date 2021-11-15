@@ -6,7 +6,7 @@ package ui;
  * 
  * @author Isaac Fleetwood
  * @version 1.0.0
- * @param T the type of the selected item
+ * @param <T> the type of the selected item
  * @see OptionListMenu
  */
 public interface RunnableSelectListItem<T> {

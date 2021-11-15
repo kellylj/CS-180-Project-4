@@ -33,7 +33,7 @@ public class MenuInputInt extends MenuInput {
 		try {
 			Integer.parseInt(number);
 			return true;
-		} catch(NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			return false;
 		}
 	}
