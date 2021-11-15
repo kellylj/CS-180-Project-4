@@ -503,7 +503,9 @@ public class UIManager implements Manager {
 				    .getQuizManager()
 				    .getListOfCourses()
 				    .stream()
-				    .map(course -> new StringListable(course))
+				    .map(course -> (
+				    	new StringListable(course)
+				    ))
 				    .collect(Collectors.toList());
 			})
 		    .onSelectListItem(
@@ -569,7 +571,8 @@ public class UIManager implements Manager {
 					}))
 		    .addOption((new MenuOption("Change Name"))
 			    .onSelect(() -> {
-					MenuQuickInput quickInput = new MenuQuickInput(this, "What would you like the new name of the quiz to be?");
+					MenuQuickInput quickInput = new MenuQuickInput(this, 
+						"What would you like the new name of the quiz to be?");
 					quickInput.open();
 					String newName = quickInput.getResult();
 					quiz.setName(newName);
@@ -578,7 +581,8 @@ public class UIManager implements Manager {
 				}))
 		    .addOption((new MenuOption("Change Course"))
 			    .onSelect(() -> {
-					MenuQuickInput quickInput = new MenuQuickInput(this, "What course would you like this quiz to be in?");
+					MenuQuickInput quickInput = new MenuQuickInput(this, 
+						"What course would you like this quiz to be in?");
 					quickInput.open();
 					String newCourse = quickInput.getResult();
 					quiz.setCourse(newCourse);
@@ -616,7 +620,7 @@ public class UIManager implements Manager {
 	private InputMenu getAddQuestionMenu(Quiz quiz) {
 		
 		InputMenu questionMenu = (new InputMenu(this))
-		   .addInputWithOptions("What type of question do you want to add?",
+		    .addInputWithOptions("What type of question do you want to add?",
 				  new String[] {"Multiple Choice", "True or False", "Dropdown"},
 				  "Type"
 			)
@@ -660,12 +664,12 @@ public class UIManager implements Manager {
 								int pointvalue = Integer.parseInt(answerInfo.get("PointValue"));
 								
 								question.getAnswers().add(
-								   new Answer(
-								      answer, 
-									  pointvalue > 0, 
-									  pointvalue, 
-									  question.generateUniqueAnswerId() + 1
-								   )
+								    new Answer(
+								       answer, 
+									   pointvalue > 0, 
+									   pointvalue, 
+									   question.generateUniqueAnswerId() + 1
+								    )
 								);
 								return MenuState.CLOSE;
 							});

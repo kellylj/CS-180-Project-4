@@ -39,7 +39,14 @@ public class JUnitTestCases {
         	}
         }
     }
-
+    /**
+     * A framework to run public test cases.
+     *
+     * Contains various test cases
+     *
+     * @author Isaac Fleetwood and Liam Kelly
+     * @version Nov 14, 2021
+     */
     public static class TestCase {
         private final PrintStream originalOutput = System.out;
         private final InputStream originalSysin = System.in;
@@ -92,9 +99,9 @@ public class JUnitTestCases {
             Assert.assertFalse("Ensure that `" + className + "` is NOT `abstract`!", Modifier.isAbstract(modifiers));
             Assert.assertEquals("Ensure that `" + className + "` extends `Object`!", Object.class, superclass);
             Assert.assertEquals("Ensure that `" + className + "` implements the Manager interface " + 
-            		"(it doesn't implement any)!", 1, superinterfaces.length);
+            	"(it doesn't implement any)!", 1, superinterfaces.length);
             Assert.assertEquals("Ensure that `" + className + "` implements the Manager interface " + 
-            		"(what it implements isn't the Manager interface)!", Manager.class, superinterfaces[0]);
+            	"(what it implements isn't the Manager interface)!", Manager.class, superinterfaces[0]);
         }
 
         @Test(timeout = 1000)
@@ -158,7 +165,7 @@ public class JUnitTestCases {
             receiveInput(input);
             try {
             	LearningManagementSystem.main(new String[0]);
-            } catch(Exception e) {
+            } catch (Exception e) {
             	e.printStackTrace();
             }
             // Retrieves the output from the program
@@ -255,7 +262,7 @@ public class JUnitTestCases {
 
             String[] inputArr = new String[] {
                 "2", "Test User", "testUsername", "testPassword", "1", "1", "1","testUsername", "testPassword", "3",
-                "Test Quiz", "Test Course", "2","2", "1", "Test Question?", "1", "Correct Answer", "1", "1",
+                "Test Quiz", "Test Course", "2", "2", "1", "Test Question?", "1", "Correct Answer", "1", "1",
                 "Incorrect Answer", "0", "6", "7", "1", "1", "1", "2", "2","6","3"
             };
 

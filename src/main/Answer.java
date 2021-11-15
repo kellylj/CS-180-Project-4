@@ -52,18 +52,18 @@ public class Answer {
     /**
      * Sets a new point value for the question
      *
-     * @param points - the new point value
+     * @param pointsParameter - the new point value
      */
-    public void setPointValue(int points) {
-        this.points = points;
+    public void setPointValue(int pointsParameter) {
+        this.points = pointsParameter;
     }
     /**
      * Sets the new question id
      *
-     * @param id - the new unique id for the answer
+     * @param idParameter - the new unique id for the answer
      */
-    public void setID(int id) {
-        this.id = id;
+    public void setID(int idParameter) {
+        this.id = idParameter;
     }
     /**
      * Returns the question's unique id

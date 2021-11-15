@@ -13,7 +13,7 @@ import java.util.*;
  * @verion 11/14/21
  * @see QuizManager
  */
-public class Quiz implements Listable{
+public class Quiz implements Listable {
     private String name;
     private String author;
     ArrayList<Question> questions;
@@ -96,10 +96,10 @@ public class Quiz implements Listable{
     /**
      * Sets quiz ID
      *
-     * @param id - the new ID of the quiz
+     * @param idParameter - the new ID of the quiz
      */
-    public void setID(int id) {
-        this.id = id;
+    public void setID(int idParameter) {
+        this.id = idParameter;
     }
     /**
      * Sets quiz scrambled boolean
@@ -161,7 +161,7 @@ public class Quiz implements Listable{
     }
     public String toString() {
         String quizDescription = "Quiz name: " + name + "\nAuthor: " + author;
-        quizDescription+= "\nCourse: " + course;
+        quizDescription += "\nCourse: " + course;
         return quizDescription;
     }
 
