@@ -52,12 +52,12 @@ public class GradedQuizManager implements Manager {
 
     /**
      * Removes a graded quiz from the list of graded quiz
-     * @param ID The ID of the Graded Quiz that is to be removed
+     * @param id The ID of the Graded Quiz that is to be removed
      */
-    public void removeQuiz(int ID) {
+    public void removeQuiz(int id) {
         int startingListLength = gradedQuizList.size();
         for (int i = 0; i < gradedQuizList.size(); i++) {
-            if (gradedQuizList.get(i).getID().equals(Integer.toString(ID))) {
+            if (gradedQuizList.get(i).getID().equals(Integer.toString(id))) {
                 gradedQuizList.remove(i);
                 i--;
             }
