@@ -88,6 +88,9 @@ public class UIManager implements Manager {
 	 */
 	@Override
 	public void init() {
+		/*
+		 * The start menu.
+		 */
 		menuStart = (new OptionMenu(this))
 		    .addHeading("Welcome to the Learning Management System!")
 		    .addSubheading("Please select one of the following options:")
@@ -104,6 +107,9 @@ public class UIManager implements Manager {
 				return MenuState.CLOSE;
 			}));
 		
+		/*
+		 * The create user menu.
+		 */
 		menuCreateUser = (new InputMenu(this))
 		    .addHeading("Creating a new user")
 		    .addSubheading("Please answer the following questions")
@@ -151,6 +157,9 @@ public class UIManager implements Manager {
 				return MenuState.CLOSE;
 			});
 		
+		/*
+		 * The login menu
+		 */
 		menuLogin = (new InputMenu(this))
 		    .addHeading("Logging into the Learning Management System.")
 		    .addSubheading("Please enter your login details.")
@@ -187,6 +196,9 @@ public class UIManager implements Manager {
 				return MenuState.CLOSE;
 			});
 
+		/*
+		 * The main menu for a Student.
+		 */
 		menuMainStudent = (new OptionMenu(this))
 		    .setCheckLogin(true)
 		    .addHeading("Main Menu")
@@ -370,6 +382,9 @@ public class UIManager implements Manager {
 					return MenuState.CLOSE;
 				}));
 		
+		/*
+		 * The menu for selecting a course then a quiz to look at it.
+		 */
 		menuSelectQuizView = getCourseQuizSelectionMenu("Please select a quiz to view.",
 			(Quiz quiz) -> {
 				InformationMenu viewQuizMenu = (new InformationMenu(this))
@@ -381,6 +396,9 @@ public class UIManager implements Manager {
 			}
 		);
 		
+		/*
+		 * The menu for selecting a quiz submission
+		 */
 		menuSelectQuizSubmissions = (new OptionListMenu<ListableGradedQuiz>(this))
 		    .onRequestListItems(() -> {
 				return lms
@@ -397,6 +415,9 @@ public class UIManager implements Manager {
 			})
 		    .addHeading("Select a quiz submission to view it.");
 		
+		/*
+		 * The menu for selecting a quiz to take
+		 */
 		menuSelectQuizTake = getCourseQuizSelectionMenu("Please select a quiz to take.",
 			(Quiz quiz) -> {
 				InformationMenu viewQuizMenu = (new InformationMenu(this))
@@ -416,6 +437,9 @@ public class UIManager implements Manager {
 			}
 		);
 		
+		/*
+		 * The menu for selecting a quiz to modify.
+		 */
 		menuSelectQuizModify = getCourseQuizSelectionMenu("Please select a quiz to modify.",
 			(Quiz quiz) -> {
 				OptionMenu menu = getMenuModifyQuiz(quiz);
@@ -424,6 +448,10 @@ public class UIManager implements Manager {
 			}
 		);
 		
+		/*
+		 * The menu that prompts the user for information
+		 * about adding a new quiz.
+		 */
 		menuAddQuiz = (new InputMenu(this))
 		    .addHeading("Creating a new quiz.")
 		    .addInput("What would you like the name of this quiz to be?", "Name")
@@ -477,6 +505,13 @@ public class UIManager implements Manager {
 		
 	}
 
+	/**
+	 * Method used for getting a menu where a course is selected, and then
+	 * a quiz is selected from a list of quizzes in that course.
+	 * 
+	 * @param heading The heading to be shown when selecting a quiz.
+	 * @param callback The callback function for when a Quiz is selected.
+	 */
 	private Menu getCourseQuizSelectionMenu(String heading, RunnableSelectListItem<Quiz> callback) {
 		
 		/**
@@ -522,6 +557,11 @@ public class UIManager implements Manager {
 		    .addHeading("Please select a course.");
 	}
 
+	/**
+	 * Method used for getting a menu to modify a specific quiz.
+	 * 
+	 * @param quiz The quiz to be modified.
+	 */
 	private OptionMenu getMenuModifyQuiz(Quiz quiz) {
 		return (new OptionMenu(this))
 		    .onHeadingPrint(() -> {
@@ -661,6 +701,12 @@ public class UIManager implements Manager {
 				}));
 	}
 
+	/**
+	 * Method used for getting a menu to add a question
+	 * to a specific quiz.
+	 * 
+	 * @param quiz The quiz to add a question to.
+	 */
 	private InputMenu getAddQuestionMenu(Quiz quiz) {
 		
 		InputMenu questionMenu = (new InputMenu(this))
@@ -693,7 +739,13 @@ public class UIManager implements Manager {
 			});
 		return questionMenu;
 	}
-	
+
+	/**
+	 * Method used for getting a menu for modifying
+	 * a specific multiple choice question
+	 * 
+	 * @param question The question to modify
+	 */
 	private OptionMenu getMenuModifyQuestionMultipleChoice(Question question) {
 		return (new OptionMenu(this))
 			    .addHeading("Modifying Question: " + question.getQuestion())
@@ -805,7 +857,13 @@ public class UIManager implements Manager {
 						return MenuState.CLOSE;
 					}));
 	}
-	
+
+	/**
+	 * Method used for getting a menu to modify
+	 * a specific question
+	 * 
+	 * @param question The question to modify.
+	 */
 	private Menu getMenuModifyQuestion(Question question) {
 		switch(question.getQuestionType()) {
 			case "Multiple Choice":
@@ -821,7 +879,13 @@ public class UIManager implements Manager {
 				    .requireEnter();
 		}
 	}
-	
+
+	/**
+	 * Method used for getting a menu for modifying
+	 * a specific true or false question
+	 * 
+	 * @param question The question to modify
+	 */
 	private OptionMenu getMenuModifyQuestionTrueFalse(Question question) {
 		return (new OptionMenu(this))
 			    .addHeading("Modifying Question: " + question.getQuestion())
@@ -885,7 +949,15 @@ public class UIManager implements Manager {
 						return MenuState.CLOSE;
 					}));
 	}
-	
+
+	/**
+	 * Method used for getting a menu for
+	 * taking a quiz. Is used right after
+	 * the user select the quiz they want
+	 * to take and verify they want to take it
+	 * 
+	 * @param quiz The quiz to take
+	 */
 	private OptionMenu getMenuTakeQuiz(Quiz quiz) {
 		// Queue is used to go from first to last question in order.
 		Queue<OptionMenu> questionsMenus = new LinkedList<OptionMenu>();
@@ -1009,6 +1081,13 @@ public class UIManager implements Manager {
 		return questionsMenus.poll();
 	}
 
+	/**
+	 * Method used for getting a menu to
+	 * show question and answer information
+	 * 
+	 * @param question The question show info about
+	 * @param chosenAnswerId The id of the chosen answer.
+	 */
 	private void showQuestionInfoMenu(Question question, int chosenAnswerId) {
 		InformationMenu menu = (new InformationMenu(this))
 		    .requireEnter()
@@ -1041,7 +1120,13 @@ public class UIManager implements Manager {
 		menu.addText("Points earned: " + chosen.getPoints() + "/" + bestPoints);
 		menu.open();
 	}
-	
+
+	/**
+	 * Method used for getting a menu to
+	 * view information about a quiz submission
+	 * 
+	 * @param gradedQuiz The graded quiz to show
+	 */
 	private Menu getSubmissionMenu(GradedQuiz gradedQuiz) {
 		User student = lms.getUserManager().getUserById(gradedQuiz.getStudentID()); 
 		if (student == null) {

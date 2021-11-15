@@ -19,6 +19,11 @@ The JUnit test cases can be ran by running `run_test_cases.sh` in the root proje
 ## Importing File Instructions
 The instructions for importing quizzes from a file can be found in `ImportExample.txt`. If you would like to see an example of a file formatted properly to be imported, view `TestImport.txt`.
 
+## Javadoc Information
+We have included Javadocs alongside our code which can be found in `/doc`. These javadocs include each of our classes, with documentation regarding what each class does and what many of the methods in each class also do. 
+
+This documentation can be very useful for getting an overview of how certain parts of the code (such as the User Interface Menu System) are structured.
+
 # Classes Summary
 
 ## Main Class
@@ -44,7 +49,7 @@ Classes that each handle a vital function of the program.
 This interface is what blueprints all of other managers used in this application such as UIManager, QuizManager, and UserManager. There are 2 methods in this interface: `init()` and `exit()`. These methods help initialize and save data. 
 
 ### UIManager
-The manager that is responsible for the User Interface (UI). It uses the User Interface Menu System to create menus that the user then interacts with. In “init()” it creates all of the menus, which sets up the structure of the UI, and then in `run()` it runs the start menu, which is used as the entry point to the rest of the UI.
+The manager that is responsible for the User Interface (UI). It uses the User Interface Menu System to create menus that the user then interacts with. In `init()` it creates all of the menus, which sets up the structure of the UI, and then in `run()` it runs the start menu, which is used as the entry point to the rest of the UI.
 
 ### UserManager
 The manager that is responsible for keeping track of users and providing functionalities such as `addUser()` or `authenticator()`. This manager performs actions that mainly require iterating through all the Users. For example, searching a user by his username or generating a unique id for each user is done through this class.
