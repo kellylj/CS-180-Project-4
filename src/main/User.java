@@ -46,10 +46,10 @@ public class User {
 
     /**
      * Sets ID of user
-     * @param inputId ID of user
+     * @param inputIdToBeSet ID of user
      */
-    public void setID(int inputId) {
-        this.id = inputId;
+    public void setID(int inputIdToBeSet) {
+        this.id = inputIdToBeSet;
     }
 
     /**
