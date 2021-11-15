@@ -57,8 +57,8 @@ public class JUnitTestCases {
     	 * Descriptive errors should appear as appropriate. 
     	 * For example, if someone tries to log in with an invalid account. 
     	 * The application should not crash under any circumstances. 
-    	 * - Shown... well... everywhere
-    	 * - But specifically in this.testInvalidUser();
+    	 * - Shown in this.testInvalidUser();
+    	 * - And in this.testInvalidInput();
     	 * 
     	 * Users can create, edit, and delete accounts for themselves.
     	 * - Shown in this.testUserStuff();
@@ -101,10 +101,11 @@ public class JUnitTestCases {
          * 
     	 * Teachers can choose to randomize the order of questions 
     	 * and the order of potential options for a question.
-         * - Shown in this.testShuffle();
+         * - Shown in this.testEditQuiz();
          * 
          * Students will receive a different order with every attempt. 
-         * - Shown in this.testShuffle();
+         * - Due to the nature of probability, this can't be tested. 
+         * - There is always the possibility that the order is exactly the same.
          * 
          * Teachers can view the quiz submissions for individual students 
          * and assign point values to each answer. 
@@ -125,9 +126,6 @@ public class JUnitTestCases {
 	    public void outputStart() {
 		    testOut = new ByteArrayOutputStream();
 		    System.setOut(new PrintStream(testOut));
-		    /*
-		     * this.testShuffle();
-		     */
 	    }
 
         @After
@@ -402,6 +400,70 @@ public class JUnitTestCases {
                 "3: Exit",
                 "Okay! Bye!"
             };
+            String errorMsg = "The output was not expected!";
+
+            tryTestInput(inputArr, expectedArr, errorMsg);
+
+        }
+        
+
+
+        /**
+         * Because all menus use InputMenu and OptionMenu
+         * (or a derivative), if these menus safely handle invalid input,
+         * all menus safely handle invalid input
+         * Because the base error checking is derived from these classes.
+         */
+        @Test(timeout = 1000)
+        public void testInvalidInput() {
+
+        	clearFiles();
+
+            String[] inputArr = new String[] {
+                "", // Invalid input for OptionMenu
+                "haha", // Invalid input for OptionMenu
+                "10", // Invalid input for OptionMenu
+                "-102", // Invalid input for OptionMenu
+                "1",// Valid input for OptionMenu
+                "", // Invalid Input for InputMenu
+                "test", // Valid Input for InputMenu
+                "test", // Valid Input for InputMenu
+                "2", // 
+                "3" // 
+            };
+
+            String[] expectedArr = new String[] {
+        	    "",
+        	    "Welcome to the Learning Management System!",
+        	    "Please select one of the following options:",
+        	    "1: Login",
+        	    "2: Create User",
+        	    "3: Exit",
+        	    "Please use a valid integer when selecting an option.", // Errors
+        	    "Please use a valid integer when selecting an option.",
+        	    "Please select a valid option.",
+        	    "Please select a valid option.",
+        	    "",
+        	    "Logging into the Learning Management System.",
+        	    "Please enter your login details.",
+        	    "Username: ",
+        	    "Please try again and enter a valid input.", // Error
+        	    "Password: ",
+        	    "",
+        	    "Invalid login credentials.",
+        	    "Would you like to try again?",
+        	    "1: Yes",
+        	    "2: No",
+        	    "Okay. Going back to the main menu.",
+        	    "",
+        	    "Welcome to the Learning Management System!",
+        	    "Please select one of the following options:",
+        	    "1: Login",
+        	    "2: Create User",
+        	    "3: Exit",
+        	    "Okay! Bye!",
+        	};
+            
             String errorMsg = "The output was not expected!";
 
             tryTestInput(inputArr, expectedArr, errorMsg);
@@ -1654,6 +1716,8 @@ public class JUnitTestCases {
                 "4", // remove question
                 "2", // Question 2
                 "1", // Yes, want to delete
+                "7", // Set scrambled
+                "1", // Yes
                 "1", // View questions
                 "1", // View question 1
                 "", // Enter
@@ -1669,7 +1733,7 @@ public class JUnitTestCases {
                 "6", // Logout
                 "3" // Exit
             };
-
+        	
         	String[] expectedArr = new String[] {
     		    "",
     		    "Welcome to the Learning Management System!",
@@ -1844,6 +1908,22 @@ public class JUnitTestCases {
     		    "1: Yes",
     		    "2: No",
     		    "The question was succesfully deleted.",
+    		    "",
+    		    "Modifying Quiz: 'Test Quiz'",
+    		    "Current Amount of Questions: 2",
+    		    "1: View Questions",
+    		    "2: Add Question",
+    		    "3: Edit Questions",
+    		    "4: Remove Question",
+    		    "5: Change Name",
+    		    "6: Change Course",
+    		    "7: Set Scrambled",
+    		    "8: Save Quiz",
+    		    "9: Delete Quiz",
+    		    "",
+    		    "Should the quiz be scrambled?",
+    		    "1: Yes",
+    		    "2: No",
     		    "",
     		    "Modifying Quiz: 'Test Quiz'",
     		    "Current Amount of Questions: 2",

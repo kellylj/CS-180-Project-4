@@ -6,7 +6,10 @@ To compile and run the project, run the `compile_and_run.sh` script found in the
 _Note: If the script is ran on Windows (or any system that doesn't support .sh scripts), you can also compile the project normally via the javac command or via an IDE._
 
 ## Voccheck instructions
-Voccheck (the script used by Vocareum to check coding style) only runs on .java files in the root directory. As such, it does not run with our project structure that is organized inside of directories. Because of this, we have provided a handy script `run_voccheck.sh` that will run voccheck on all of our .java files in our source code. Run run_voccheck.sh in Vocareum to view the output of voccheck on our code. If you want, you can also view the source code of the script to verify it is properly checking our code.
+Voccheck (the script used by Vocareum to check coding style) only runs on .java files in the root directory. As such, it does not run with our project structure that is organized inside of directories. Because of this, we have provided a handy script `run_voccheck.sh` that will run voccheck on all of our .java files in our source code. Run `run_voccheck.sh` in Vocareum to view the output of voccheck on our code. If you want, you can also view the source code of the script to verify it is properly checking our code.
+
+## JUnit Test Cases instructions.
+The JUnit test cases can be ran by running `run_test_cases.sh` in the root project directory. Alternatively, they can also be ran via running the main method found in main/JUnitTestCases.java
 
 # Classes Summary
 
@@ -70,6 +73,9 @@ Extends User. Contains the details of a particular teacher.
 
 #### Student
 Extends User. Contains the details of a particular student.
+
+#### UserPermission
+A class used for representing a user's permissions. This allows the permissions to be extended further in case we want more permissions than just 'Teacher' or 'Student' in the future.
 
 ### GradedQuiz
 Class used for storing data about each graded quiz. Contains questions, student responses, the quiz's ID, and the student's ID.
@@ -149,7 +155,8 @@ Ran whenever an option is selected in OptionMenu
 ### ANSICodes
 This class contains ANSI codes that are used for modifying text (like making it bold, underlines, or a different color). Also, it contains some commands for clearing the terminal and moving the cursor. Then, it also contains a utility function for stripping the ANSI codes from a piece of text, which is used for comparing output in test cases.
 
-### NumberUtils
-A class containing number utility functions that have no specific other place and are used through the program. Specifically, it contains a function to check if a number is an integer or not.
 
+## Test Case Classes
 
+### JUnitTestCases
+This class contains all JUnit test cases. In it, each requirement of the project is outlined, and it shows which test cases shows that each requirement is properly implemented.
