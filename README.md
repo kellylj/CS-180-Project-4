@@ -74,8 +74,6 @@ Extends User. Contains the details of a particular student.
 ### GradedQuiz
 Class used for storing data about each graded quiz. Contains questions, student responses, the quiz's ID, and the student's ID.
 
-### ... etc
-
 ### Listable
 All classes that can be used in a list menu must implement this interface. It adds a function for how to represent the object in the list (`getListName()`).
 
