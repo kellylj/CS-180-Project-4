@@ -4,8 +4,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.StringJoiner;
-
-
+/**
+ * Reads and writes files with graded quiz information for initialization and storage
+ * <p>
+ * Contains an ArrayList of graded quizzes from storage that will be passed to GradedQuizManager.
+ * <p>
+ *
+ *
+ * @author Daniel Geva
+ * @version 11/14/21
+ * @see GradedQuizManager
+ * @see FileWrapper
+ */
 public class GradedQuizFileManager implements Manager {
 
     LearningManagementSystem lms;
