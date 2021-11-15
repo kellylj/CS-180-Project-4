@@ -6,7 +6,7 @@
 * Run run_voccheck.sh to verify that we pass
 * the coding style checks.
 * 
-* @author Nobody
+* @author Isaac Fleetwood
 * @version 1.0.0
 */
 public class Fake {
