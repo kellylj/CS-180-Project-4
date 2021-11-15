@@ -89,12 +89,15 @@ public class OptionListMenu<T extends Listable> extends OptionMenuWithResult<T> 
         this.options.clear();
 
         // Add "Previous Page" option, which causes the page to decrease.
-        this.addOption((new MenuOption("Previous Page")).addVisibilityCondition(() -> {
-            return this.page > 0;
-        }).onSelect(() -> {
-            this.page -= 1;
-            return MenuState.RESTART;
-        }));
+        this.addOption((new MenuOption("Previous Page"))
+        	.addVisibilityCondition(() -> {
+        		return this.page > 0;
+        	})
+        	.onSelect(() -> {
+	            this.page -= 1;
+	            return MenuState.RESTART;
+	        })
+        );
 
         for (int i = 0; i < AMT_ITEMS_PER_PAGE; i++) {
             int j = page * AMT_ITEMS_PER_PAGE + i;
@@ -110,12 +113,15 @@ public class OptionListMenu<T extends Listable> extends OptionMenuWithResult<T> 
         }
 
         // Add Next Page option, which increases the page, but only if there's more quizzes to see.
-        this.addOption((new MenuOption("Next Page")).addVisibilityCondition(() -> {
-            return items.size() > (page + 1) * AMT_ITEMS_PER_PAGE;
-        }).onSelect(() -> {
-            this.page += 1;
-            return MenuState.RESTART;
-        }));
+        this.addOption((new MenuOption("Next Page"))
+        	.addVisibilityCondition(() -> {
+        		return items.size() > (page + 1) * AMT_ITEMS_PER_PAGE;
+        	})
+        	.onSelect(() -> {
+	            this.page += 1;
+	            return MenuState.RESTART;
+	        })
+        );
 
         // Add Exit option, which closes the menu.
         this.addOption((new MenuOption("Exit")).onSelect(() -> {
