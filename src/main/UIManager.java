@@ -928,12 +928,12 @@ public class UIManager implements Manager {
 											selectedAnswer = answer;
 											break;
 										}
-										if(answer.getAnswer().equalsIgnoreCase(choice)) {
+										if (answer.getAnswer().equalsIgnoreCase(choice)) {
 											selectedAnswer = answer;
 											break;
 										}
 									}
-									if(selectedAnswer != null) {
+									if (selectedAnswer != null) {
 										gradedQuiz.addQuestion(question, selectedAnswer);
 										questionsMenus.poll().open();
 										menu.open();

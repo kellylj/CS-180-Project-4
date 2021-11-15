@@ -50,10 +50,13 @@ public class JUnitTestCases {
     	/*
     	 * Requirements to be tested:
     	 * 
-    	 * Data must persist regardless of whether or not a user is connected. If a user disconnects and reconnects, their data should still be present. 
+    	 * Data must persist regardless of whether or not a user is connected.
+    	 * If a user disconnects and reconnects, their data should still be present. 
     	 * - Shown in this.testPersistance();
     	 * 
-    	 * Descriptive errors should appear as appropriate. For example, if someone tries to log in with an invalid account. The application should not crash under any circumstances. 
+    	 * Descriptive errors should appear as appropriate. 
+    	 * For example, if someone tries to log in with an invalid account. 
+    	 * The application should not crash under any circumstances. 
     	 * - Shown... well... everywhere
     	 * - But specifically in this.testInvalidUser();
     	 * 
@@ -65,7 +68,8 @@ public class JUnitTestCases {
          * Quizzes will have one or more multiple choice questions. 
          * - Shown in this.testQuizzes();
          * 
-         * Quiz questions will appear on the same page in the order they are added to the quiz. 
+         * Quiz questions will appear on the same page in the order 
+         * they are added to the quiz. 
          * - Shown in this.testQuizzes();
          * - And this.testSubmit(); (take quiz)
          * 
@@ -76,33 +80,39 @@ public class JUnitTestCases {
          * Teachers can view student submissions for the quiz. 
          * - Shown in this.testSubmissionTimestamp()
     	 * 
-    	 * Students can take any created quiz. Students can select their responses to each question. 
+    	 * Students can take any created quiz. 
+    	 * Students can select their responses to each question. 
     	 * - Shown in this.testSubmissionTimestamp()
     	 * 
-         * After completing a quiz, students can submit it. Each submission must be timestamped. 
+         * After completing a quiz, students can submit it. 
+         * Each submission must be timestamped. 
 		 * - Shown in this.testSubmissionTimestamp()
 		 * 
 		 * -- Selection Requirements
     	 * All file imports must occur as a prompt to enter the file path.  
          * - Shown in this.testImportQuiz();
          * 
-         * Teachers can import a file with the quiz title and quiz questions to create a new quiz. 
+         * Teachers can import a file with the quiz title and 
+         * quiz questions to create a new quiz. 
          * - Shown in this.testImportQuiz();
          * 
          * Students can attach a file to any question as a response. 
          * - Shown in this.testImportReponse();
          * 
-    	 * Teachers can choose to randomize the order of questions and the order of potential options for a question.
+    	 * Teachers can choose to randomize the order of questions 
+    	 * and the order of potential options for a question.
          * - Shown in this.testShuffle();
          * 
          * Students will receive a different order with every attempt. 
          * - Shown in this.testShuffle();
          * 
-         * Teachers can view the quiz submissions for individual students and assign point values to each answer. 
+         * Teachers can view the quiz submissions for individual students 
+         * and assign point values to each answer. 
          * - Shown in this.testQuizzes(); (creating quiz assigns points)
          * - Shown in this.testSubmissionTimestamp(); (viewing submission shows points)
          * 
-         * Students can view their graded quizzes, with the points for each individual question and their total score listed. 
+         * Students can view their graded quizzes, with the points for each 
+         * individual question and their total score listed. 
     	 * - Shown in this.testSubmissionTimestamp();
          * 
     	 */
@@ -678,7 +688,8 @@ public class JUnitTestCases {
         	    "Okay! Bye!",
         	};
         	
-            String errorMsg = "The data is not persistent! Unable to login, or unable to view quiz from previous session!";
+            String errorMsg = "The data is not persistent! Unable to login, or " + 
+                "unable to view quiz from previous session!";
 
             tryTestInput(inputArr, expectedArr, errorMsg);
 
@@ -1221,7 +1232,8 @@ public class JUnitTestCases {
         	    "Okay! Bye!",
         	};
 
-            String errorMsg = "An error occurred when checking if multiple quizzes and questions can exist!";
+            String errorMsg = "An error occurred when checking if multiple quizzes " + 
+                "and questions can exist!";
 
             tryTestInput(inputArr, expectedArr, errorMsg);
 
@@ -1472,134 +1484,134 @@ public class JUnitTestCases {
             };
             
             String[] expectedArr = new String[] {
-            	    "",
-            	    "Welcome to the Learning Management System!",
-            	    "Please select one of the following options:",
-            	    "1: Login",
-            	    "2: Create User",
-            	    "3: Exit",
-            	    "",
-            	    "Logging into the Learning Management System.",
-            	    "Please enter your login details.",
-            	    "Username: ",
-            	    "Password: ",
-            	    "You have successfully logged in!",
-            	    "",
-            	    "Main Menu",
-            	    "Please select one of the following options:",
-            	    "1: View Quizzes",
-            	    "2: Take Quiz",
-            	    "3: View Your Quiz Submissions",
-            	    "4: User Settings",
-            	    "5: Logout",
-            	    "",
-            	    "Please Select one of the following quiz submissions.",
-            	    "1: Student Name - Test Quiz - .*", // RegEx for any date
-            	    "2: Exit",
-            	    "",
-            	    "Viewing your submission of Quiz: Test Quiz in course: Test Course",
-            	    "Total Score: 1\\/2",
-            	    "1: View All Questions",
-            	    "2: View Incorrect Answers",
-            	    "3: Exit",
-            	    "",
-            	    "Select a question to view it.",
-            	    "1: Question 2!",
-            	    "2: Exit",
-            	    "",
-            	    "Question Info",
-            	    "Question 2!",
-            	    "1: Totally not correct",
-            	    "2: Totally not incorrect",
-            	    "The given answer was: 2: Totally not incorrect",
-            	    "The best answer was: 1: Totally not correct",
-            	    "Points earned: 0\\/1",
-            	    "Please press Enter to continue.",
-            	    "",
-            	    "Select a question to view it.",
-            	    "1: Question 2!",
-            	    "2: Exit",
-            	    "",
-            	    "Viewing your submission of Quiz: Test Quiz in course: Test Course",
-            	    "Total Score: 1\\/2",
-            	    "1: View All Questions",
-            	    "2: View Incorrect Answers",
-            	    "3: Exit",
-            	    "",
-            	    "Main Menu",
-            	    "Please select one of the following options:",
-            	    "1: View Quizzes",
-            	    "2: Take Quiz",
-            	    "3: View Your Quiz Submissions",
-            	    "4: User Settings",
-            	    "5: Logout",
-            	    "",
-            	    "Welcome to the Learning Management System!",
-            	    "Please select one of the following options:",
-            	    "1: Login",
-            	    "2: Create User",
-            	    "3: Exit",
-            	    "",
-            	    "Logging into the Learning Management System.",
-            	    "Please enter your login details.",
-            	    "Username: ",
-            	    "Password: ",
-            	    "You have successfully logged in!",
-            	    "",
-            	    "Teacher Menu",
-            	    "1: List Quizzes",
-            	    "2: List All Quiz Submissions",
-            	    "3: Add New Quiz",
-            	    "4: Modify Quizzes",
-            	    "5: User Settings",
-            	    "6: Logout",
-            	    "1: Student Name - Test Quiz - .*", // RegEx for any date
-            	    "2: Exit",
-            	    "",
-            	    "Viewing Student Name's submission of Quiz: 'Test Quiz' in course: Test Course",
-            	    "Total Score: 1\\/2",
-            	    "1: View All Questions",
-            	    "2: View Incorrect Answers",
-            	    "3: Exit",
-            	    "",
-            	    "Select a question to view it.",
-            	    "1: Question 2!",
-            	    "2: Exit",
-            	    "",
-            	    "Question Info",
-            	    "Question 2!",
-            	    "1: Totally not correct",
-            	    "2: Totally not incorrect",
-            	    "The given answer was: 2: Totally not incorrect",
-            	    "The best answer was: 1: Totally not correct",
-            	    "Points earned: 0\\/1",
-            	    "Please press Enter to continue.",
-            	    "",
-            	    "Select a question to view it.",
-            	    "1: Question 2!",
-            	    "2: Exit",
-            	    "",
-            	    "Viewing Student Name's submission of Quiz: 'Test Quiz' in course: Test Course",
-            	    "Total Score: 1\\/2",
-            	    "1: View All Questions",
-            	    "2: View Incorrect Answers",
-            	    "3: Exit",
-            	    "",
-            	    "Teacher Menu",
-            	    "1: List Quizzes",
-            	    "2: List All Quiz Submissions",
-            	    "3: Add New Quiz",
-            	    "4: Modify Quizzes",
-            	    "5: User Settings",
-            	    "6: Logout",
-            	    "",
-            	    "Welcome to the Learning Management System!",
-            	    "Please select one of the following options:",
-            	    "1: Login",
-            	    "2: Create User",
-            	    "3: Exit",
-            	    "Okay! Bye!",
-            	};
+        	    "",
+        	    "Welcome to the Learning Management System!",
+        	    "Please select one of the following options:",
+        	    "1: Login",
+        	    "2: Create User",
+        	    "3: Exit",
+        	    "",
+        	    "Logging into the Learning Management System.",
+        	    "Please enter your login details.",
+        	    "Username: ",
+        	    "Password: ",
+        	    "You have successfully logged in!",
+        	    "",
+        	    "Main Menu",
+        	    "Please select one of the following options:",
+        	    "1: View Quizzes",
+        	    "2: Take Quiz",
+        	    "3: View Your Quiz Submissions",
+        	    "4: User Settings",
+        	    "5: Logout",
+        	    "",
+        	    "Please Select one of the following quiz submissions.",
+        	    "1: Student Name - Test Quiz - .*", // RegEx for any date
+        	    "2: Exit",
+        	    "",
+        	    "Viewing your submission of Quiz: Test Quiz in course: Test Course",
+        	    "Total Score: 1\\/2",
+        	    "1: View All Questions",
+        	    "2: View Incorrect Answers",
+        	    "3: Exit",
+        	    "",
+        	    "Select a question to view it.",
+        	    "1: Question 2!",
+        	    "2: Exit",
+        	    "",
+        	    "Question Info",
+        	    "Question 2!",
+        	    "1: Totally not correct",
+        	    "2: Totally not incorrect",
+        	    "The given answer was: 2: Totally not incorrect",
+        	    "The best answer was: 1: Totally not correct",
+        	    "Points earned: 0\\/1",
+        	    "Please press Enter to continue.",
+        	    "",
+        	    "Select a question to view it.",
+        	    "1: Question 2!",
+        	    "2: Exit",
+        	    "",
+        	    "Viewing your submission of Quiz: Test Quiz in course: Test Course",
+        	    "Total Score: 1\\/2",
+        	    "1: View All Questions",
+        	    "2: View Incorrect Answers",
+        	    "3: Exit",
+        	    "",
+        	    "Main Menu",
+        	    "Please select one of the following options:",
+        	    "1: View Quizzes",
+        	    "2: Take Quiz",
+        	    "3: View Your Quiz Submissions",
+        	    "4: User Settings",
+        	    "5: Logout",
+        	    "",
+        	    "Welcome to the Learning Management System!",
+        	    "Please select one of the following options:",
+        	    "1: Login",
+        	    "2: Create User",
+        	    "3: Exit",
+        	    "",
+        	    "Logging into the Learning Management System.",
+        	    "Please enter your login details.",
+        	    "Username: ",
+        	    "Password: ",
+        	    "You have successfully logged in!",
+        	    "",
+        	    "Teacher Menu",
+        	    "1: List Quizzes",
+        	    "2: List All Quiz Submissions",
+        	    "3: Add New Quiz",
+        	    "4: Modify Quizzes",
+        	    "5: User Settings",
+        	    "6: Logout",
+        	    "1: Student Name - Test Quiz - .*", // RegEx for any date
+        	    "2: Exit",
+        	    "",
+        	    "Viewing Student Name's submission of Quiz: 'Test Quiz' in course: Test Course",
+        	    "Total Score: 1\\/2",
+        	    "1: View All Questions",
+        	    "2: View Incorrect Answers",
+        	    "3: Exit",
+        	    "",
+        	    "Select a question to view it.",
+        	    "1: Question 2!",
+        	    "2: Exit",
+        	    "",
+        	    "Question Info",
+        	    "Question 2!",
+        	    "1: Totally not correct",
+        	    "2: Totally not incorrect",
+        	    "The given answer was: 2: Totally not incorrect",
+        	    "The best answer was: 1: Totally not correct",
+        	    "Points earned: 0\\/1",
+        	    "Please press Enter to continue.",
+        	    "",
+        	    "Select a question to view it.",
+        	    "1: Question 2!",
+        	    "2: Exit",
+        	    "",
+        	    "Viewing Student Name's submission of Quiz: 'Test Quiz' in course: Test Course",
+        	    "Total Score: 1\\/2",
+        	    "1: View All Questions",
+        	    "2: View Incorrect Answers",
+        	    "3: Exit",
+        	    "",
+        	    "Teacher Menu",
+        	    "1: List Quizzes",
+        	    "2: List All Quiz Submissions",
+        	    "3: Add New Quiz",
+        	    "4: Modify Quizzes",
+        	    "5: User Settings",
+        	    "6: Logout",
+        	    "",
+        	    "Welcome to the Learning Management System!",
+        	    "Please select one of the following options:",
+        	    "1: Login",
+        	    "2: Create User",
+        	    "3: Exit",
+        	    "Okay! Bye!",
+        	};
 
             String errorMsg = "Unable to view quiz submissions!";
 
