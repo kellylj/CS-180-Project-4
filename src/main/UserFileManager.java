@@ -1,7 +1,18 @@
 package main;
 import java.io.File;
 import java.util.ArrayList;
-
+/**
+ * Reads and writes files with user information for initialization and storage
+ * <p>
+ * Contains an ArrayList of users from storage that will be passed to UserManager.
+ * <p>
+ *
+ *
+ * @author Daniel Geva
+ * @version 11/14/21
+ * @see UserManager
+ * @see FileWrapper
+ */
 public class UserFileManager implements Manager {
 
     LearningManagementSystem lms;
