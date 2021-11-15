@@ -50,6 +50,26 @@ public class Question implements Listable {
         return retVal;
     }
     /**
+     * Returns the list of answers with the highest point value
+     *
+     * @return bestAnswers - the answers with point values matching the highest provided point values
+     */
+    public ArrayList<Answer> getBestAnswers() {
+        int bestAnswerPointValue = 0;
+        ArrayList<Answer> bestAnswers = new ArrayList<Answer>();
+        for (Answer a: answers) {
+            if (a.getPoints() > bestAnswerPointValue) {
+                bestAnswerPointValue = a.getPoints();
+            }
+        }
+        for (Answer a: answers) {
+            if (a.getPoints() == bestAnswerPointValue) {
+                getBestAnswers().add(a);
+            }
+        }
+        return bestAnswers;
+    }
+    /**
      * Returns the list of answers
      *
      * @return answers - the list of answers to this question
