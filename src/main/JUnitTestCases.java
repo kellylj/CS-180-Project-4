@@ -424,7 +424,7 @@ public class JUnitTestCases {
                 "haha", // Invalid input for OptionMenu
                 "10", // Invalid input for OptionMenu
                 "-102", // Invalid input for OptionMenu
-                "1",// Valid input for OptionMenu
+                "1", // Valid input for OptionMenu
                 "", // Invalid Input for InputMenu
                 "test", // Valid Input for InputMenu
                 "test", // Valid Input for InputMenu

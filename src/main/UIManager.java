@@ -640,10 +640,19 @@ public class UIManager implements Manager {
 			    .onSelect(() -> {
 					OptionMenuYesNo verifyMenu = new OptionMenuYesNo(this);
 					verifyMenu.addHeading("Are you sure you want to delete this quiz?");
+					verifyMenu.addSubheading("All submissions of it will be deleted alongside the quiz.");
 					verifyMenu.open();
 					boolean isYes = verifyMenu.getResult();
 					if (isYes) {
+						ArrayList<GradedQuiz> gradedQuizList = lms.getGradedQuizManager().getGradedQuizList();
+						for (int i = 0; i < gradedQuizList.size(); i++) {
+							if (gradedQuizList.get(i).getQuizID() == quiz.getId()) {
+								gradedQuizList.remove(i);
+								i -= 1;
+							}
+						}
 						lms.getQuizManager().removeQuiz(quiz.getId());
+						System.out.println("Successfully deleted the quiz.");
 						return MenuState.CLOSE;
 					}
 					System.out.println("Okay. Going back to modifying the quiz.");
