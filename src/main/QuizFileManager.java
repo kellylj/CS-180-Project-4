@@ -70,6 +70,10 @@ public class QuizFileManager implements Manager {
 	public ArrayList<Question> readQuestions(String questionList) {
 		ArrayList<Question> questions = new ArrayList<>();
 
+		if (questionList.isEmpty() || questionList.isBlank()) {
+			return questions;
+		}
+
 		String[] list = questionList.split("::", -1);
 		//Two "::" (colons) are used to separate the different questions in a quiz
 
@@ -88,6 +92,10 @@ public class QuizFileManager implements Manager {
 
 	public ArrayList<Answer> readAnswers(String answerList) {
 		ArrayList<Answer> answers = new ArrayList<>();
+
+		if (answerList.isBlank() || answerList.isEmpty()) {
+			return answers;
+		}
 
 		String[] list = answerList.split("--");
 		//Two "--" (dashes) are used to separate the answers from each other
