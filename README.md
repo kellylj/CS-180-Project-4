@@ -1,5 +1,9 @@
 # CS-180-Project-4
 
+# Submission Details
+Project 4 Reflection Submitted by Liam Kelly
+Project 4 submitted on Vocareum by Sean Lee
+
 # Compilation Instructions
 To compile and run the project, run the `compile_and_run.sh` script found in the root project directory. This script will compile all of the java classes, run the main class, and then clean away all of the .class files once the program has exited.
 
