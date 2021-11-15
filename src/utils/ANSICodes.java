@@ -14,6 +14,7 @@ import ui.OptionMenu;
  * ANSI can be used for more things, including moving the cursor and clearing the screen. However there is no guarantee on widespread compatibility with this, so we decided to not use it.
  * 
  * @author Isaac Fleetwood
+ * @version 1.0.0
  * 
  * @see InputMenu#runMenu()
  * @see OptionMenu#runMenu()

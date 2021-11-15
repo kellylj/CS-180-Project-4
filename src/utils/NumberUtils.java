@@ -6,6 +6,7 @@ package utils;
  *    that aren't available by default in Java
  * 
  * @author Isaac Fleetwood
+ * @version 1.0.0
  *
  */
 public class NumberUtils {

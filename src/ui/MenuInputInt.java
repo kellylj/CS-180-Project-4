@@ -11,6 +11,7 @@ import utils.NumberUtils;
  * If it is not, it will ask the user to enter a valid one and prompt them again.
  * 
  * @author Isaac Fleetwood
+ * @version 1.0.0
  * @see MenuInput
  */
 public class MenuInputInt extends MenuInput {

@@ -3,6 +3,17 @@ package ui;
 import main.UIManager;
 import utils.ANSICodes;
 
+/**
+ * Menu for requesting a single of input from the user
+ * quickly, without the need for a callback function.
+ * Once opened, the result of the prompt will be set
+ * and can be accessed via {@link MenuQuickInput#getResult()}
+ * 
+ * @author Isaac Fleetwood
+ * @version 1.0.0
+ * @see Menu
+ * @see InputMenu
+ */
 public class MenuQuickInput extends Menu {
 	
 	UIManager uiManager;

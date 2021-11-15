@@ -22,6 +22,7 @@ import utils.ANSICodes;
  * to verify the data is correct.
  * 
  * @author Isaac Fleetwood
+ * @version 1.0.0
  *
  * @see UIManager
  */

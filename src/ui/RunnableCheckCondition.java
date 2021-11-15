@@ -5,6 +5,7 @@ package ui;
  * Returns a boolean based on whether the condition is true or not.
  * 
  * @author Isaac Fleetwood
+ * @version 1.0.0
  * 
  * @see {@link MenuOption#addVisibilityCondition(RunnableCheckCondition)}
  */

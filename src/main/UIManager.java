@@ -34,6 +34,7 @@ import utils.ANSICodes;
  * 
  * @author Isaac Fleetwood
  * @author Aryan Jain
+ * @version 1.0.0
  * @see LearningManagementSystem
  * @see Manager
  */

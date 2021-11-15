@@ -7,6 +7,7 @@ import java.util.Map;
  * finished getting all of it's inputs.
  * 
  * @author Isaac Fleetwood
+ * @version 1.0.0
  * @see InputMenu
  */
 public interface RunnableInputFinish {

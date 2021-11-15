@@ -10,6 +10,7 @@ import main.UIManager;
  * Once the user chooses a valid option, the resulting chosen string is returned.
  * 
  * @author Isaac Fleetwood
+ * @version 1.0.0
  * @see InputMenu
  */
 public class MenuInputOptions extends MenuInput {

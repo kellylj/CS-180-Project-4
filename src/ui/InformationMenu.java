@@ -5,6 +5,16 @@ import java.util.StringJoiner;
 import main.UIManager;
 import utils.ANSICodes;
 
+/**
+ * Menu to show the user information without the need
+ * to prompt input from them. (Can require Enter to be
+ * pressed though, if desired)
+ * 
+ * @author Isaac Fleetwood
+ * @version 1.0.0
+ * 
+ * @see Menu
+ */
 public class InformationMenu extends Menu {
 
 	UIManager uiManager;

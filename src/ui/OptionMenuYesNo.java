@@ -8,6 +8,7 @@ import main.UIManager;
  * {@link #getResult()} will return true for Yes and false for No.
  * 
  * @author Isaac Fleetwood
+ * @version 1.0.0
  *
  */
 public class OptionMenuYesNo extends OptionMenuWithResult<Boolean> {

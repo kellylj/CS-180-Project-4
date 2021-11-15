@@ -5,6 +5,7 @@ package ui;
  * an item in {@link OptionListMenu}.
  * 
  * @author Isaac Fleetwood
+ * @version 1.0.0
  * @param T the type of the selected item
  * @see OptionListMenu
  * TODO T extends Listable

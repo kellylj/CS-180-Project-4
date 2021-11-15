@@ -31,6 +31,7 @@ import utils.NumberUtils;
  * as options to select from, using a pagination format.
  * 
  * @author Isaac Fleetwood
+ * @version 1.0.0
  * @see Menu
  * @see MenuOption
  */

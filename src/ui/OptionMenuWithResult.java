@@ -12,6 +12,7 @@ import main.UIManager;
  * coming from option chosen in the menu.
  * 
  * @author Isaac Fleetwood
+ * @version 1.0.0
  *
  * @param <T> Parameter for what type {@link #result} should be.
  */

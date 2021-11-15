@@ -7,6 +7,7 @@ package ui;
  * once it exits, or if it will close.
  * 
  * @author Isaac Fleetwood
+ * @version 1.0.0
  * @see Menu
  */
 public enum MenuState {

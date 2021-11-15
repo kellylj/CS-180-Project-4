@@ -10,6 +10,7 @@ package ui;
  * {@link #menuState} should be updated appropriately in {@link #runMenu()} depending on the desire of the Menu to stay open or not.
  * 
  * @author Isaac Fleetwood
+ * @version 1.0.0
  * @see InputMenu
  * @see OptionMenu
  */

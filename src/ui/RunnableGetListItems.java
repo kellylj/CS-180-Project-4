@@ -9,6 +9,7 @@ import java.util.List;
  * up-to-date list can be used.
  * 
  * @author Isaac Fleetwood
+ * @version 1.0.0
  * @param <T>
  * TODO T extends Listable
  */

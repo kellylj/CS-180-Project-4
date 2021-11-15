@@ -6,6 +6,7 @@ package ui;
  * 
  * 
  * @author Isaac Fleetwood
+ * @version 1.0.0
  * @see MenuOption
  * @see OptionMenu
  */

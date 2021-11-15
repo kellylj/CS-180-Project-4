@@ -11,6 +11,7 @@ package ui;
  * The callback can be added via method chaining, like seen in {@link OptionMenu}
  * 
  * @author Isaac Fleetwood
+ * @version 1.0.0
  * 
  * @see OptionMenu
  * @see MenuOptionConditional

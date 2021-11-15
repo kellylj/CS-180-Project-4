@@ -11,6 +11,7 @@ import utils.ANSICodes;
  * Contains a question and the key for where to store the resulting data in the HashMap in InputMenu ({@link InputMenu#values}).
  * 
  * @author Isaac Fleetwood
+ * @version 1.0.0
  * @see InputMenu
  */
 public class MenuInput {

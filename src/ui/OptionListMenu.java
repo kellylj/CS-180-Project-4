@@ -24,6 +24,7 @@ import main.UIManager;
  * Note: It is possible an item isn't selected if a user chooses "Exit"
  * 
  * @author Isaac Fleetwood
+ * @version 1.0.0
  * @param T the type of the item in the list. 
  * TODO T extends Listable
  */
