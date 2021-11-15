@@ -5,6 +5,7 @@ import java.util.Random;
  * Manager for the Graded Quizzes
  *
  * @author Sean Lee
+ * @version 11/14/21
  * @see Manager
  */
 public class GradedQuizManager implements Manager {
@@ -40,8 +41,9 @@ public class GradedQuizManager implements Manager {
         gradedQuizList.add(gradedQuiz);
     }
 
-    public void deleteAllByStudentID(int studentID) {  // TODO: check if this method works
-        for (int i = gradedQuizList.size() - 1; i >= 0; i--) {  // iterates backwards to prevent array out of bounds exception
+    public void deleteAllByStudentID(int studentID) {
+        for (int i = gradedQuizList.size() - 1; i >= 0; i--) {  // iterates backwards to prevent
+            // array out of bounds exception
             if (gradedQuizList.get(i).getStudentID() == studentID) {
                 gradedQuizList.remove(gradedQuizList.get(i));
             }
