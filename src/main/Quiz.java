@@ -10,6 +10,7 @@ import java.util.*;
  *
  *
  * @author Liam Kelly
+ * @verion 11/14/21
  * @see QuizManager
  */
 public class Quiz implements Listable{
@@ -160,7 +161,7 @@ public class Quiz implements Listable{
     }
     public String toString() {
         String quizDescription = "Quiz name: " + name + "\nAuthor: " + author;
-        quizDescription+= "\nID: " + id + "\nCourse: " + course;
+        quizDescription+= "\nCourse: " + course;
         return quizDescription;
     }
 
