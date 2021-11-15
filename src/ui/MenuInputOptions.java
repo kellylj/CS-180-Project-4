@@ -22,12 +22,12 @@ public class MenuInputOptions extends MenuInput {
 		super(question, resultKey);
 		this.optionMenu = new OptionMenuWithResult<String>(uiManager);
 		for (String option: options) {
-			optionMenu.addOption(((new MenuOption(option))
+			optionMenu.addOption((new MenuOption(option))
 			    .onSelect(() -> {
 					optionMenu.setResult(option);
 					return MenuState.CLOSE;
 				})
-		     ));
+		        );
 		}
 	}
 	
