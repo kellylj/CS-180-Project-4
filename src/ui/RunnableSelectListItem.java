@@ -8,7 +8,6 @@ package ui;
  * @version 1.0.0
  * @param T the type of the selected item
  * @see OptionListMenu
- * TODO T extends Listable
  */
 public interface RunnableSelectListItem<T> {
 	public MenuState selectItem(T listItem);

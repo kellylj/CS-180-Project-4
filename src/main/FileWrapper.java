@@ -2,7 +2,16 @@ package main;
 
 import java.io.*;
 import java.util.ArrayList;
-
+/**
+ * Class that handles all reading and writing to files directly
+ * <p>
+ * Contains only static methods for reading and writing.
+ * <p>
+ *
+ *
+ * @author Daniel Geva
+ * @version 11/14/21
+ */
 public class FileWrapper {
 
     public static ArrayList<String> readFile(String path) { //reads a given file and returns an arraylist of strings, where one element corresponds to one line

@@ -26,7 +26,6 @@ import main.UIManager;
  * @author Isaac Fleetwood
  * @version 1.0.0
  * @param T the type of the item in the list. 
- * TODO T extends Listable
  */
 public class OptionListMenu<T extends Listable> extends OptionMenuWithResult<T> {
 
@@ -103,7 +102,7 @@ public class OptionListMenu<T extends Listable> extends OptionMenuWithResult<T> 
 				continue;
 			
 			final T item = items.get(j);
-			// TODO Quiz item.toString() -> item.getListName()
+			
 			this.addOption((new MenuOption(item.getListName())).onSelect(() -> {
 				this.setResult(item);
 				return MenuState.CLOSE;

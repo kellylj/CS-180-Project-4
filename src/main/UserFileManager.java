@@ -1,7 +1,18 @@
 package main;
 import java.io.File;
 import java.util.ArrayList;
-
+/**
+ * Reads and writes files with user information for initialization and storage
+ * <p>
+ * Contains an ArrayList of users from storage that will be passed to UserManager.
+ * <p>
+ *
+ *
+ * @author Daniel Geva
+ * @version 11/14/21
+ * @see UserManager
+ * @see FileWrapper
+ */
 public class UserFileManager implements Manager {
 
     LearningManagementSystem lms;
@@ -46,7 +57,7 @@ public class UserFileManager implements Manager {
         this.writeUsers();
     } //gets the altered arraylist of users from UserManager after the program finishes, to be written to a file
 
-    public ArrayList<User> readUsers() { //reads the file that stores the user data and constructs an arraylist of users from it
+    public ArrayList<User> readUsers() {
         ArrayList<User> tempUsers = new ArrayList<>();
         String path = "./data/users.txt";
         ArrayList<String> contents = fw.readFile(path);
@@ -60,8 +71,10 @@ public class UserFileManager implements Manager {
                 continue;
             }
 
-            String[] list = contents.get(i).split("::", 2); //Two "::" colons are used to separate the type of user from the other information
-            String[] info = list[1].split(";;", 4); //Two ";;" semicolons are used to separate the information used to construct a user
+            String[] list = contents.get(i).split("::", 2);
+            //Two "::" colons are used to separate the type of user from the other information
+            String[] info = list[1].split(";;", 4);
+            //Two ";;" semicolons are used to separate the information used to construct a user
             int id = Integer.parseInt(info[0]);
             String username = info[1];
             String password = info[2];
@@ -73,7 +86,7 @@ public class UserFileManager implements Manager {
             }
         }
         return tempUsers;
-    }
+    } //reads the file that stores the user data and constructs an arraylist of users from it
 
     public boolean writeUsers() { //writes the arraylist of users "users" to a file in order to store the data
         ArrayList<String> writableUsers = new ArrayList<>();
@@ -86,7 +99,9 @@ public class UserFileManager implements Manager {
             } else {
                 write += "student::";
             }
-            write += String.format("%d;;%s;;%s;;%s", users.get(i).getID(), users.get(i).getUsername(), users.get(i).getPassword(), users.get(i).getName());
+            write += String.format("%d;;%s;;%s;;%s",
+                    users.get(i).getID(), users.get(i).getUsername(),
+                    users.get(i).getPassword(), users.get(i).getName());
             writableUsers.add(write);
         }
         boolean success = fw.writeFile(path, writableUsers);
