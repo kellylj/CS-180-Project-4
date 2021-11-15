@@ -46,10 +46,10 @@ public class User {
 
     /**
      * Sets ID of user
-     * @param ID ID of user
+     * @param id ID of user
      */
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setID(int id) {
+        this.ID = id;
     }
 
     /**
