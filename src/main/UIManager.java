@@ -394,7 +394,8 @@ public class UIManager implements Manager {
 				Menu submissionMenu = getSubmissionMenu(listableGradedQuiz.getGradedQuiz());
 				submissionMenu.open();
 				return MenuState.CLOSE;
-			});
+			})
+		    .addHeading("Select a quiz submission to view it.");
 		
 		menuSelectQuizTake = getCourseQuizSelectionMenu("Please select a quiz to take.",
 			(Quiz quiz) -> {
@@ -1015,21 +1016,29 @@ public class UIManager implements Manager {
 		    .addText(question.getQuestion());
 		
 		Answer chosen = null;
-		Answer best = question.getAnswers().get(0);
 		for (Answer answer: question.getAnswers()) {
 			menu.addListItem(answer.getAnswer());
 			
 			if (answer.getId() == chosenAnswerId) {
 				chosen = answer;
 			}
-			if (answer.getPoints() > best.getPoints()) {
-				best = answer;
-			}
 		}
+		ArrayList<Answer> bestAnswers = question.getBestAnswers();
 		menu.addText("The given answer was: " + (question.getAnswers().indexOf(chosen) + 1) + ": " + 
 		    (chosen == null ? "Unknown" : chosen.getAnswer()));
-		menu.addText("The best answer was: " + (question.getAnswers().indexOf(best) + 1) + ": " + best.getAnswer());
-		menu.addText("Points earned: " + chosen.getPoints() + "/" + best.getPoints());
+		int bestPoints = 0;
+		if(bestAnswers.size() == 1) {
+			Answer best = bestAnswers.get(0);
+			bestPoints = best.getPoints();
+			menu.addText("The best answer was: " + (question.getAnswers().indexOf(best) + 1) + ": " + best.getAnswer());
+		} else {
+			menu.addText("The following were the best answers:");
+			for (Answer best: bestAnswers) {
+				bestPoints = best.getPoints();
+				menu.addText("- " + (question.getAnswers().indexOf(best) + 1) + ": " + best.getAnswer());
+			}
+		}
+		menu.addText("Points earned: " + chosen.getPoints() + "/" + bestPoints);
 		menu.open();
 	}
 	
