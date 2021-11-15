@@ -42,7 +42,8 @@ The manager that is responsible for keeping track of users and providing functio
 The manager that holds the list of every created quiz.  It also provides methods for searching through the quizzes with various filters, such as name, author, etc.  It also is responsible for generating unique ids for new quizzes.
 
 ### GradedQuizManager
-TODO
+The manager that holds the the list of all graded quizzes. It also provides a method for searching for graded quizzes by course, and a method to delete all graded quizzes taken by a certain student.
+
 ### UserFileManager, QuizFileManager, and GradedQuizFileManager
 The managers that reads and writes user, quiz, and graded quiz data to and from files. Each gives its respective manager the list of users, quizzes, or graded quizzes at the start of the program and receives the list of them at the end. The file paths in `readUsers()`, `readQuizzes()`, and `readGradedQuizzes` as well as `writeUsers()`, `writeQuizzes()`, and `writeGradedQuizzes()` are hard coded and should work as relative paths for the file that stores the desired information.
 
@@ -62,12 +63,16 @@ Implements Listable.  Class used for storing data about each question.  It also 
 Class used for storing data about each answer.  Each answer is assigned a point value by the teacher, and is either correct or incorerct.
 
 ### User
+A super class that contains the details of a particular user.
 
 #### Teacher
+Extends User. Contains the details of a particular teacher.
 
 #### Student
+Extends User. Contains the details of a particular student.
 
 ### GradedQuiz
+Class used for storing data about each graded quiz. Contains questions, student responses, the quiz's ID, and the student's ID.
 
 ### ... etc
 
