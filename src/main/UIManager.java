@@ -556,19 +556,50 @@ public class UIManager implements Manager {
 					return MenuState.RESTART;
 				}))
 		    .addOption((new MenuOption("Edit Questions"))
-				    .onSelect(() -> {
-						Menu menu = (new OptionListMenu<Question>(this))
-						    .setItems(quiz.getQuestions())
-						    .onSelectListItem((Question question) -> {
-								Menu questionMenu = getMenuModifyQuestion(question);
-								
-								questionMenu.open();
+			    .onSelect(() -> {
+					Menu menu = (new OptionListMenu<Question>(this))
+					    .setItems(quiz.getQuestions())
+					    .onSelectListItem((Question question) -> {
+							Menu questionMenu = getMenuModifyQuestion(question);
+							
+							questionMenu.open();
+							return MenuState.CLOSE;
+						})
+					    .addHeading("Select a question to view it.");
+					menu.open();
+					return MenuState.RESTART;
+				}))
+		    .addOption((new MenuOption("Remove Question"))
+			    .onSelect(() -> {
+					Menu menu = (new OptionListMenu<Question>(this))
+					    .setItems(quiz.getQuestions())
+					    .onSelectListItem((Question question) -> {
+							InformationMenu infoMenu = (new InformationMenu(this))
+							    .addHeading("Question Info")
+							    .addText(question.getQuestion());
+							
+							for (Answer answer: question.getAnswers()) {
+								infoMenu.addListItem(answer.getAnswer());
+							}
+							infoMenu.addText("");
+							infoMenu.open();
+							
+							OptionMenuYesNo verifyMenu = new OptionMenuYesNo(this);
+							verifyMenu.addHeading("Are you sure you want to delete this question?");
+							verifyMenu.open();
+							
+							if(verifyMenu.resultWasYes()) {
+								quiz.getQuestions().remove(question);
+								System.out.println("The question was succesfully deleted.");
 								return MenuState.CLOSE;
-							})
-						    .addHeading("Select a question to view it.");
-						menu.open();
-						return MenuState.RESTART;
-					}))
+							}
+							System.out.println("Okay.");
+							return MenuState.CLOSE;
+						})
+					    .addHeading("Select a question to delete it.");
+					menu.open();
+					return MenuState.RESTART;
+				}))
 		    .addOption((new MenuOption("Change Name"))
 			    .onSelect(() -> {
 					MenuQuickInput quickInput = new MenuQuickInput(this, 
@@ -599,6 +630,10 @@ public class UIManager implements Manager {
 				}))
 		    .addOption((new MenuOption("Save Quiz"))
 			    .onSelect(() -> {
+			    	if(quiz.getQuestions().size() == 0) {
+			    		System.out.println("You cannot save a quiz that has no questions!");
+			    		return MenuState.RESTART;
+			    	}
 					lms.getQuizFileManager().save();
 					return MenuState.CLOSE;
 				}))
@@ -753,6 +788,10 @@ public class UIManager implements Manager {
 						}))
 			    .addOption((new MenuOption("Save Question"))
 				    .onSelect(() -> {
+				    	if(question.getAnswers().size() == 0) {
+				    		System.out.println("You cannot save a question that has no answers!");
+				    		return MenuState.RESTART;
+				    	}
 						return MenuState.CLOSE;
 					}));
 	}
