@@ -8,13 +8,13 @@ package main;
  * @see UserManager
  */
 public class User {
-    private int ID;
+    private int id;
     private String username;
     private String password;
     private String name;
 
     public User(int id, String name, String username, String password) {
-        this.ID = id;
+        this.id = id;
         this.name = name;
         this.username = username;
         this.password = password;
@@ -41,7 +41,7 @@ public class User {
      * @return ID of user
      */
     public int getID() {
-        return ID;
+        return id;
     }
 
     /**
@@ -49,7 +49,7 @@ public class User {
      * @param id ID of user
      */
     public void setID(int id) {
-        this.ID = id;
+        this.id = id;
     }
 
     /**
@@ -90,6 +90,6 @@ public class User {
      */
     public String toString() {
         String format = "ID: %d, Username: %s, Password: %s";
-        return String.format(format, ID, username, password);
+        return String.format(format, id, username, password);
     }
 }
