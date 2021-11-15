@@ -8,7 +8,7 @@ import java.util.Random;
  *
  *
  * @author Liam Kelly
- * @versiom 11/14/21
+ * @version 11/14/21
  * @see Manager
  */
 public class QuizManager implements Manager {
@@ -40,12 +40,12 @@ public class QuizManager implements Manager {
 	 * Removes a quiz matching a specific ID from the list of all quizzes.
 	 * If none are removed, displays a message
 	 *
-	 * @param ID - ID of the quiz that needs to be removed
+	 * @param id - ID of the quiz that needs to be removed
 	 */
-	public void removeQuiz(int ID) {
+	public void removeQuiz(int id) {
 		int startingListLength = quizList.size();
 		for (int i = 0; i < quizList.size(); i++) {
-			if (quizList.get(i).getId() == ID) {
+			if (quizList.get(i).getId() == id) {
 				quizList.remove(i);
 				i--;
 			}
@@ -65,7 +65,7 @@ public class QuizManager implements Manager {
 	public String listQuizzes() {
 		String quizDescriptions = "";
 		for (Quiz q : quizList) {
-			quizDescriptions+= q.toString() + "\n";
+			quizDescriptions += q.toString() + "\n";
 		}
 		if (quizList.size() == 0) {
 			quizDescriptions += "No quizzes have been created";
@@ -138,11 +138,11 @@ public class QuizManager implements Manager {
 	 * Returns the list of quizzes if any are found that match.  If none match, returns null
 	 *
 	 * @return matchingQuizzes - a list of quizzes that match the specified ID
-	 * @param ID - the ID to search for
+	 * @param id - the ID to search for
 	 */
-	public Quiz searchQuizByID(int ID) {
+	public Quiz searchQuizByID(int id) {
 		for (Quiz q : quizList) {
-			if (q.getId() == ID) {
+			if (q.getId() == id) {
 				return q;
 			}
 		}
@@ -190,7 +190,7 @@ public class QuizManager implements Manager {
 			exists = false;
 			id = rand.nextInt(999999);
 			for (int i = 0; i < quizList.size(); i++) {
-				if(quizList.get(i).getId() == i) {
+				if (quizList.get(i).getId() == i) {
 					exists = true;
 				}
 			}

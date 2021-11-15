@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @version 11/14/21
  * @see Quiz
  */
-public class Question implements Listable{
+public class Question implements Listable {
     ArrayList<Answer> answers;
     String question;
     int id;
